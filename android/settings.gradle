@@ -1,0 +1,4 @@
+rootProject.name = 'GeometryInfo'
+
+include ':app', ':rnsupermap'
+

@@ -41,6 +41,10 @@ public class SupermapFullPackage implements ReactPackage {
         modules.add(new JSDatasources(reactContext));
         modules.add(new JSDatasetVector(reactContext));
         modules.add(new JSDatasourceConnectionInfo(reactContext));
+        modules.add(new JSDataDownloadService(reactContext));
+        modules.add(new JSDataUploadService(reactContext));
+        modules.add(new JSFeature(reactContext));
+        modules.add(new JSFeatureSet(reactContext));
         modules.add(new JSLayers(reactContext));
         modules.add(new JSLayer(reactContext));
         modules.add(new JSLayerSetting(reactContext));
@@ -60,6 +64,7 @@ public class SupermapFullPackage implements ReactPackage {
         modules.add(new JSRecordset(reactContext));
         modules.add(new JSSelection(reactContext));
         modules.add(new JSSize2D(reactContext));
+        modules.add(new JSServiceBase(reactContext));
         modules.add(new JSGeoStyle(reactContext));
         modules.add(new JSGeometry(reactContext));
         modules.add(new JSGeoPoint(reactContext));

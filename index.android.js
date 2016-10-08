@@ -16,6 +16,7 @@ import WorkspaceConnectionInfo from './NativeModule/WorkspaceConnectionInfo';
 import ServerMapView from './NativeModule/SMMapViewUI.js';
 import LegendView from './NativeModule/SMLegendViewUI.js';
 import LayerListView from './NativeModule/SMLayerListViewUI.js';
+import ScaleView from './NativeModule/SMScaleViewUI.js';
 
 class GeometryInfo extends Component {
   state = {
@@ -75,7 +76,8 @@ class GeometryInfo extends Component {
       <View style={styles.container}>
         <ServerMapView ref="mapView" style={styles.map} onGetInstance={this._onGetInstance}/>
         {/*{ this.state.mapId && <LegendView style={styles.legend} mapId={this.state.mapId}/> }*/}
-        { this.state.mapId && <LayerListView style={styles.legend} mapId={this.state.mapId}/> }
+        { this.state.mapId && <ScaleView style={styles.legend} mapId={this.state.mapId}/> }
+          {/*{ this.state.mapId && <LayerListView style={styles.legend} mapId={this.state.mapId}/> }*/}
       </View>
     );
   }
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   legend:{
-    flex:.5,
+    flex:.2,
     backgroundColor:'#ffffff',
     alignSelf: 'stretch',
   }

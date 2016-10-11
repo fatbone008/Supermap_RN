@@ -53,15 +53,17 @@ class GeometryInfo extends Component {
           this.mapControl = await this.mapView.getMapControl();
           this.map = await this.mapControl.getMap();
 
-          this.setState({
-            mapId:this.map.mapId,
-          })
+
 
           await this.map.setWorkspace(this.workspace);
           var mapName = await this.maps.get(0);
 
           await this.map.open(mapName);
           await this.map.refresh();
+
+          this.setState({
+            bindMapId:this.map.mapId,
+          });
         } catch (e) {
           console.error(e);
         }
@@ -76,8 +78,8 @@ class GeometryInfo extends Component {
       <View style={styles.container}>
         <ServerMapView ref="mapView" style={styles.map} onGetInstance={this._onGetInstance}/>
         {/*{ this.state.mapId && <LegendView style={styles.legend} mapId={this.state.mapId}/> }*/}
-        { this.state.mapId && <ScaleView style={styles.legend} mapId={this.state.mapId}/> }
-          {/*{ this.state.mapId && <LayerListView style={styles.legend} mapId={this.state.mapId}/> }*/}
+        {/*{ this.state.mapId && <ScaleView style={styles.legend} mapId={this.state.mapId}/> }*/}
+          { this.state.bindMapId && <LayerListView style={styles.legend} bindMapId={this.state.bindMapId}/> }
       </View>
     );
   }
@@ -95,7 +97,7 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
   },
   legend:{
-    flex:.2,
+    flex:.5,
     backgroundColor:'#ffffff',
     alignSelf: 'stretch',
   }

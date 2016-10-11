@@ -28,12 +28,11 @@ public class LayerListViewManager extends SimpleViewManager<LayerListView> {
         return m_LayerListView;
     }
 
-    @ReactProp(name="mapId")
-    public void mapId(final LayerListView layerListView,String mapId){
+    @ReactProp(name="bindMapId")
+    public void bindMapId(final LayerListView layerListView,String mapId){
         final Map map = JSMap.getObjFromList(mapId);
         final boolean b = false;
 
         layerListView.loadMap(map);
-        layerListView.reload();
     }
 }

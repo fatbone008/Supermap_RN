@@ -7,7 +7,7 @@ let {requireNativeComponent,View}=require('react-native');
 class SMLayerListView extends React.Component{
 
     static propTypes = {
-        mapId:React.PropTypes.string,
+        bindMapId:React.PropTypes.string,
         ...View.propTypes,
     };
 

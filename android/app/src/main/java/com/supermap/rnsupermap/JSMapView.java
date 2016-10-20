@@ -160,6 +160,32 @@ public class JSMapView extends ReactContextBaseJavaModule {
         }
     }
 
+    @ReactMethod
+    public void addCallOut(String mapViewId,String callOutId,String pointName,Promise promise){
+        try{
+            m_mapView = mapViewList.get(mapViewId);
+            m_callout = JSCallOut.getObjFromList(callOutId);
+            m_PointName = pointName;
+//            m_mapView.addCallout(m_callout,pointName);
+            getCurrentActivity().runOnUiThread(updateThread);
+
+            promise.resolve(true);
+        }catch (Exception e ){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void showCallOut(String mapViewId,Promise promise){
+        try{
+            m_mapView = mapViewList.get(mapViewId);
+            getCurrentActivity().runOnUiThread(shouCallOutThread);
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
     private void showPointByCallout(MapView mapView, Point2D point, final String pointName,
                                     final int idDrawable) {
         CallOut callOut = new CallOut(getCurrentActivity());
@@ -193,6 +219,14 @@ public class JSMapView extends ReactContextBaseJavaModule {
         @Override
         public void run(){
             m_mapView.addCallout(m_callout);
+            m_mapView.showCallOut();
+        }
+    };
+
+
+    Runnable shouCallOutThread = new Runnable(){
+        @Override
+        public void run(){
             m_mapView.showCallOut();
         }
     };

@@ -24,7 +24,7 @@ public class SupermapFullPackage implements ReactPackage {
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
         return Arrays.<ViewManager>asList(
                 new MapViewManager(),new LegendViewManager(),
-                new LayerListViewManager(),new ScaleViewManager()
+                new LayerListViewManager(),new ScaleViewManager(),new CallOutManager()
         );
     }
 
@@ -32,7 +32,7 @@ public class SupermapFullPackage implements ReactPackage {
     public List<NativeModule> createNativeModules(
             ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-
+        modules.add(new JSCallOut(reactContext));
         modules.add(new JSDataset(reactContext));
         modules.add(new JSDatasets(reactContext));
         modules.add(new JSDatasource(reactContext));

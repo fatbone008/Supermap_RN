@@ -21,20 +21,36 @@ export default class JSMapView{
         }
     }
 
-    // async addPoint(point2D,pointName){
-    //     try{
-    //         var {eth_point2DId} = await MV.addPoint(this.mapViewId,point2D.point2DId,pointName);
-    //         var point2D = new Point2D();
-    //         point2D.point2DId = eth_point2DId;
-    //         return point2D;
-    //     }catch (e){
-    //         console.error(e);
-    //     }
-    // }
+    async addPoint(point2D,pointName){
+        try{
+            var {eth_point2DId} = await MV.addPoint(this.mapViewId,point2D.point2DId,pointName);
+            var point2D = new Point2D();
+            point2D.point2DId = eth_point2DId;
+            return point2D;
+        }catch (e){
+            console.error(e);
+        }
+    }
 
     async refresh(){
         try{
             await MV.refresh(this.mapViewId);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    async addCallOut(callOut,pointName){
+        try{
+            await MV.addCallOut(this.mapViewId,callOut.callOutId,pointName);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    async showCallOut(){
+        try{
+            await MV.showCallOut(this.mapViewId);
         }catch(e){
             console.error(e);
         }

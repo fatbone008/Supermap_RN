@@ -64,9 +64,6 @@ class GeometryInfo extends Component {
                     await this.map.open(mapName);
                     await this.map.refresh();
 
-                    //需要在map.open后使用
-                    await this.mapControl.setGestureDetector(this._longPressHandler, ()=> {
-                    });
                 } catch (e) {
                     console.error(e);
                 }
@@ -76,94 +73,10 @@ class GeometryInfo extends Component {
         }
     }
 
-    _longPressHandler = (e) => {
-        var pointName;
-        if (this.state.setStartPoint) {
-            pointName = MapView.NAVIGATION_STARTPOINT;
-        } else if (this.state.setDestPoint) {
-            pointName = MapView.NAVIGATION_DESTPOINT;
-        } else {
-            return;
-        }
-
-        var pointFac = new Point();
-        (async() => {
-            try {
-                await this._initCallOut(pointName);
-
-                var point = await pointFac.createObj(e.x, e.y);
-                var point2D = await this.map.pixelToMap(point);
-                console.log("point2D:" + JSON.stringify(point2D));
-
-                await this.callOut.setLocation(point2D);
-
-                var imageViewId = pointName == "startpoint" ? findNodeHandle(this.refs.startpoint) : findNodeHandle(this.refs.destpoint);
-                console.log("imageViewId:" + imageViewId);
-                this.callOut.setContentView(imageViewId);
-
-                this.mapView.showCallOut();
-
-                // var {eth_point2DId} = await this.mapView.addPoint(point2D,pointName,this.refs.callout.state.viewId);
-                // p2.point2DId = eth_point2DId;
-                // pointName == MapView.NAVIGATION_STARTPOINT ?
-                //     this.startPoint = p2 : this.destPoint = p2 ;
-            } catch (e) {
-                console.error(e);
-            }
-        })();
-    }
-
-    _initCallOut = async(pointName) => {
-        try {
-            var callOutFac = new CallOut();
-            this.callOut = await callOutFac.createObj(this.mapView);
-            console.log("callOut ID:" + this.callOut.callOutId);
-
-            await this.callOut.setStyle();
-            await this.callOut.setCustomize(true);
-
-            await this.mapView.addCallOut(this.callOut,pointName);
-        } catch (e) {
-            console.error(e);
-        }
-    }
-
-    _routeAnalysis = async()=> {
-        // if(this.startPoint == null || this.destPoint == null){
-        //     console.log('请先设置起点终点');
-        //     return ;
-        // }
-
-        //链式调用的试验……写法很丑啊
-        var networkDataset = await(await(await(await this.workspace.getDatasources()).get("beijing")).getDatasets()).get("RoadNetwork");
-        console.log("networkDataset:" + JSON.stringify(networkDataset));
-        this.navigation2 = await this.mapControl.getNavigation2();
-        console.log("navigation2:" + JSON.stringify(this.navigation2));
-        // await navigation2.setPathVisible(true);
-    }
-
     render() {
         return (
             <View style={styles.container}>
                 <ServerMapView ref="mapView" style={styles.map} onGetInstance={this._onGetInstance}/>
-                <View style={styles.buttons}>
-                    <TouchableHighlight style={styles.buttonText}
-                                        onPress={()=>this.setState({setDestPoint: false, setStartPoint: true})}>
-                        <Text>设置起点</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.buttonText}
-                                        onPress={()=>this.setState({setStartPoint: false, setDestPoint: true})}>
-                        <Text>设置终点</Text>
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.buttonText} onPress={this._routeAnalysis}>
-                        <Text>路线分析</Text>
-                    </TouchableHighlight>
-                    {/*<TouchableHighlight style={styles.buttonText} onPress={()=>console.log("callOut Id:"+findNodeHandle(this.refs.mapView))}>*/}
-                    {/*<Text>测试CallOut</Text>*/}
-                    {/*</TouchableHighlight>*/}
-                    <Image ref="startpoint" source={require('./NativeModule/resource/startpoint.png')}/>
-                    <Image ref="destpoint" source={require('./NativeModule/resource/destpoint.png')}/>
-                </View>
             </View>
         );
     }

@@ -73,6 +73,7 @@ class GeometryInfo extends Component {
         }
     }
 
+    // 导航测试
     render() {
         return (
             <View style={styles.container}>

@@ -18,6 +18,7 @@ import com.supermap.mapping.Action;
 import com.supermap.mapping.ActionChangedListener;
 import com.supermap.mapping.MapControl;
 import com.supermap.mapping.MapParameterChangedListener;
+import com.supermap.mapping.RefreshListener;
 import com.supermap.navi.Navigation2;
 
 import java.util.Calendar;
@@ -39,6 +40,11 @@ public class JSMapControl extends ReactContextBaseJavaModule {
     private static final String SCALECHANGED = "Supermap.MapControl.MapParamChanged.ScaleChanged";
     private static final String ANGLECHANGED = "Supermap.MapControl.MapParamChanged.AngleChanged";
     private static final String SIZECHANGED = "Supermap.MapControl.MapParamChanged.SizeChanged";
+
+
+    private static final String LONGPRESS_EVENT = "com.supermap.RN.JSMapcontrol.long_press_event";
+
+    private static final String REFRESH_EVENT = "com.supermap.RN.JSMapcontrol.refresh_event";
 
     @Override
     public String getName(){return "JSMapControl";}
@@ -118,7 +124,7 @@ public class JSMapControl extends ReactContextBaseJavaModule {
                     map.putInt("y",(int)event.getY());
 
                     mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
-                            .emit("NavigationLongPress",map);
+                            .emit(LONGPRESS_EVENT,map);
                 }
 
                 public boolean onScroll(MotionEvent e1, MotionEvent e2,
@@ -128,6 +134,29 @@ public class JSMapControl extends ReactContextBaseJavaModule {
                     return false;
                 }
             }));
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    /**
+     * 监听原生map刷新事件
+     * @param mapControlId
+     * @param promise
+     */
+    @ReactMethod
+    public void setRefreshListener(String mapControlId , Promise promise){
+        try{
+            MapControl mapControl = mapControlList.get(mapControlId);
+            mapControl.setRefreshListener(new RefreshListener() {
+                @Override
+                public void mapRefresh() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                            .emit(REFRESH_EVENT,null);
+                }
+            });
+            promise.resolve(true);
         }catch(Exception e){
             promise.reject(e);
         }

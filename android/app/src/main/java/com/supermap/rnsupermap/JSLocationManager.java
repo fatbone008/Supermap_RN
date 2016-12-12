@@ -25,6 +25,7 @@ public class JSLocationManager extends ReactContextBaseJavaModule {
     LocationManagePlugin m_LocationManagePlugin;
 
     private static final String LOCATIONCHANGED_EVENT = "com.supermap.RN.JSLocationManager.location_changed_event";
+    private static final String LONGPRESS_EVENT = "com.supermap.RN.JSLocationManager.location_changed_event";
 
     ReactApplicationContext mContext;
 

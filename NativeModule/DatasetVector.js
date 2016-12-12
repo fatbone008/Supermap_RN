@@ -6,7 +6,7 @@ import QueryParameter from './QueryParameter.js';
 export default class DatasetVector {
     async queryInBuffer(rectangle2D,cursorType){
         try{
-            var {recordsetId} = await DV.query(this.datasetVectorId,rectangle2D.rectangle2DId,cursorType);
+            var {recordsetId} = await DV.queryInBuffer(this.datasetVectorId,rectangle2D.rectangle2DId,cursorType);
             var recordset = new Recordset();
             recordset.recordsetId = recordsetId;
             return recordset;

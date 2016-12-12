@@ -1,6 +1,7 @@
 /**
  * Created by will on 2016/6/17.
  */
+const LONGPRESS_EVENT = "com.supermap.RN.JSMapcontrol.long_press_event";
 import { NativeModules,DeviceEventEmitter } from 'react-native';
 let MC = NativeModules.JSMapControl;
 import Map from './Map.js';
@@ -69,16 +70,26 @@ export default class MapControl{
      * @param longPressHandler 长按事件处理函数,回调事件参数: e:x,e:y，即长按点的屏幕坐标。
      * @param scrollHandler 滑动事件处理函数
      */
-    async setGestureDetector(longPressHandler,scrollHandler){
+    // async setGestureDetector(longPressHandler,scrollHandler){
+    async setGestureDetector(handlers){
         try{
-            DeviceEventEmitter.addListener('NavigationLongPress',function (e) {
-                longPressHandler && longPressHandler(e);
-                console.log("Long press excute!");
-            });
-            DeviceEventEmitter.addListener('NavigationScroll',function (e) {
-                scrollHandler && scrollHandler(e);
-            });
-            if(longPressHandler && scrollHandler){
+            if(!handlers) return;
+
+            if(typeof handlers.longPressHandler === "function"){
+                DeviceEventEmitter.addListener(LONGPRESS_EVENT,function (e) {
+                    // longPressHandler && longPressHandler(e);
+                    handlers.longPressHandler(e);
+                });
+            }
+
+            if(typeof handlers.scrollHandler === "function"){
+                DeviceEventEmitter.addListener('NavigationScroll',function (e) {
+                    scrollHandler && scrollHandler(e);
+                });
+            }
+
+            console.log('MapControl.js:----------------------------------');
+            if(handlers){
                 await MC.setGestureDetector(this.mapControlId);
                 console.log("GestrueDetector listening!");
             }else{
@@ -134,6 +145,25 @@ export default class MapControl{
                     console.error("Please set a callback to the property 'sizeChanged' in the first argument.");
                 }
             });
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    async setRefreshListener(callback){
+        try{
+            var success = await MC.setRefreshListener(this.mapControlId);
+            console.log("MapControl:test result:",success);
+            if(success){
+                DeviceEventEmitter.addListener("com.supermap.RN.JSMapcontrol.refresh_event",function (e) {
+                    console.log("MapControl:监听到地图刷新");
+                    if(typeof callback == 'function'){
+                        callback(e);0
+                    }else{
+                        console.error("Please set a callback function as the first argument.");
+                    }
+                });
+            }
         }catch(e){
             console.error(e);
         }

@@ -73,11 +73,12 @@ class GeometryInfo extends Component {
         }
     }
 
+
     // 导航测试
     render() {
         return (
             <View style={styles.container}>
-                <ServerMapView ref="mapView" style={styles.map} onGetInstance={this._onGetInstance}/>
+                <ServerMapView ref="mapView" onGetInstance={this._onGetInstance}/>
             </View>
         );
     }
@@ -88,26 +89,8 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: '#333333',
     },
-    map: {
-        flex: 1,
-        alignSelf: 'stretch',
-    },
-    legend: {
-        flex: .5,
-        backgroundColor: '#ffffff',
-        alignSelf: 'stretch',
-    },
-    buttons: {
-        flexDirection: 'row',
-    },
-    buttonText: {
-        backgroundColor: '#f3ab99',
-        width: 100,
-        height: 30,
-        margin: 5,
-    }
 });
 
 AppRegistry.registerComponent('GeometryInfo', () => GeometryInfo);

@@ -29,6 +29,10 @@ export default class CallOut {
         }
     }
 
+    /**
+     *
+     * @param point2D
+     */
     async setLocation(point2D){
         try{
             await C.setLocation(this.callOutId,point2D.point2DId);

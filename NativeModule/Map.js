@@ -5,6 +5,7 @@ import { NativeModules } from 'react-native';
 let M = NativeModules.JSMap;
 import Layers from './Layers.js';
 import Point2D from './Point2D.js';
+import Point from './Point.js';
 import TrackingLayer from './TrackingLayer.js';
 
 export default class Map{
@@ -45,10 +46,25 @@ export default class Map{
 
     async pixelToMap(point){
         try{
-            var {point2DId} = await M.pixelToMap(this.mapId,point.pointId);
+            var {point2DId,x,y} = await M.pixelToMap(this.mapId,point.pointId);
             var point2D = new Point2D();
             point2D.point2DId = point2DId;
+            point2D.x = x;
+            point2D.y = y;
             return point2D;
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    async mapToPixel(point2D){
+        try{
+            var {pointId,x,y} = await M.mapToPixel(this.mapId,point2D.point2DId);
+            var point = new Point();
+            point.pointId = pointId;
+            point.x = x;
+            point.y = y;
+            return point;
         }catch(e){
             console.error(e);
         }

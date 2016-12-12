@@ -156,7 +156,7 @@ export default class MapControl{
             console.log("MapControl:test result:",success);
             if(success){
                 DeviceEventEmitter.addListener("com.supermap.RN.JSMapcontrol.refresh_event",function (e) {
-                    console.log("MapControl:监听到地图刷新");
+                    // console.log("MapControl:监听到地图刷新");
                     if(typeof callback == 'function'){
                         callback(e);0
                     }else{

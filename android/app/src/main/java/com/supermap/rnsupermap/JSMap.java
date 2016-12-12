@@ -144,9 +144,30 @@ public class JSMap extends ReactContextBaseJavaModule {
             Point2D point2D = map.pixelToMap(point);
             String point2DId = JSPoint2D.registerId(point2D);
 
-            WritableMap map1 = Arguments.createMap();
-            map1.putString("point2DId",point2DId);
-            promise.resolve(map1);
+            WritableMap writableMap = Arguments.createMap();
+            writableMap.putString("point2DId",point2DId);
+            writableMap.putDouble("x",point2D.getX());
+            writableMap.putDouble("y",point2D.getY());
+            promise.resolve(writableMap);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void mapToPixel(String mapId, String point2DId,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            Point2D point2D = JSPoint2D.m_Point2DList.get(point2DId);
+
+            Point point = map.mapToPixel(point2D);
+            String pointId = JSPoint.registerId(point);
+
+            WritableMap writableMap = Arguments.createMap();
+            writableMap.putString("pointId",pointId);
+            writableMap.putInt("x",point.getX());
+            writableMap.putInt("y",point.getY());
+            promise.resolve(writableMap);
         }catch(Exception e){
             promise.reject(e);
         }

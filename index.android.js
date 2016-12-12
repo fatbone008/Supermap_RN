@@ -25,6 +25,10 @@ class GeometryInfo extends Component {
     state = {
         setStartPoint: false,
         setDestPoint: false,
+        callouts:[{uri:require('./NativeModule/resource/startpoint.png'),top:300,left:150,mapX:4500,mapY:-3500}
+            // {uri:require('./NativeModule/resource/destpoint.png'),top:150,left:100},
+            // {uri:require('./NativeModule/resource/startpoint.png'),top:30,left:50},
+        ],
     }
 
     _onGetInstance = (mapView) => {
@@ -57,7 +61,6 @@ class GeometryInfo extends Component {
                     this.mapControl = await this.mapView.getMapControl();
                     this.map = await this.mapControl.getMap();
 
-
                     await this.map.setWorkspace(this.workspace);
                     var mapName = await this.maps.get(0);
 
@@ -78,7 +81,8 @@ class GeometryInfo extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <ServerMapView ref="mapView" onGetInstance={this._onGetInstance}/>
+                <ServerMapView ref="mapView" callouts={this.state.callouts}
+                               addCalloutByLongPress={true} onGetInstance={this._onGetInstance}/>
             </View>
         );
     }

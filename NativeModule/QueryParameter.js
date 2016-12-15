@@ -24,6 +24,10 @@ export default class QueryParameter {
             var {queryParameterId} = await QP.createObj();
             var queryParameter = new QueryParameter();
             queryParameter.queryParameterId = queryParameterId;
+            //Return records in batches. by default, 20 records
+            //first batch would be return(initial with "1")
+            queryParameter.size = 20;
+            queryParameter.batch = 1;
             return queryParameter;
         }catch (e){
             console.error(e);

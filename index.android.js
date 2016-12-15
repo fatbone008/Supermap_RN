@@ -67,6 +67,13 @@ class GeometryInfo extends Component {
                     await this.map.open(mapName);
                     await this.map.refresh();
 
+                    this.layers = await this.map.getLayers();
+                    var layer = await this.layers.get(1);
+                    var dataset = await layer.getDataset();
+                    var datasetVector = await dataset.toDatasetVector();
+                    console.log("DataQuery:datasetVectorId_" + datasetVector.datasetVectorId);
+                    var result = await datasetVector.query({hasGeometry:true,size:10,batch:3});
+                    console.log("DataQuery:" + JSON.stringify(result));
                 } catch (e) {
                     console.error(e);
                 }
@@ -82,7 +89,7 @@ class GeometryInfo extends Component {
         return (
             <View style={styles.container}>
                 <ServerMapView ref="mapView" callouts={this.state.callouts}
-                               addCalloutByLongPress={true} onGetInstance={this._onGetInstance}/>
+                               addCalloutByLongPress={false} onGetInstance={this._onGetInstance}/>
             </View>
         );
     }

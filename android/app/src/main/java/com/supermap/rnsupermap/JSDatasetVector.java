@@ -16,6 +16,7 @@ import com.supermap.data.QueryParameter;
 import com.supermap.data.Recordset;
 import com.supermap.data.Rectangle2D;
 
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,7 +84,7 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void query(String dataVectorId,String queryParameterId,Promise promise){
+    public void query(String dataVectorId,String queryParameterId,int size,int batch,Promise promise){
         try{
             DatasetVector datasetVector = getObjFromList(dataVectorId);
             Recordset recordset;
@@ -104,16 +105,31 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
             //JS数组，存放
             WritableArray recordArray = Arguments.createArray();
 
+            //分批处理
+            int totalCount = recordset.getRecordCount(); //记录总数
+            int batches;    //总批数
+            if(totalCount % size != 0){
+                batches = totalCount / size + 1 ;
+            }else{
+                batches = totalCount / size ;
+            }
             recordset.moveFirst();
-            while(!recordset.isEmpty() && !recordset.isEOF()){
-                    WritableMap recordsMap = parseRecordset(recordset,fields);
-                    recordArray.pushMap(recordsMap);
-                    recordset.moveNext();
+            if(batch < batches && batch > 1) recordset.moveTo(size * (batch - 1));
+
+            int count = 0;
+            while(!recordset.isEmpty() && !recordset.isEOF() && count < size){
+                WritableMap recordsMap = parseRecordset(recordset,fields);
+                recordArray.pushMap(recordsMap);
+                recordset.moveNext();
+                count++;
             }
 
             WritableMap returnMap = Arguments.createMap();
             returnMap.putArray("records",recordArray);
             returnMap.putString("queryParameterId",queryParameterId);
+            returnMap.putInt("counts",totalCount);
+            returnMap.putInt("batch",batch);
+            returnMap.putInt("size",size);
 
             promise.resolve(returnMap);
         }catch(Exception e){
@@ -133,10 +149,14 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
         for(Map.Entry field:fields.entrySet()){
             String name = (String)field.getKey();
             FieldType type = (FieldType)field.getValue();
-            if(type == FieldType.DOUBLE ||
-                    type == FieldType.SINGLE){
+            if(type == FieldType.DOUBLE ){
+                Double d = (Double)recordset.getFieldValue(name);
                 map.putDouble(name,(Double)recordset.getFieldValue(name));
-            }else if(type == FieldType.CHAR ||
+            }else if(type == FieldType.SINGLE){
+                BigDecimal b = new BigDecimal(recordset.getFieldValue(name).toString());
+                Double d = b.doubleValue();
+                map.putDouble(name,d);
+            } else if(type == FieldType.CHAR ||
                     type == FieldType.TEXT ||
                     type == FieldType.WTEXT ||
                     type == FieldType.DATETIME

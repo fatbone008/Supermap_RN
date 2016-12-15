@@ -95,6 +95,8 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
                 recordset = datasetVector.query(queryParameter);
             }
 
+            String recordsetId = JSRecordset.registerId(recordset);
+
             //获取字段信息
             FieldInfos fieldInfos = recordset.getFieldInfos();
             Map<String,FieldType> fields = new HashMap<>();
@@ -130,6 +132,7 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
             returnMap.putInt("counts",totalCount);
             returnMap.putInt("batch",batch);
             returnMap.putInt("size",size);
+            returnMap.putString("recordsetId",recordsetId);
 
             promise.resolve(returnMap);
         }catch(Exception e){

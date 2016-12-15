@@ -38,4 +38,18 @@ export default class Selection {
             console.log(e);
         }
     }
+
+    /**
+     * 从查询结果获取地图被选要素
+     * @param result 经DataVector的query方法查询出的结果
+     * @returns {Promise.<Promise.fromRecordset>}
+     */
+    async fromQueryResult(result){
+        try{
+            let {fromRecordset} = await S.fromRecordset(this.selectionId,result.recordsetId);
+            return fromRecordset;
+        }catch(e){
+            console.log(e);
+        }
+    }
 }

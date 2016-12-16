@@ -1,7 +1,8 @@
 import {NativeModules} from 'react-native';
 let GL = NativeModules.JSGeoLine;
+import Geometry from './Geometry.js';
 
-export default class GeoLine {
+export default class GeoLine extends Geometry{
     constructor(){
         super();
         //同步子类Id和父类Id

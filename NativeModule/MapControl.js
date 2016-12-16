@@ -2,10 +2,15 @@
  * Created by will on 2016/6/17.
  */
 const LONGPRESS_EVENT = "com.supermap.RN.JSMapcontrol.long_press_event";
+
 import { NativeModules,DeviceEventEmitter } from 'react-native';
 let MC = NativeModules.JSMapControl;
 import Map from './Map.js';
 import Navigation2 from './Navigation2.js';
+import GeoPoint from './GeoPoint.js';
+import GeoRegion from './GeoRegion.js';
+import GeoLine from './GeoLine.js';
+import Geometry from './Geometry.js';
 export default class MapControl{
     static ACTION = {
         PAN:1,
@@ -165,6 +170,29 @@ export default class MapControl{
                 });
             }
         }catch(e){
+            console.error(e);
+        }
+    }
+
+    async getCurrentGeometry(){
+        try{
+            var {geometryId,geoType} = await MC.getCurrentGeometry(this.mapControlId);
+
+            if(geoType == "GeoPoint"){
+                var geoPoint = new GeoPoint();
+                geoPoint.geoPointId = geometryId;
+            }else if(geoType == "GeoRegion"){
+                var geoRegion = new GeoRegion();
+                geoRegion.geoRegionId = geometryId;
+            }else if(geoType == "GeoLine"){
+                var geoLine = new GeoLine();
+                geoLine.geoLineId = geometryId;
+            }else{
+                var geometry = new Geometry();
+                geometry.geometryId = geometryId;
+            }
+            return geoPoint || geoLine || geoRegion || geometry;
+        }catch (e){
             console.error(e);
         }
     }

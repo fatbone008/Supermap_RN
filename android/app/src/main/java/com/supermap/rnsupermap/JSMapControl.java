@@ -13,6 +13,11 @@ import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.supermap.data.Enum;
+import com.supermap.data.GeoLine;
+import com.supermap.data.GeoPie;
+import com.supermap.data.GeoPoint;
+import com.supermap.data.GeoRegion;
+import com.supermap.data.Geometry;
 import com.supermap.data.Point2D;
 import com.supermap.mapping.Action;
 import com.supermap.mapping.ActionChangedListener;
@@ -244,6 +249,32 @@ public class JSMapControl extends ReactContextBaseJavaModule {
                 }
             });
             promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getCurrentGeometry(String mapControlId,Promise promise){
+        try{
+            mMapControl = mapControlList.get(mapControlId);
+            Geometry geometry = mMapControl.getCurrentGeometry();
+            String geometryId = JSGeometry.registerId(geometry);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("geometryId",geometryId);
+
+            String type = "";
+            if(geometry instanceof GeoPoint){
+                type = "GeoPoint";
+            }else if(geometry instanceof GeoLine){
+                type = "GeoLine";
+            }else if(geometry instanceof GeoRegion){
+                type = "GeoRegion";
+            }
+            map.putString("geoType",type);
+
+            promise.resolve(map);
         }catch(Exception e){
             promise.reject(e);
         }

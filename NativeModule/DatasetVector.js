@@ -54,6 +54,9 @@ export default class DatasetVector {
                 queryParameter.orderBy &&
                 await qp.setOrderBy(queryParameter.orderBy);
 
+                queryParameter.spatialQueryObject &&
+                await qp.setSpatialQueryObject(queryParameter.spatialQueryObject);
+
                 queryParameter.spatialQueryMode &&
                 await qp.setSpatialQueryMode(queryParameter.spatialQueryMode);
 

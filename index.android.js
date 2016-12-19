@@ -9,6 +9,7 @@ import {
     AppRegistry,
     StyleSheet,
     Text,
+    ListView,
     Image,
     TouchableHighlight,
     View
@@ -16,19 +17,18 @@ import {
 import Workspace from './NativeModule/Workspace.js';
 import WorkspaceConnectionInfo from './NativeModule/WorkspaceConnectionInfo';
 import ServerMapView from './NativeModule/SMMapViewUI.js';
-import MapView from './NativeModule/MapView.js';
-import Point from './NativeModule/Point.js';
-import CallOut from './NativeModule/CallOut.js';
+import MapControl from './NativeModule/MapControl.js';
+import QueryParameter from './NativeModule/QueryParameter.js';
 
 
 class GeometryInfo extends Component {
-    state = {
-        setStartPoint: false,
-        setDestPoint: false,
-        callouts:[{uri:require('./NativeModule/resource/startpoint.png'),top:300,left:150,mapX:4500,mapY:-3500}
-            // {uri:require('./NativeModule/resource/destpoint.png'),top:150,left:100},
-            // {uri:require('./NativeModule/resource/startpoint.png'),top:30,left:50},
-        ],
+    constructor (props) {
+        super(props);
+        const ds = new ListView.DataSource({rowHasChanged:(r1,r2) => r1 !== r2});
+        this.state = {
+            dataSource:ds.cloneWithRows(['11111111']),
+            showListView : false,
+        };
     }
 
     _onGetInstance = (mapView) => {
@@ -53,7 +53,7 @@ class GeometryInfo extends Component {
 
                     this.workspaceConnectionInfo = await WorkspaceConnectionInfoModule.createJSObj();
                     await this.workspaceConnectionInfo.setType(Workspace.SMWU);
-                    await this.workspaceConnectionInfo.setServer("/SuperMap/data/Changchun.smwu");
+                    await this.workspaceConnectionInfo.setServer("/SampleData/GeometryInfo/World.smwu");
 
                     await this.workspace.open(this.workspaceConnectionInfo);
                     this.maps = await this.workspace.getMaps();
@@ -68,12 +68,6 @@ class GeometryInfo extends Component {
                     await this.map.refresh();
 
                     this.layers = await this.map.getLayers();
-                    var layer = await this.layers.get(1);
-                    var dataset = await layer.getDataset();
-                    var datasetVector = await dataset.toDatasetVector();
-                    console.log("DataQuery:datasetVectorId_" + datasetVector.datasetVectorId);
-                    var result = await datasetVector.query({hasGeometry:true,size:10,batch:3});
-                    console.log("DataQuery:" + JSON.stringify(result));
                 } catch (e) {
                     console.error(e);
                 }
@@ -83,13 +77,76 @@ class GeometryInfo extends Component {
         }
     }
 
+    _drawPolygon = async () => {
+        try{
+            var layer = await this.layers.get(10);
+            console.log("layerId:"+JSON.stringify(layer));
+            await layer.setEditable(true);
+            await this.mapControl.setAction(MapControl.ACTION.CREATEPOLYGON);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    _done = async () => {
+        try{
+            this.geoRegion = await this.mapControl.getCurrentGeometry();
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    _query = async () => {
+        try{
+            var layer = await this.layers.get(8);
+            var dataset = await layer.getDataset();
+            var datasetVector = await dataset.toDatasetVector();
+            console.log("DataQuery:datasetVectorId_" + datasetVector.datasetVectorId);
+            var result = await datasetVector.query({
+                spatialQueryObject:this.geoRegion,
+                spatialQueryMode:QueryParameter.QUERYMODE.INTERSECT,
+                hasGeometry:true,
+                size:10,
+                batch:3,
+            });
+            console.log("DataQuery:" + JSON.stringify(result));
+            this.setState({
+                dataSource:this.state.dataSource.cloneWithRows(result.records),
+                showListView:true,
+            });
+        }catch (e){
+            console.error(e);
+        }
+    }
 
     // 导航测试
     render() {
         return (
             <View style={styles.container}>
-                <ServerMapView ref="mapView" callouts={this.state.callouts}
-                               addCalloutByLongPress={false} onGetInstance={this._onGetInstance}/>
+                <ServerMapView ref="mapView" onGetInstance={this._onGetInstance}/>
+
+                <View style={styles.buttonGroup}>
+                    <TouchableHighlight style={styles.geoButton} onPress={this._drawPolygon}>
+                        <Text style={{fontSize:18,color:"white"}}>绘制多边形</Text>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight style={styles.geoButton} onPress={this._done}>
+                        <Text style={{fontSize:18,color:"white"}}>完成</Text>
+                    </TouchableHighlight>
+
+                    <TouchableHighlight style={styles.geoButton} onPress={this._query}>
+                        <Text style={{fontSize:18,color:"white"}}>查询</Text>
+                    </TouchableHighlight>
+                </View>
+
+                {
+                    this.showListView ||
+                        <ListView style={{flex:.3,alignSelf: 'stretch',}}
+                            dataSource={this.state.dataSource}
+                            renderRow={(rowData)=>
+                                <Text style={{color:'white'}}>{rowData.COUNTRY}</Text>}>
+                        </ListView>
+                }
             </View>
         );
     }
@@ -101,6 +158,22 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#333333',
+    },
+    buttonGroup:{
+        flexDirection:'row',
+        justifyContent: 'space-between',
+        flexWrap:'wrap',
+    },
+    geoButton:{
+        width:80,
+        height:40,
+        backgroundColor:'#008800',
+        margin:5,
+        padding:5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        opacity:.7,
+        borderRadius: 5,
     },
 });
 

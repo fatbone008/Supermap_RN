@@ -81,8 +81,17 @@ export default class QueryParameter {
         }
     }
 
+    async setSpatialQueryObject(geometry){
+        try{
+            await QP.setSpatialQueryObject(this.queryParameterId,geometry.geometryId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
     async setSpatialQueryMode(mode){
         try{
+            console.log("QueryParameter:" + mode);
             typeof mode == "number" && await QP.setSpatialQueryMode(this.queryParameterId,mode);
         }catch (e){
             console.error(e);

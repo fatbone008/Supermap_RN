@@ -131,7 +131,8 @@ class SMMapView extends React.Component{
     };
 
     static defaultProps = {
-        aaddCalloutByLongPress:false,
+        callouts:[],
+        addCalloutByLongPress:false,
     }
 
     render(){

@@ -127,7 +127,7 @@ class GeometryInfo extends Component {
 
                 <View style={styles.buttonGroup}>
                     <TouchableHighlight style={styles.geoButton} onPress={this._drawPolygon}>
-                        <Text style={{fontSize:18,color:"white"}}>绘制多边形</Text>
+                        <Text style={{fontSize:18,color:"white"}}>绘制区域</Text>
                     </TouchableHighlight>
 
                     <TouchableHighlight style={styles.geoButton} onPress={this._done}>
@@ -140,7 +140,7 @@ class GeometryInfo extends Component {
                 </View>
 
                 {
-                    this.showListView ||
+                    !this.state.showListView ||
                         <ListView style={{flex:.3,alignSelf: 'stretch',}}
                             dataSource={this.state.dataSource}
                             renderRow={(rowData)=>

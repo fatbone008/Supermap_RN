@@ -15,7 +15,7 @@ import {
 } from 'react-native';
 import Workspace from '../NativeModule/Workspace.js';
 import WorkspaceConnectionInfo from '../NativeModule/WorkspaceConnectionInfo';
-import ServerMapView from '../NativeModule/SMMapViewUI.js';
+import ServerMapView from '../NativeModule/components/SMMapViewUI.js';
 import MapView from '../NativeModule/MapView.js';
 import Point from '../NativeModule/Point.js';
 import CallOut from '../NativeModule/CallOut.js';

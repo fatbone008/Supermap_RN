@@ -11,9 +11,9 @@ let {
         PixelRatio  /*像素转换工具*/
     }=require('react-native');
 let resolveAssetSource = require('resolveAssetSource'); /*解析静态图片工具*/
-import MapView from './MapView.js';
-import Point2D from './Point2D.js';
-import Point from './Point.js';
+import MapView from '../MapView.js';
+import Point2D from '../Point2D.js';
+import Point from '../Point.js';
 
 let MC = NativeModules.JSMapControl;
 let MV = NativeModules.JSMapView;
@@ -21,12 +21,12 @@ let MV = NativeModules.JSMapView;
  * ServerMapView视图标签，提供onGetInstance属性，该属性值的类型为函数，
  * 且函数参数为从Native层返回的MapViewId，在使用该标签时，必须通过此属性获得MapViewId
  */
-const STARTPOINT = require('./resource/startpoint.png');
-const DESTPOINT = require('./resource/destpoint.png');
+const STARTPOINT = require('./../resource/startpoint.png');
+const DESTPOINT = require('./../resource/destpoint.png');
 class SMMapView extends React.Component{
     state = {
         startPoint:{},
-        path:require('./resource/startpoint.png'),
+        path:require('./../resource/startpoint.png'),
     }
 
     constructor(){
@@ -101,7 +101,7 @@ class SMMapView extends React.Component{
                         var mapPoint = await this.map.pixelToMap(point);
 
                         var arr = this.state.callouts;
-                        arr.push({uri:require('./resource/destpoint.png'),mapX:mapPoint.x,mapY:mapPoint.y});
+                        arr.push({uri:require('./../resource/destpoint.png'),mapX:mapPoint.x,mapY:mapPoint.y});
                         this.setState({
                             callouts:arr,
                         })

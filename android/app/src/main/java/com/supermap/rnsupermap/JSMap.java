@@ -6,9 +6,11 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.supermap.data.Dataset;
 import com.supermap.data.Point;
 import com.supermap.data.Point2D;
 import com.supermap.data.Workspace;
+import com.supermap.mapping.Layer;
 import com.supermap.mapping.Layers;
 import com.supermap.mapping.Map;
 import com.supermap.mapping.TrackingLayer;
@@ -114,6 +116,50 @@ public class JSMap extends ReactContextBaseJavaModule {
             map.close();
             System.out.print("map closed");
             promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getLayer(String mapId,int layerIndex,Promise promise){
+        try{
+            m_Map = mapList.get(mapId);
+            Layer layer = m_Map.getLayers().get(layerIndex);
+            String layerId = JSLayer.registerId(layer);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("layerId",layerId);
+
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void addDataset(String mapId,String datasetId,boolean addToHead,Promise promise){
+        try{
+            m_Map = mapList.get(mapId);
+            Dataset dataset = JSDataset.getObjById(datasetId);
+
+            m_Map.getLayers().add(dataset,addToHead);
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getLayersCount(String mapId,Promise promise){
+        try{
+            m_Map = mapList.get(mapId);
+            int count = m_Map.getLayers().getCount();
+
+            WritableMap map = Arguments.createMap();
+            map.putInt("count",count);
+
+            promise.resolve(map);
         }catch(Exception e){
             promise.reject(e);
         }

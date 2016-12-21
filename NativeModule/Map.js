@@ -3,7 +3,7 @@
  */
 import { NativeModules } from 'react-native';
 let M = NativeModules.JSMap;
-import Layers from './Layers.js';
+import Layer from './Layer.js';
 import Point2D from './Point2D.js';
 import Point from './Point.js';
 import TrackingLayer from './TrackingLayer.js';
@@ -25,12 +25,42 @@ export default class Map{
         }
     }
 
+    async getLayer(layerIndex){
+        try{
+            var {layerId} = await M.getLayer(this.mapId,layerIndex);
+            var layer = new Layer();
+            layer.layerId = layerId;
+            return layer;
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    async addDataset(dataset,addToHead){
+        try{
+            await M.addDataset(this.mapId,dataset.datasetid,addToHead);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    //deprecated
     async getLayers(){
+        console.warn("Map.js:getLayers() function has been deprecated. If you want to get Layer , please call the getLayer() function");
         try{
             var {layersId} = await M.getLayers(this.mapId);
             var layers = new Layers();
             layers.layersId = layersId;
             return layers;
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    async getLayersCount(){
+        try{
+            var {count} = await M.getLayersCount(this.mapId);
+            return count;
         }catch(e){
             console.error(e);
         }

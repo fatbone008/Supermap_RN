@@ -56,18 +56,17 @@ class GeometryInfo extends Component {
                     await this.workspaceConnectionInfo.setServer("/SampleData/GeometryInfo/World.smwu");
 
                     await this.workspace.open(this.workspaceConnectionInfo);
-                    this.maps = await this.workspace.getMaps();
+                    var mapName = await this.workspace.getMapName(0);
 
                     this.mapControl = await this.mapView.getMapControl();
                     this.map = await this.mapControl.getMap();
 
                     await this.map.setWorkspace(this.workspace);
-                    var mapName = await this.maps.get(0);
 
                     await this.map.open(mapName);
                     await this.map.refresh();
 
-                    this.layers = await this.map.getLayers();
+                    // this.layers = await this.map.getLayers();
                 } catch (e) {
                     console.error(e);
                 }
@@ -79,7 +78,7 @@ class GeometryInfo extends Component {
 
     _drawPolygon = async () => {
         try{
-            var layer = await this.layers.get(10);
+            var layer = await this.map.getLayer(10);
             console.log("layerId:"+JSON.stringify(layer));
             await layer.setEditable(true);
             await this.mapControl.setAction(MapControl.ACTION.CREATEPOLYGON);
@@ -98,7 +97,7 @@ class GeometryInfo extends Component {
 
     _query = async () => {
         try{
-            var layer = await this.layers.get(8);
+            var layer = await this.map.getLayer(10);
             var dataset = await layer.getDataset();
             var datasetVector = await dataset.toDatasetVector();
             console.log("DataQuery:datasetVectorId_" + datasetVector.datasetVectorId);

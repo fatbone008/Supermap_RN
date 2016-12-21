@@ -9,6 +9,7 @@ import Recordset from './Recordset.js';
 
 export default class Datasets{
     async get(index){
+        this._drepecated();
         try{
             var dataset = new Dataset();
             if(typeof index != "string"){
@@ -25,6 +26,7 @@ export default class Datasets{
     }
 
     async getAvailableDatasetName(name){
+        this._drepecated();
         try{
             var {datasetName} = await D.getAvailableDatasetName(this.datasetsId,name);
             return datasetName;
@@ -34,6 +36,7 @@ export default class Datasets{
     }
 
     async create(datasetVectorInfo){
+        this._drepecated();
         try{
             var {datasetVectorId} = await D.create(this.datasetsId,datasetVectorInfo.datasetVectorInfoId);
             var datasetVector = new DatasetVector();
@@ -44,4 +47,9 @@ export default class Datasets{
         }
     }
 
+    _drepecated(){
+        console.warn("Datasets.js:This class has been deprecated. " +
+            "All its implements has been migrated to the Datasource class." +
+            "Relevant modifications refer to the API documents please");
+    }
 }

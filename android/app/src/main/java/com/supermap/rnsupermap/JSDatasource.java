@@ -6,6 +6,9 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.supermap.data.Dataset;
+import com.supermap.data.DatasetVector;
+import com.supermap.data.DatasetVectorInfo;
 import com.supermap.data.Datasets;
 import com.supermap.data.Datasource;
 
@@ -51,6 +54,66 @@ public class JSDatasource extends ReactContextBaseJavaModule {
 
             WritableMap map = Arguments.createMap();
             map.putString("datasetsId",datasetsId);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getDataset(String datasourceId,int index,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            Dataset dataset = m_datasource.getDatasets().get(index);
+            String datasetId= JSDataset.registerId(dataset);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasetId",datasetId);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getDatasetByName(String datasourceId,String name,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            Dataset dataset = m_datasource.getDatasets().get(name);
+            String datasetId= JSDataset.registerId(dataset);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasetId",datasetId);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getAvailableDatasetName(String datasourceId,String name,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            String datasetName = m_datasource.getDatasets().getAvailableDatasetName(name);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasetName",datasetName);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void createDatasetVector(String datasourceId,String datasetVectorInfoId,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            DatasetVectorInfo datasetVectorInfo = JSDatasetVectorInfo.getObjFromList(datasetVectorInfoId);
+            DatasetVector datasetVector = m_datasource.getDatasets().create(datasetVectorInfo);
+            String datasetVectorId = JSDatasetVector.registerId(datasetVector);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasetVectorId",datasetVectorId);
             promise.resolve(map);
         }catch (Exception e){
             promise.reject(e);

@@ -7,6 +7,7 @@ import Datasource from './Datasource.js';
 
 export default class Datasources{
     async open(datasourceConnectionInfo){
+        this._drepecated();
         try{
             var {datasourceId} = await D.open(this.datasourcesId,datasourceConnectionInfo.datasourceConnectionInfoId);
             console.log("datasourceId:"+datasourceId);
@@ -20,6 +21,7 @@ export default class Datasources{
     }
 
     async get(index){
+        this._drepecated();
         try{
             var datasource = new Datasource();
             if(typeof index != 'string'){
@@ -33,5 +35,11 @@ export default class Datasources{
         }catch(e){
             console.error(e);
         }
+    }
+
+    _drepecated(){
+        console.warn("Datasources.js:This class has been deprecated. " +
+            "All its implements has been migrated to the Workspace class." +
+            "Relevant modifications refer to the API documents please");
     }
 }

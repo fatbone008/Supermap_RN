@@ -7,6 +7,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.supermap.data.Geometry;
 import com.supermap.data.QueryParameter;
 import com.supermap.data.SpatialQueryMode;
 import com.supermap.data.Enum;
@@ -125,6 +126,19 @@ public class JSQueryParameter extends ReactContextBaseJavaModule {
             }
             QueryParameter qp = getObjFromList(queryParameterId);
             qp.setOrderBy(attributes);
+
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setSpatialQueryObject(String queryParameterId,String geometryId,Promise promise){
+        try{
+            QueryParameter qp = getObjFromList(queryParameterId);
+            Geometry geometry = JSGeometry.getObjFromList(geometryId);
+            qp.setSpatialQueryObject(geometry);
 
             promise.resolve(true);
         }catch (Exception e){

@@ -7,6 +7,7 @@ import Layer from './Layer.js';
 
 export default class Layers{
     async add(dataset,b){
+        this._drepecated();
         try{
             await L.add(this.layersId,dataset.datasetId,b);
         }catch (e){
@@ -15,6 +16,7 @@ export default class Layers{
     }
 
     async get(index){
+        this._drepecated();
         try{
             var layer = new Layer();
             if(typeof index == "string"){
@@ -30,11 +32,19 @@ export default class Layers{
     }
 
     async getCount(){
+        this._drepecated();
         try{
             var {count} = await L.getCount(this.layersId);
             return count;
         }catch(e){
             console.error(e);
         }
+    }
+
+    _drepecated(){
+        console.warn("Layers.js:This class has been deprecated. " +
+            "All its implements has been migrated to the Map class." +
+            "eg:Layers.get(index) now has been substituted by map.getLayer(index)." +
+            "Relevant modifications refer to the API documents please");
     }
 }

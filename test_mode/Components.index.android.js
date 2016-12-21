@@ -11,12 +11,12 @@ import {
   Text,
   View
 } from 'react-native';
-import Workspace from './NativeModule/Workspace.js';
-import WorkspaceConnectionInfo from './NativeModule/WorkspaceConnectionInfo';
-import ServerMapView from './NativeModule/SMMapViewUI.js';
-import LegendView from './NativeModule/SMLegendViewUI.js';
-import LayerListView from './NativeModule/SMLayerListViewUI.js';
-import ScaleView from './NativeModule/SMScaleViewUI.js';
+import Workspace from '../NativeModule/Workspace.js';
+import WorkspaceConnectionInfo from '../NativeModule/WorkspaceConnectionInfo';
+import ServerMapView from '../NativeModule/components/SMMapViewUI.js';
+import LegendView from '../NativeModule/components/SMLegendViewUI.js';
+import LayerListView from '../NativeModule/components/SMLayerListViewUI.js';
+import ScaleView from '../NativeModule/components/SMScaleViewUI.js';
 
 class GeometryInfo extends Component {
   state = {

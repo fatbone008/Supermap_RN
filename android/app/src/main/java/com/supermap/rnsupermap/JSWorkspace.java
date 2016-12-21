@@ -14,6 +14,7 @@ import com.supermap.data.EngineType;
 import com.supermap.data.Enum;
 import com.supermap.data.Maps;
 import com.supermap.data.Rectangle2D;
+import com.supermap.data.StrokeType;
 import com.supermap.data.Workspace;
 import com.supermap.data.WorkspaceConnectionInfo;
 
@@ -117,6 +118,20 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void getMapName(String workspaceId,int mapIndex,Promise promise){
+        try{
+            m_Workspace = mWorkspaceList.get(workspaceId);
+            String mapName = m_Workspace.getMaps().get(mapIndex);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("mapName",mapName);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
     public void openDatasource(String workspaceId,String server,int engineType,String driver,Promise promise){
         try{
             Workspace workspace = getObjById(workspaceId);
@@ -129,6 +144,53 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
             Datasource ds = workspace.getDatasources().open(dsInfo);
 
             promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void openDatasourceConnectionInfo(String workspaceId,String datasrouceConnectionInfoId,Promise promise){
+        try {
+            Workspace workspace = getObjById(workspaceId);
+            DatasourceConnectionInfo datasourceConnectionInfo = JSDatasourceConnectionInfo.getObjById(datasrouceConnectionInfoId);
+            Datasource datasource = workspace.getDatasources().open(datasourceConnectionInfo);
+            String datasourceId = JSDatasource.registerId(datasource);
+
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasourceId",datasourceId);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getDatasource(String workspaceId,int index,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+            Datasource datasource = workspace.getDatasources().get(index);
+            String datasourceId = JSDatasource.registerId(datasource);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasourceId",datasourceId);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getDatasourceByName(String workspaceId,String index,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+            Datasource datasource = workspace.getDatasources().get(index);
+            String datasourceId = JSDatasource.registerId(datasource);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasourceId",datasourceId);
+            promise.resolve(map);
         }catch(Exception e){
             promise.reject(e);
         }

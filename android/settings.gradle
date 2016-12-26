@@ -1,4 +1,4 @@
 rootProject.name = 'GeometryInfo'
 
-include ':app', ':rnsupermap'
+include ':app', ':android'
 

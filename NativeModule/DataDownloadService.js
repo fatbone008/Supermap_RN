@@ -1,7 +1,8 @@
 import {NativeModules} from 'react-native';
 let DDS = NativeModules.JSDataDownloadService;
+import ServiceBase from './ServiceBase.js';
 
-export default class DataDownloadService {
+export default class DataDownloadService extends ServiceBase{
     constructor(){
         super();
         //同步子类Id和父类Id

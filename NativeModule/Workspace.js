@@ -74,6 +74,8 @@ export default class Workspace{
             datasource.datasourceId = datasourceId;
 
             return datasource;
+        }catch (e){
+            console.error(e);
         }
     }
 

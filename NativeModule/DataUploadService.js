@@ -1,7 +1,8 @@
 import {NativeModules} from 'react-native';
 let DUS = NativeModules.JSDataUploadService;
+import ServiceBase from './ServiceBase.js';
 
-export default class DataUploadService {
+export default class DataUploadService extends ServiceBase{
     constructor(){
         super();
         //同步子类Id和父类Id

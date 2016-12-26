@@ -5,8 +5,6 @@ import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableArray;
-import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.supermap.data.Geometry;
@@ -48,19 +46,10 @@ public class JSFeature extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void createObj(ReadableArray fieldNames, ReadableArray fieldValues, String geomtryId, Promise promise){
+    public void createObj(String[] fieldNames, String[] fieldValues, String geomtryId, Promise promise){
         try{
-            String[] names = {};
-            String[] values = {};
-            for(int i = 0; i < fieldNames.size(); i++){
-                names[i] = fieldNames.getString(i);
-            }
-            for(int i = 0; i < fieldValues.size(); i++){
-                values[i] = fieldValues.getString(i);
-            }
-
             Geometry geometry = JSGeometry.getObjFromList(geomtryId);
-            Feature feature = new Feature(names,values,geometry);
+            Feature feature = new Feature(fieldNames,fieldValues,geometry);
             String featureId = registerId(feature);
 
             WritableMap map = Arguments .createMap();

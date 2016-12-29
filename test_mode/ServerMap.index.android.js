@@ -14,10 +14,10 @@ import {
     TouchableHighlight,
     View
 } from 'react-native';
-import Workspace from './NativeModule/Workspace.js';
-import WorkspaceConnectionInfo from './NativeModule/WorkspaceConnectionInfo';
-import ServerMapView from './NativeModule/components/SMMapViewUI.js';
-import DatasourceConnectionInfo from './NativeModule/DatasourceConnectionInfo.js';
+import Workspace from '../NativeModule/Workspace.js';
+import WorkspaceConnectionInfo from '../NativeModule/WorkspaceConnectionInfo';
+import ServerMapView from '../NativeModule/components/SMMapViewUI.js';
+import DatasourceConnectionInfo from '../NativeModule/DatasourceConnectionInfo.js';
 
 
 class GeometryInfo extends Component {

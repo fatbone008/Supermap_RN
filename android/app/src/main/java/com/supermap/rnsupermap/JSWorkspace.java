@@ -155,6 +155,9 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
             Workspace workspace = getObjById(workspaceId);
             DatasourceConnectionInfo datasourceConnectionInfo = JSDatasourceConnectionInfo.getObjById(datasrouceConnectionInfoId);
             Datasource datasource = workspace.getDatasources().open(datasourceConnectionInfo);
+            if(datasource == null){
+                throw new Exception("找不到数据源，请检查请求路径是否正确或者网络是否连接。");
+            }
             String datasourceId = JSDatasource.registerId(datasource);
 
 

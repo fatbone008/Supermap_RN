@@ -38,7 +38,7 @@ export default class Map{
 
     async addDataset(dataset,addToHead){
         try{
-            await M.addDataset(this.mapId,dataset.datasetid,addToHead);
+            await M.addDataset(this.mapId,dataset.datasetId,addToHead);
         }catch(e){
             console.error(e);
         }

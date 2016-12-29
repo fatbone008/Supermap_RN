@@ -1,4 +1,4 @@
-import {NativeModules} from 'react-native';
+import {NativeModules,DeviceEventEmitter} from 'react-native';
 let LM = NativeModules.JSLocationManager;
 
 export default class LocationManager {
@@ -31,8 +31,9 @@ export default class LocationManager {
 
     async getLocationInfo(_callback){
         try{
-            DeviceEventManager.addListener("com.supermap.RN.JSLocationManager.location_changed_event",function (e) {
+            DeviceEventEmitter.addListener("com.supermap.RN.JSLocationManager.location_changed_event",function (e) {
                 if(typeof _callback == "function"){
+                    console.log("locationManager");
                     _callback(e);
                 }else{
                     console.error("Please set a callback in the first argument.");

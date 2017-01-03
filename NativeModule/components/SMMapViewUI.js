@@ -173,8 +173,6 @@ var styles = StyleSheet.create({
         flex: 1,
         alignSelf: 'stretch',
         backgroundColor: '#ffbcbc',
-        borderWidth: 1,
-        borderColor: 'red',
         alignItems: 'center',
         justifyContent: 'center',
         overflow:'hidden',

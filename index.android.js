@@ -77,7 +77,31 @@ class GeometryInfo extends Component {
         return (
             <View style={styles.container}>
                 <ServerMapView ref="mapView" onGetInstance={this._onGetInstance}/>
-
+                <View style={styles.contorlPane}>
+                    <Text style={styles.textLabel}>半径:</Text>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            style={styles.textInputor}
+                            onChangeText={(text) => this.setState({text})}
+                            value={this.state.text}
+                            underlineColorAndroid={'transparent'}
+                            keyboardType={'numeric'}
+                        />
+                    </View>
+                    <TouchableHighlight style={styles.imageWrapper} onPress={this._pickALine}>
+                        <Image
+                            source={require('./img/select.png')}
+                        />
+                    </TouchableHighlight>
+                    <TouchableHighlight style={styles.imageWrapper} onPress={this._pan}>
+                        <Image
+                            source={require('./img/pan.png')}
+                        />
+                    </TouchableHighlight>
+                    <TouchableHighlight style={styles.imageWrapper} onPress={this._search}>
+                        <Text style={styles.searchButton}>查  询</Text>
+                    </TouchableHighlight>
+                </View>
             </View>
         );
     }
@@ -90,22 +114,46 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         backgroundColor: '#333333',
     },
-    buttonGroup:{
-        flexDirection:'row',
-        justifyContent: 'space-between',
-        flexWrap:'wrap',
-    },
-    geoButton:{
-        width:80,
-        height:40,
-        backgroundColor:'#008800',
-        margin:5,
-        padding:5,
-        justifyContent: 'center',
+    contorlPane: {
+        opacity: .7,
+        backgroundColor: 'black',
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        right: 0,
+        height: 50,
+        flexDirection: 'row',
         alignItems: 'center',
-        opacity:.7,
-        borderRadius: 5,
     },
+    textLabel: {
+        padding: 5,
+        color: '#ffffff',
+    },
+    inputWrapper: {
+        flex: 1,
+        borderRadius: 10,
+        backgroundColor: 'white',
+        justifyContent: 'center',
+        // padding:5,
+    },
+    textInputor: {
+        height: 40,
+        color: 'black',
+        textAlignVertical:'center',
+    },
+    imageWrapper: {
+        flexDirection: 'row',
+        justifyContent: 'center',
+        width: 40,
+        height: 40,
+        marginLeft: 5,
+        alignItems: 'center',
+        backgroundColor: '#666666',
+        borderRadius: 10,
+    },
+    searchButton:{
+        color:'white',
+    }
 });
 
 AppRegistry.registerComponent('GeometryInfo', () => GeometryInfo);

@@ -18,16 +18,16 @@
 
 RCT_EXPORT_MODULE();
 
-RCT_REMAP_METHOD(getMap,geMapKey:(NSString*)key resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
-  MapControl* mapcontrol = [JSObjManager getObjWithKey:key];
-  if(mapcontrol){
-    Map* map = mapcontrol.map;
-    [JSObjManager addObj:map];
-    NSInteger key = (NSInteger)map;
-    resolve(@{@"mapId":@(key).stringValue});
-  }else
-    reject(@"MapControl",@"getMap:mapcontrol not exeist!!!",nil);
-}
+//RCT_REMAP_METHOD(getMap,geMapKey:(NSString*)key resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
+//  MapControl* mapcontrol = [JSObjManager getObjWithKey:key];
+//  if(mapcontrol){
+//    Map* map = mapcontrol.map;
+//    [JSObjManager addObj:map];
+//    NSInteger key = (NSInteger)map;
+//    resolve(@{@"mapId":@(key).stringValue});
+//  }else
+//    reject(@"MapControl",@"getMap:mapcontrol not exeist!!!",nil);
+//}
 
 RCT_REMAP_METHOD(getMapControl,getMapControlKey:(NSString*)key resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
   MapControl* mapcontrol = [JSObjManager getObjWithKey:key];

@@ -155,24 +155,24 @@ export default class MapControl{
         }
     }
 
-    async setRefreshListener(callback){
-        try{
-            var success = await MC.setRefreshListener(this.mapControlId);
-            console.log("MapControl:test result:",success);
-            if(success){
-                DeviceEventEmitter.addListener("com.supermap.RN.JSMapcontrol.refresh_event",function (e) {
-                    // console.log("MapControl:监听到地图刷新");
-                    if(typeof callback == 'function'){
-                        callback(e);0
-                    }else{
-                        console.error("Please set a callback function as the first argument.");
-                    }
-                });
-            }
-        }catch(e){
-            console.error(e);
-        }
-    }
+//    async setRefreshListener(callback){
+//        try{
+//            var success = await MC.setRefreshListener(this.mapControlId);
+//            console.log("MapControl:test result:",success);
+//            if(success){
+//                DeviceEventEmitter.addListener("com.supermap.RN.JSMapcontrol.refresh_event",function (e) {
+//                    // console.log("MapControl:监听到地图刷新");
+//                    if(typeof callback == 'function'){
+//                        callback(e);0
+//                    }else{
+//                        console.error("Please set a callback function as the first argument.");
+//                    }
+//                });
+//            }
+//        }catch(e){
+//            console.error(e);
+//        }
+//    }
 
     async getCurrentGeometry(){
         try{

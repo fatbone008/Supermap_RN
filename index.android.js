@@ -77,31 +77,6 @@ class GeometryInfo extends Component {
         return (
             <View style={styles.container}>
                 <ServerMapView ref="mapView" onGetInstance={this._onGetInstance}/>
-                <View style={styles.contorlPane}>
-                    <Text style={styles.textLabel}>半径:</Text>
-                    <View style={styles.inputWrapper}>
-                        <TextInput
-                            style={styles.textInputor}
-                            onChangeText={(text) => this.setState({text})}
-                            value={this.state.text}
-                            underlineColorAndroid={'transparent'}
-                            keyboardType={'numeric'}
-                        />
-                    </View>
-                    <TouchableHighlight style={styles.imageWrapper} onPress={this._pickALine}>
-                        <Image
-                            source={require('./img/select.png')}
-                        />
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.imageWrapper} onPress={this._pan}>
-                        <Image
-                            source={require('./img/pan.png')}
-                        />
-                    </TouchableHighlight>
-                    <TouchableHighlight style={styles.imageWrapper} onPress={this._search}>
-                        <Text style={styles.searchButton}>查  询</Text>
-                    </TouchableHighlight>
-                </View>
             </View>
         );
     }

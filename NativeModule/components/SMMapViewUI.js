@@ -166,6 +166,7 @@ class SMMapView extends React.Component{
 
 var RCTMapView = requireNativeComponent('RCTMapView',SMMapView,{nativeOnly:{
     returnId:true,
+    onChange:true,
 }});
 
 var styles = StyleSheet.create({

@@ -1,7 +1,7 @@
 /**
  * Created by will on 2016/6/17.
  */
-import { NativeModules } from 'react-native';
+import { NativeModules,Platform } from 'react-native';
 let MV = NativeModules.JSMapView;
 import MapControl from './MapControl.js';
 import Point2D from './Point2D.js';
@@ -12,6 +12,10 @@ export default class JSMapView{
 
     async getMapControl(){
         try{
+            if(Platform.OS === 'ios'){
+                this.mapControlId = this.mapViewId;
+                return this;
+            }
             var {mapControlId} =await MV.getMapControl(this.mapViewId);
             var mapControl = new MapControl();
             mapControl.mapControlId = mapControlId;

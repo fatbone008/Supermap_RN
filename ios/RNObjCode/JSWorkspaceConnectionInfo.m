@@ -25,7 +25,7 @@ RCT_REMAP_METHOD(createJSObj,resolver:(RCTPromiseResolveBlock)resolve rejecter:(
   if(info){
     NSInteger key = (NSInteger)info;
     [JSObjManager addObj:info];
-    resolve(@{@"workspaceConnectionInfoId":@(key).stringValue});
+    resolve(@{@"ID":@(key).stringValue});
   }else{
     reject(@"WorkSpaceInfo",@"create workSaceInfo failed!!!",nil);
   }

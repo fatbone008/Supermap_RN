@@ -49,8 +49,7 @@
 
 @implementation JSMapControl
 //注册为Native模块
-//RCT_EXPORT_MODULE(RCTMapView)
-RCT_EXPORT_MODULE()
+RCT_EXPORT_MODULE(RCTMapView)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 
 - (instancetype)init
@@ -70,52 +69,51 @@ RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 
   return mapControl;
 }
-////////////////////////
-RCT_REMAP_METHOD(getMap,mapControlId:(NSString*)Id resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
-  MapControl* mapControl = [JSObjManager getObjWithKey:Id];
-  Map* map = mapControl.map;
-  if(map){
-    NSInteger key = (NSInteger)map;
-    [JSObjManager addObj:map];
-    resolve(@{@"mapId":@(key).stringValue});
-  }else{
-    reject(@"mapControl",@"get map failed!!!",nil);
-  }
-}
-
-RCT_REMAP_METHOD(getNavigation2,getNavigation2BymapControlId:(NSString*)Id resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
-  MapControl* mapControl = [JSObjManager getObjWithKey:Id];
-  Navigation2* navi2 = [mapControl getNavigation2];
-  if(navi2){
-    NSInteger key = (NSInteger)navi2;
-    [JSObjManager addObj:navi2];
-    resolve(@{@"navigation2Id":@(key).stringValue});
-  }else{
-    reject(@"mapControl",@"get navi2 failed!!!",nil);
-  }
-}
-
-RCT_REMAP_METHOD(setAction,mapControlId:(NSString*)Id actionType:(int)type resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
-  MapControl* mapControl = [JSObjManager getObjWithKey:Id];
-  if (mapControl) {
-    mapControl.action = type;
-    resolve(@"1");
-  }else{
-    reject(@"mapControl",@"setAction failed!!!",nil);
-  }
-}
-  
-  RCT_REMAP_METHOD(getCurrentGeometry,getCurrentGeometryById:(NSString*)Id resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
-    MapControl* mapControl = [JSObjManager getObjWithKey:Id];
-    Geometry *geo = [mapControl getCurrentGeometry];
-    if (geo) {
-      NSInteger key = (NSInteger)geo;
-      [JSObjManager addObj:geo];
-      resolve(@{@"geometryId":@(key).stringValue});
-    }else{
-      reject(@"mapControl",@"getCurrentGeometry failed!!!",nil);
-    }
-  }
+//RCT_REMAP_METHOD(getMap,mapControlId:(NSString*)Id resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
+//  MapControl* mapControl = [JSObjManager getObjWithKey:Id];
+//  Map* map = mapControl.map;
+//  if(map){
+//    NSInteger key = (NSInteger)map;
+//    [JSObjManager addObj:map];
+//    resolve(@{@"mapId":@(key).stringValue});
+//  }else{
+//    reject(@"mapControl",@"get map failed!!!",nil);
+//  }
+//}
+//
+//RCT_REMAP_METHOD(getNavigation2,getNavigation2BymapControlId:(NSString*)Id resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
+//  MapControl* mapControl = [JSObjManager getObjWithKey:Id];
+//  Navigation2* navi2 = [mapControl getNavigation2];
+//  if(navi2){
+//    NSInteger key = (NSInteger)navi2;
+//    [JSObjManager addObj:navi2];
+//    resolve(@{@"navigation2Id":@(key).stringValue});
+//  }else{
+//    reject(@"mapControl",@"get navi2 failed!!!",nil);
+//  }
+//}
+//
+//RCT_REMAP_METHOD(setAction,mapControlId:(NSString*)Id actionType:(int)type resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
+//  MapControl* mapControl = [JSObjManager getObjWithKey:Id];
+//  if (mapControl) {
+//    mapControl.action = type;
+//    resolve(@"1");
+//  }else{
+//    reject(@"mapControl",@"setAction failed!!!",nil);
+//  }
+//}
+//  
+//  RCT_REMAP_METHOD(getCurrentGeometry,getCurrentGeometryById:(NSString*)Id resolver:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject){
+//    MapControl* mapControl = [JSObjManager getObjWithKey:Id];
+//    Geometry *geo = [mapControl getCurrentGeometry];
+//    if (geo) {
+//      NSInteger key = (NSInteger)geo;
+//      [JSObjManager addObj:geo];
+//      resolve(@{@"geometryId":@(key).stringValue});
+//    }else{
+//      reject(@"mapControl",@"getCurrentGeometry failed!!!",nil);
+//    }
+//  }
 
 //RCT_CUSTOM_VIEW_PROPERTY(onChange, RCTBubblingEventBlock, RCTMapView)
 @end

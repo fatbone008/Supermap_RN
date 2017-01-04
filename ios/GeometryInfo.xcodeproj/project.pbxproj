@@ -23,6 +23,123 @@
 		140ED2AC1D01E1AD002B40FF /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		146834051AC3E58100842450 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 146834041AC3E56700842450 /* libReact.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
+		FF583EC41E1B8F73004748D1 /* index.ios.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EC31E1B8F73004748D1 /* index.ios.js */; };
+		FF583F1B1E1B8F85004748D1 /* BufferAnalystGeometry.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EE51E1B8F85004748D1 /* BufferAnalystGeometry.js */; };
+		FF583F1C1E1B8F85004748D1 /* BufferAnalystParameter.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EE61E1B8F85004748D1 /* BufferAnalystParameter.js */; };
+		FF583F1D1E1B8F85004748D1 /* CallOut.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EE71E1B8F85004748D1 /* CallOut.js */; };
+		FF583F1E1E1B8F85004748D1 /* SMCallOut.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EE91E1B8F85004748D1 /* SMCallOut.js */; };
+		FF583F1F1E1B8F85004748D1 /* SMLayerListViewUI.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EEA1E1B8F85004748D1 /* SMLayerListViewUI.js */; };
+		FF583F201E1B8F85004748D1 /* SMLegendViewUI.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EEB1E1B8F85004748D1 /* SMLegendViewUI.js */; };
+		FF583F211E1B8F85004748D1 /* SMMapViewUI.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EEC1E1B8F85004748D1 /* SMMapViewUI.js */; };
+		FF583F221E1B8F85004748D1 /* SMScaleViewUI.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EED1E1B8F85004748D1 /* SMScaleViewUI.js */; };
+		FF583F231E1B8F85004748D1 /* CursorType.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EEE1E1B8F85004748D1 /* CursorType.js */; };
+		FF583F241E1B8F85004748D1 /* DataDownloadService.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EEF1E1B8F85004748D1 /* DataDownloadService.js */; };
+		FF583F251E1B8F85004748D1 /* Dataset.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF01E1B8F85004748D1 /* Dataset.js */; };
+		FF583F261E1B8F85004748D1 /* Datasets.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF11E1B8F85004748D1 /* Datasets.js */; };
+		FF583F271E1B8F85004748D1 /* DatasetVector.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF21E1B8F85004748D1 /* DatasetVector.js */; };
+		FF583F281E1B8F85004748D1 /* DatasetVectorInfo.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF31E1B8F85004748D1 /* DatasetVectorInfo.js */; };
+		FF583F291E1B8F85004748D1 /* Datasource.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF41E1B8F85004748D1 /* Datasource.js */; };
+		FF583F2A1E1B8F85004748D1 /* DatasourceConnectionInfo.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF51E1B8F85004748D1 /* DatasourceConnectionInfo.js */; };
+		FF583F2B1E1B8F85004748D1 /* Datasources.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF61E1B8F85004748D1 /* Datasources.js */; };
+		FF583F2C1E1B8F85004748D1 /* DataUploadService.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF71E1B8F85004748D1 /* DataUploadService.js */; };
+		FF583F2D1E1B8F85004748D1 /* Feature.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF81E1B8F85004748D1 /* Feature.js */; };
+		FF583F2E1E1B8F85004748D1 /* FeatureSet.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EF91E1B8F85004748D1 /* FeatureSet.js */; };
+		FF583F2F1E1B8F85004748D1 /* GeoLine.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EFA1E1B8F85004748D1 /* GeoLine.js */; };
+		FF583F301E1B8F85004748D1 /* Geometry.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EFB1E1B8F85004748D1 /* Geometry.js */; };
+		FF583F311E1B8F85004748D1 /* GeoPoint.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EFC1E1B8F85004748D1 /* GeoPoint.js */; };
+		FF583F321E1B8F85004748D1 /* GeoRegion.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EFD1E1B8F85004748D1 /* GeoRegion.js */; };
+		FF583F331E1B8F85004748D1 /* GeoStyle.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EFE1E1B8F85004748D1 /* GeoStyle.js */; };
+		FF583F341E1B8F85004748D1 /* Layer.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583EFF1E1B8F85004748D1 /* Layer.js */; };
+		FF583F351E1B8F85004748D1 /* Layers.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F001E1B8F85004748D1 /* Layers.js */; };
+		FF583F361E1B8F85004748D1 /* LayerSetting.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F011E1B8F85004748D1 /* LayerSetting.js */; };
+		FF583F371E1B8F85004748D1 /* LayerSettingVector.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F021E1B8F85004748D1 /* LayerSettingVector.js */; };
+		FF583F381E1B8F85004748D1 /* LocationManager.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F031E1B8F85004748D1 /* LocationManager.js */; };
+		FF583F391E1B8F85004748D1 /* Map.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F041E1B8F85004748D1 /* Map.js */; };
+		FF583F3A1E1B8F85004748D1 /* MapControl.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F051E1B8F85004748D1 /* MapControl.js */; };
+		FF583F3B1E1B8F85004748D1 /* Maps.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F061E1B8F85004748D1 /* Maps.js */; };
+		FF583F3C1E1B8F85004748D1 /* MapView.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F071E1B8F85004748D1 /* MapView.js */; };
+		FF583F3D1E1B8F85004748D1 /* Navigation2.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F081E1B8F85004748D1 /* Navigation2.js */; };
+		FF583F3E1E1B8F85004748D1 /* Point.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F091E1B8F85004748D1 /* Point.js */; };
+		FF583F3F1E1B8F85004748D1 /* Point2D.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F0A1E1B8F85004748D1 /* Point2D.js */; };
+		FF583F401E1B8F85004748D1 /* PrjCoordSys.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F0B1E1B8F85004748D1 /* PrjCoordSys.js */; };
+		FF583F411E1B8F85004748D1 /* QueryParameter.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F0C1E1B8F85004748D1 /* QueryParameter.js */; };
+		FF583F421E1B8F85004748D1 /* QueryService.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F0D1E1B8F85004748D1 /* QueryService.js */; };
+		FF583F431E1B8F85004748D1 /* Recordset.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F0E1E1B8F85004748D1 /* Recordset.js */; };
+		FF583F441E1B8F85004748D1 /* Rectangle2D.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F0F1E1B8F85004748D1 /* Rectangle2D.js */; };
+		FF583F451E1B8F85004748D1 /* destpoint.png in Resources */ = {isa = PBXBuildFile; fileRef = FF583F111E1B8F85004748D1 /* destpoint.png */; };
+		FF583F461E1B8F85004748D1 /* startpoint.png in Resources */ = {isa = PBXBuildFile; fileRef = FF583F121E1B8F85004748D1 /* startpoint.png */; };
+		FF583F471E1B8F85004748D1 /* Selection.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F131E1B8F85004748D1 /* Selection.js */; };
+		FF583F481E1B8F85004748D1 /* ServiceBase.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F141E1B8F85004748D1 /* ServiceBase.js */; };
+		FF583F491E1B8F85004748D1 /* ServiceQueryParameter.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F151E1B8F85004748D1 /* ServiceQueryParameter.js */; };
+		FF583F4A1E1B8F85004748D1 /* Size2D.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F161E1B8F85004748D1 /* Size2D.js */; };
+		FF583F4B1E1B8F85004748D1 /* Track.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F171E1B8F85004748D1 /* Track.js */; };
+		FF583F4C1E1B8F85004748D1 /* TrackingLayer.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F181E1B8F85004748D1 /* TrackingLayer.js */; };
+		FF583F4D1E1B8F85004748D1 /* Workspace.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F191E1B8F85004748D1 /* Workspace.js */; };
+		FF583F4E1E1B8F85004748D1 /* WorkspaceConnectionInfo.js in Resources */ = {isa = PBXBuildFile; fileRef = FF583F1A1E1B8F85004748D1 /* WorkspaceConnectionInfo.js */; };
+		FF583FAC1E1B8F94004748D1 /* JSBufferAnalystGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F511E1B8F94004748D1 /* JSBufferAnalystGeometry.m */; };
+		FF583FAE1E1B8F94004748D1 /* JSCallOut.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F551E1B8F94004748D1 /* JSCallOut.m */; };
+		FF583FAF1E1B8F94004748D1 /* JSDataDownloadService.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F571E1B8F94004748D1 /* JSDataDownloadService.m */; };
+		FF583FB01E1B8F94004748D1 /* JSDataset.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F591E1B8F94004748D1 /* JSDataset.m */; };
+		FF583FB11E1B8F94004748D1 /* JSDatasets.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F5B1E1B8F94004748D1 /* JSDatasets.m */; };
+		FF583FB21E1B8F94004748D1 /* JSDatasetVector.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F5D1E1B8F94004748D1 /* JSDatasetVector.m */; };
+		FF583FB31E1B8F94004748D1 /* JSDatasetVectorInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F5F1E1B8F94004748D1 /* JSDatasetVectorInfo.m */; };
+		FF583FB41E1B8F94004748D1 /* JSDatasource.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F611E1B8F94004748D1 /* JSDatasource.m */; };
+		FF583FB51E1B8F94004748D1 /* JSDatasourceConnectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F631E1B8F94004748D1 /* JSDatasourceConnectionInfo.m */; };
+		FF583FB61E1B8F94004748D1 /* JSDatasources.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F651E1B8F94004748D1 /* JSDatasources.m */; };
+		FF583FB71E1B8F94004748D1 /* JSDataUploadService.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F671E1B8F94004748D1 /* JSDataUploadService.m */; };
+		FF583FB81E1B8F94004748D1 /* JSEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F691E1B8F94004748D1 /* JSEnvironment.m */; };
+		FF583FB91E1B8F94004748D1 /* JSFeature.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F6B1E1B8F94004748D1 /* JSFeature.m */; };
+		FF583FBA1E1B8F94004748D1 /* JSFeatureSet.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F6D1E1B8F94004748D1 /* JSFeatureSet.m */; };
+		FF583FBB1E1B8F94004748D1 /* JSGeoLine.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F6F1E1B8F94004748D1 /* JSGeoLine.m */; };
+		FF583FBC1E1B8F94004748D1 /* JSGeometry.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F711E1B8F94004748D1 /* JSGeometry.m */; };
+		FF583FBD1E1B8F94004748D1 /* JSGeoPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F731E1B8F94004748D1 /* JSGeoPoint.m */; };
+		FF583FBE1E1B8F94004748D1 /* JSGeoRegion.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F751E1B8F94004748D1 /* JSGeoRegion.m */; };
+		FF583FBF1E1B8F94004748D1 /* JSGeoStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F771E1B8F94004748D1 /* JSGeoStyle.m */; };
+		FF583FC01E1B8F94004748D1 /* JSLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F791E1B8F94004748D1 /* JSLayer.m */; };
+		FF583FC11E1B8F94004748D1 /* JSLayers.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F7B1E1B8F94004748D1 /* JSLayers.m */; };
+		FF583FC21E1B8F94004748D1 /* JSLayerSetting.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F7D1E1B8F94004748D1 /* JSLayerSetting.m */; };
+		FF583FC31E1B8F94004748D1 /* JSLayerSettingVector.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F7F1E1B8F94004748D1 /* JSLayerSettingVector.m */; };
+		FF583FC41E1B8F94004748D1 /* JSLocationManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F811E1B8F94004748D1 /* JSLocationManager.m */; };
+		FF583FC51E1B8F94004748D1 /* JSMap.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F831E1B8F94004748D1 /* JSMap.m */; };
+		FF583FC61E1B8F94004748D1 /* JSMapControl.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F851E1B8F94004748D1 /* JSMapControl.m */; };
+		FF583FC71E1B8F94004748D1 /* JSMaps.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F871E1B8F94004748D1 /* JSMaps.m */; };
+		FF583FC81E1B8F94004748D1 /* JSMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F891E1B8F94004748D1 /* JSMapView.m */; };
+		FF583FC91E1B8F94004748D1 /* JSNavigation2.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F8B1E1B8F94004748D1 /* JSNavigation2.m */; };
+		FF583FCA1E1B8F94004748D1 /* JSObjManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F8D1E1B8F94004748D1 /* JSObjManager.m */; };
+		FF583FCB1E1B8F94004748D1 /* JSPoint.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F8F1E1B8F94004748D1 /* JSPoint.m */; };
+		FF583FCC1E1B8F94004748D1 /* JSPoint2D.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F911E1B8F94004748D1 /* JSPoint2D.m */; };
+		FF583FCD1E1B8F94004748D1 /* JSPrjCoordSys.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F931E1B8F94004748D1 /* JSPrjCoordSys.m */; };
+		FF583FCE1E1B8F94004748D1 /* JSQueryParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F951E1B8F94004748D1 /* JSQueryParameter.m */; };
+		FF583FCF1E1B8F94004748D1 /* JSQueryService.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F971E1B8F94004748D1 /* JSQueryService.m */; };
+		FF583FD01E1B8F94004748D1 /* JSRecordset.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F991E1B8F94004748D1 /* JSRecordset.m */; };
+		FF583FD11E1B8F94004748D1 /* JSRectangle2D.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F9B1E1B8F94004748D1 /* JSRectangle2D.m */; };
+		FF583FD21E1B8F94004748D1 /* JSSelection.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F9D1E1B8F94004748D1 /* JSSelection.m */; };
+		FF583FD31E1B8F94004748D1 /* JSServiceBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583F9F1E1B8F94004748D1 /* JSServiceBase.m */; };
+		FF583FD41E1B8F94004748D1 /* JSServiceQueryParameter.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583FA11E1B8F94004748D1 /* JSServiceQueryParameter.m */; };
+		FF583FD51E1B8F94004748D1 /* JSSize2D.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583FA31E1B8F94004748D1 /* JSSize2D.m */; };
+		FF583FD61E1B8F94004748D1 /* JSTrack.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583FA51E1B8F94004748D1 /* JSTrack.m */; };
+		FF583FD71E1B8F94004748D1 /* JSTrackingLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583FA71E1B8F94004748D1 /* JSTrackingLayer.m */; };
+		FF583FD81E1B8F94004748D1 /* JSWorkspace.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583FA91E1B8F94004748D1 /* JSWorkspace.m */; };
+		FF583FD91E1B8F94004748D1 /* JSWorkspaceConnectionInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FF583FAB1E1B8F94004748D1 /* JSWorkspaceConnectionInfo.m */; };
+		FF5841491E1CC38A004748D1 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841481E1CC38A004748D1 /* SystemConfiguration.framework */; };
+		FF58415C1E1CC393004748D1 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF58415B1E1CC393004748D1 /* Security.framework */; };
+		FF58415E1E1CC39D004748D1 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF58415D1E1CC39D004748D1 /* QuartzCore.framework */; };
+		FF5841601E1CC3A5004748D1 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF58415F1E1CC3A5004748D1 /* MobileCoreServices.framework */; };
+		FF5841621E1CC3B1004748D1 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841611E1CC3B1004748D1 /* MediaPlayer.framework */; };
+		FF5841641E1CC3B8004748D1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841631E1CC3B8004748D1 /* Foundation.framework */; };
+		FF5841661E1CC3C3004748D1 /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841651E1CC3C3004748D1 /* CoreText.framework */; };
+		FF5841681E1CC3CB004748D1 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841671E1CC3CB004748D1 /* CoreTelephony.framework */; };
+		FF58416A1E1CC3D6004748D1 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841691E1CC3D6004748D1 /* CoreLocation.framework */; };
+		FF58416C1E1CC3E2004748D1 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF58416B1E1CC3E2004748D1 /* CoreGraphics.framework */; };
+		FF58416E1E1CC3EA004748D1 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF58416D1E1CC3EA004748D1 /* AVFoundation.framework */; };
+		FF5841701E1CC3F3004748D1 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF58416F1E1CC3F3004748D1 /* AudioToolbox.framework */; };
+		FF5841721E1CC3FD004748D1 /* AddressBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841711E1CC3FD004748D1 /* AddressBook.framework */; };
+		FF5841741E1CC405004748D1 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841731E1CC405004748D1 /* Accelerate.framework */; };
+		FF5841761E1CC414004748D1 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841751E1CC414004748D1 /* libstdc++.6.0.9.tbd */; };
+		FF5841781E1CC421004748D1 /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841771E1CC421004748D1 /* libstdc++.tbd */; };
+		FF58417A1E1CC436004748D1 /* SuperMap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FF5841791E1CC436004748D1 /* SuperMap.framework */; };
+		FF58417C1E1CC478004748D1 /* SuperMap.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FF58417B1E1CC478004748D1 /* SuperMap.bundle */; };
+		FF58418A1E1CCE13004748D1 /* JSAdoptMapView.m in Sources */ = {isa = PBXBuildFile; fileRef = FF5841891E1CCE13004748D1 /* JSAdoptMapView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,20 +220,69 @@
 			remoteGlobalIDString = 58B5119B1A9E6C1200147676;
 			remoteInfo = RCTText;
 		};
+		FF583EC91E1B8F73004748D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A283A1D9B042B00D4039D;
+			remoteInfo = "RCTImage-tvOS";
+		};
+		FF583ECD1E1B8F73004748D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28471D9B043800D4039D;
+			remoteInfo = "RCTLinking-tvOS";
+		};
+		FF583ED11E1B8F73004748D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28541D9B044C00D4039D;
+			remoteInfo = "RCTNetwork-tvOS";
+		};
+		FF583ED51E1B8F73004748D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28611D9B046600D4039D;
+			remoteInfo = "RCTSettings-tvOS";
+		};
+		FF583ED91E1B8F73004748D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A287B1D9B048500D4039D;
+			remoteInfo = "RCTText-tvOS";
+		};
+		FF583EDE1E1B8F73004748D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28881D9B049200D4039D;
+			remoteInfo = "RCTWebSocket-tvOS";
+		};
+		FF583EE21E1B8F73004748D1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 146833FF1AC3E56700842450 /* React.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 2D2A28131D9B038B00D4039D;
+			remoteInfo = "React-tvOS";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = main.jsbundle; path = main.jsbundle; sourceTree = "<group>"; };
-		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = ../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj; sourceTree = "<group>"; };
-		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = ../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj; sourceTree = "<group>"; };
-		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = ../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj; sourceTree = "<group>"; };
-		00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = ../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj; sourceTree = "<group>"; };
-		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = ../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj; sourceTree = "<group>"; };
+		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
+		00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTActionSheet.xcodeproj; path = "../node_modules/react-native/Libraries/ActionSheetIOS/RCTActionSheet.xcodeproj"; sourceTree = "<group>"; };
+		00C302B51ABCB90400DB3ED1 /* RCTGeolocation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTGeolocation.xcodeproj; path = "../node_modules/react-native/Libraries/Geolocation/RCTGeolocation.xcodeproj"; sourceTree = "<group>"; };
+		00C302BB1ABCB91800DB3ED1 /* RCTImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTImage.xcodeproj; path = "../node_modules/react-native/Libraries/Image/RCTImage.xcodeproj"; sourceTree = "<group>"; };
+		00C302D31ABCB9D200DB3ED1 /* RCTNetwork.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTNetwork.xcodeproj; path = "../node_modules/react-native/Libraries/Network/RCTNetwork.xcodeproj"; sourceTree = "<group>"; };
+		00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTVibration.xcodeproj; path = "../node_modules/react-native/Libraries/Vibration/RCTVibration.xcodeproj"; sourceTree = "<group>"; };
 		00E356EE1AD99517003FC87E /* GeometryInfoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = GeometryInfoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* GeometryInfoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GeometryInfoTests.m; sourceTree = "<group>"; };
-		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = ../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj; sourceTree = "<group>"; };
-		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = ../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj; sourceTree = "<group>"; };
+		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
+		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* GeometryInfo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GeometryInfo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = GeometryInfo/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = GeometryInfo/AppDelegate.m; sourceTree = "<group>"; };
@@ -124,9 +290,172 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = GeometryInfo/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = GeometryInfo/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = GeometryInfo/main.m; sourceTree = "<group>"; };
-		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = ../node_modules/react-native/React/React.xcodeproj; sourceTree = "<group>"; };
-		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = ../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj; sourceTree = "<group>"; };
-		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = ../node_modules/react-native/Libraries/Text/RCTText.xcodeproj; sourceTree = "<group>"; };
+		146833FF1AC3E56700842450 /* React.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = React.xcodeproj; path = "../node_modules/react-native/React/React.xcodeproj"; sourceTree = "<group>"; };
+		78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTLinking.xcodeproj; path = "../node_modules/react-native/Libraries/LinkingIOS/RCTLinking.xcodeproj"; sourceTree = "<group>"; };
+		832341B01AAA6A8300B99B32 /* RCTText.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTText.xcodeproj; path = "../node_modules/react-native/Libraries/Text/RCTText.xcodeproj"; sourceTree = "<group>"; };
+		FF583EC31E1B8F73004748D1 /* index.ios.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; name = index.ios.js; path = ../index.ios.js; sourceTree = "<group>"; };
+		FF583EE51E1B8F85004748D1 /* BufferAnalystGeometry.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = BufferAnalystGeometry.js; sourceTree = "<group>"; };
+		FF583EE61E1B8F85004748D1 /* BufferAnalystParameter.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = BufferAnalystParameter.js; sourceTree = "<group>"; };
+		FF583EE71E1B8F85004748D1 /* CallOut.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = CallOut.js; sourceTree = "<group>"; };
+		FF583EE91E1B8F85004748D1 /* SMCallOut.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SMCallOut.js; sourceTree = "<group>"; };
+		FF583EEA1E1B8F85004748D1 /* SMLayerListViewUI.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SMLayerListViewUI.js; sourceTree = "<group>"; };
+		FF583EEB1E1B8F85004748D1 /* SMLegendViewUI.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SMLegendViewUI.js; sourceTree = "<group>"; };
+		FF583EEC1E1B8F85004748D1 /* SMMapViewUI.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SMMapViewUI.js; sourceTree = "<group>"; };
+		FF583EED1E1B8F85004748D1 /* SMScaleViewUI.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = SMScaleViewUI.js; sourceTree = "<group>"; };
+		FF583EEE1E1B8F85004748D1 /* CursorType.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = CursorType.js; sourceTree = "<group>"; };
+		FF583EEF1E1B8F85004748D1 /* DataDownloadService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = DataDownloadService.js; sourceTree = "<group>"; };
+		FF583EF01E1B8F85004748D1 /* Dataset.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Dataset.js; sourceTree = "<group>"; };
+		FF583EF11E1B8F85004748D1 /* Datasets.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Datasets.js; sourceTree = "<group>"; };
+		FF583EF21E1B8F85004748D1 /* DatasetVector.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = DatasetVector.js; sourceTree = "<group>"; };
+		FF583EF31E1B8F85004748D1 /* DatasetVectorInfo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = DatasetVectorInfo.js; sourceTree = "<group>"; };
+		FF583EF41E1B8F85004748D1 /* Datasource.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Datasource.js; sourceTree = "<group>"; };
+		FF583EF51E1B8F85004748D1 /* DatasourceConnectionInfo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = DatasourceConnectionInfo.js; sourceTree = "<group>"; };
+		FF583EF61E1B8F85004748D1 /* Datasources.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Datasources.js; sourceTree = "<group>"; };
+		FF583EF71E1B8F85004748D1 /* DataUploadService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = DataUploadService.js; sourceTree = "<group>"; };
+		FF583EF81E1B8F85004748D1 /* Feature.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Feature.js; sourceTree = "<group>"; };
+		FF583EF91E1B8F85004748D1 /* FeatureSet.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = FeatureSet.js; sourceTree = "<group>"; };
+		FF583EFA1E1B8F85004748D1 /* GeoLine.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GeoLine.js; sourceTree = "<group>"; };
+		FF583EFB1E1B8F85004748D1 /* Geometry.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Geometry.js; sourceTree = "<group>"; };
+		FF583EFC1E1B8F85004748D1 /* GeoPoint.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GeoPoint.js; sourceTree = "<group>"; };
+		FF583EFD1E1B8F85004748D1 /* GeoRegion.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GeoRegion.js; sourceTree = "<group>"; };
+		FF583EFE1E1B8F85004748D1 /* GeoStyle.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = GeoStyle.js; sourceTree = "<group>"; };
+		FF583EFF1E1B8F85004748D1 /* Layer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Layer.js; sourceTree = "<group>"; };
+		FF583F001E1B8F85004748D1 /* Layers.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Layers.js; sourceTree = "<group>"; };
+		FF583F011E1B8F85004748D1 /* LayerSetting.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LayerSetting.js; sourceTree = "<group>"; };
+		FF583F021E1B8F85004748D1 /* LayerSettingVector.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LayerSettingVector.js; sourceTree = "<group>"; };
+		FF583F031E1B8F85004748D1 /* LocationManager.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = LocationManager.js; sourceTree = "<group>"; };
+		FF583F041E1B8F85004748D1 /* Map.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Map.js; sourceTree = "<group>"; };
+		FF583F051E1B8F85004748D1 /* MapControl.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MapControl.js; sourceTree = "<group>"; };
+		FF583F061E1B8F85004748D1 /* Maps.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Maps.js; sourceTree = "<group>"; };
+		FF583F071E1B8F85004748D1 /* MapView.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = MapView.js; sourceTree = "<group>"; };
+		FF583F081E1B8F85004748D1 /* Navigation2.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Navigation2.js; sourceTree = "<group>"; };
+		FF583F091E1B8F85004748D1 /* Point.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Point.js; sourceTree = "<group>"; };
+		FF583F0A1E1B8F85004748D1 /* Point2D.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Point2D.js; sourceTree = "<group>"; };
+		FF583F0B1E1B8F85004748D1 /* PrjCoordSys.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = PrjCoordSys.js; sourceTree = "<group>"; };
+		FF583F0C1E1B8F85004748D1 /* QueryParameter.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = QueryParameter.js; sourceTree = "<group>"; };
+		FF583F0D1E1B8F85004748D1 /* QueryService.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = QueryService.js; sourceTree = "<group>"; };
+		FF583F0E1E1B8F85004748D1 /* Recordset.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Recordset.js; sourceTree = "<group>"; };
+		FF583F0F1E1B8F85004748D1 /* Rectangle2D.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Rectangle2D.js; sourceTree = "<group>"; };
+		FF583F111E1B8F85004748D1 /* destpoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = destpoint.png; sourceTree = "<group>"; };
+		FF583F121E1B8F85004748D1 /* startpoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = startpoint.png; sourceTree = "<group>"; };
+		FF583F131E1B8F85004748D1 /* Selection.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Selection.js; sourceTree = "<group>"; };
+		FF583F141E1B8F85004748D1 /* ServiceBase.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ServiceBase.js; sourceTree = "<group>"; };
+		FF583F151E1B8F85004748D1 /* ServiceQueryParameter.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = ServiceQueryParameter.js; sourceTree = "<group>"; };
+		FF583F161E1B8F85004748D1 /* Size2D.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Size2D.js; sourceTree = "<group>"; };
+		FF583F171E1B8F85004748D1 /* Track.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Track.js; sourceTree = "<group>"; };
+		FF583F181E1B8F85004748D1 /* TrackingLayer.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = TrackingLayer.js; sourceTree = "<group>"; };
+		FF583F191E1B8F85004748D1 /* Workspace.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = Workspace.js; sourceTree = "<group>"; };
+		FF583F1A1E1B8F85004748D1 /* WorkspaceConnectionInfo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = WorkspaceConnectionInfo.js; sourceTree = "<group>"; };
+		FF583F501E1B8F94004748D1 /* JSBufferAnalystGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSBufferAnalystGeometry.h; sourceTree = "<group>"; };
+		FF583F511E1B8F94004748D1 /* JSBufferAnalystGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSBufferAnalystGeometry.m; sourceTree = "<group>"; };
+		FF583F541E1B8F94004748D1 /* JSCallOut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSCallOut.h; sourceTree = "<group>"; };
+		FF583F551E1B8F94004748D1 /* JSCallOut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSCallOut.m; sourceTree = "<group>"; };
+		FF583F561E1B8F94004748D1 /* JSDataDownloadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDataDownloadService.h; sourceTree = "<group>"; };
+		FF583F571E1B8F94004748D1 /* JSDataDownloadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDataDownloadService.m; sourceTree = "<group>"; };
+		FF583F581E1B8F94004748D1 /* JSDataset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDataset.h; sourceTree = "<group>"; };
+		FF583F591E1B8F94004748D1 /* JSDataset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDataset.m; sourceTree = "<group>"; };
+		FF583F5A1E1B8F94004748D1 /* JSDatasets.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDatasets.h; sourceTree = "<group>"; };
+		FF583F5B1E1B8F94004748D1 /* JSDatasets.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDatasets.m; sourceTree = "<group>"; };
+		FF583F5C1E1B8F94004748D1 /* JSDatasetVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDatasetVector.h; sourceTree = "<group>"; };
+		FF583F5D1E1B8F94004748D1 /* JSDatasetVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDatasetVector.m; sourceTree = "<group>"; };
+		FF583F5E1E1B8F94004748D1 /* JSDatasetVectorInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDatasetVectorInfo.h; sourceTree = "<group>"; };
+		FF583F5F1E1B8F94004748D1 /* JSDatasetVectorInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDatasetVectorInfo.m; sourceTree = "<group>"; };
+		FF583F601E1B8F94004748D1 /* JSDatasource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDatasource.h; sourceTree = "<group>"; };
+		FF583F611E1B8F94004748D1 /* JSDatasource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDatasource.m; sourceTree = "<group>"; };
+		FF583F621E1B8F94004748D1 /* JSDatasourceConnectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDatasourceConnectionInfo.h; sourceTree = "<group>"; };
+		FF583F631E1B8F94004748D1 /* JSDatasourceConnectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDatasourceConnectionInfo.m; sourceTree = "<group>"; };
+		FF583F641E1B8F94004748D1 /* JSDatasources.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDatasources.h; sourceTree = "<group>"; };
+		FF583F651E1B8F94004748D1 /* JSDatasources.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDatasources.m; sourceTree = "<group>"; };
+		FF583F661E1B8F94004748D1 /* JSDataUploadService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSDataUploadService.h; sourceTree = "<group>"; };
+		FF583F671E1B8F94004748D1 /* JSDataUploadService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSDataUploadService.m; sourceTree = "<group>"; };
+		FF583F681E1B8F94004748D1 /* JSEnvironment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSEnvironment.h; sourceTree = "<group>"; };
+		FF583F691E1B8F94004748D1 /* JSEnvironment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSEnvironment.m; sourceTree = "<group>"; };
+		FF583F6A1E1B8F94004748D1 /* JSFeature.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSFeature.h; sourceTree = "<group>"; };
+		FF583F6B1E1B8F94004748D1 /* JSFeature.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSFeature.m; sourceTree = "<group>"; };
+		FF583F6C1E1B8F94004748D1 /* JSFeatureSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSFeatureSet.h; sourceTree = "<group>"; };
+		FF583F6D1E1B8F94004748D1 /* JSFeatureSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSFeatureSet.m; sourceTree = "<group>"; };
+		FF583F6E1E1B8F94004748D1 /* JSGeoLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSGeoLine.h; sourceTree = "<group>"; };
+		FF583F6F1E1B8F94004748D1 /* JSGeoLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSGeoLine.m; sourceTree = "<group>"; };
+		FF583F701E1B8F94004748D1 /* JSGeometry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSGeometry.h; sourceTree = "<group>"; };
+		FF583F711E1B8F94004748D1 /* JSGeometry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSGeometry.m; sourceTree = "<group>"; };
+		FF583F721E1B8F94004748D1 /* JSGeoPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSGeoPoint.h; sourceTree = "<group>"; };
+		FF583F731E1B8F94004748D1 /* JSGeoPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSGeoPoint.m; sourceTree = "<group>"; };
+		FF583F741E1B8F94004748D1 /* JSGeoRegion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSGeoRegion.h; sourceTree = "<group>"; };
+		FF583F751E1B8F94004748D1 /* JSGeoRegion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSGeoRegion.m; sourceTree = "<group>"; };
+		FF583F761E1B8F94004748D1 /* JSGeoStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSGeoStyle.h; sourceTree = "<group>"; };
+		FF583F771E1B8F94004748D1 /* JSGeoStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSGeoStyle.m; sourceTree = "<group>"; };
+		FF583F781E1B8F94004748D1 /* JSLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSLayer.h; sourceTree = "<group>"; };
+		FF583F791E1B8F94004748D1 /* JSLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSLayer.m; sourceTree = "<group>"; };
+		FF583F7A1E1B8F94004748D1 /* JSLayers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSLayers.h; sourceTree = "<group>"; };
+		FF583F7B1E1B8F94004748D1 /* JSLayers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSLayers.m; sourceTree = "<group>"; };
+		FF583F7C1E1B8F94004748D1 /* JSLayerSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSLayerSetting.h; sourceTree = "<group>"; };
+		FF583F7D1E1B8F94004748D1 /* JSLayerSetting.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSLayerSetting.m; sourceTree = "<group>"; };
+		FF583F7E1E1B8F94004748D1 /* JSLayerSettingVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSLayerSettingVector.h; sourceTree = "<group>"; };
+		FF583F7F1E1B8F94004748D1 /* JSLayerSettingVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSLayerSettingVector.m; sourceTree = "<group>"; };
+		FF583F801E1B8F94004748D1 /* JSLocationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSLocationManager.h; sourceTree = "<group>"; };
+		FF583F811E1B8F94004748D1 /* JSLocationManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSLocationManager.m; sourceTree = "<group>"; };
+		FF583F821E1B8F94004748D1 /* JSMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMap.h; sourceTree = "<group>"; };
+		FF583F831E1B8F94004748D1 /* JSMap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMap.m; sourceTree = "<group>"; };
+		FF583F841E1B8F94004748D1 /* JSMapControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMapControl.h; sourceTree = "<group>"; };
+		FF583F851E1B8F94004748D1 /* JSMapControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMapControl.m; sourceTree = "<group>"; };
+		FF583F861E1B8F94004748D1 /* JSMaps.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMaps.h; sourceTree = "<group>"; };
+		FF583F871E1B8F94004748D1 /* JSMaps.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMaps.m; sourceTree = "<group>"; };
+		FF583F881E1B8F94004748D1 /* JSMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSMapView.h; sourceTree = "<group>"; };
+		FF583F891E1B8F94004748D1 /* JSMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSMapView.m; sourceTree = "<group>"; };
+		FF583F8A1E1B8F94004748D1 /* JSNavigation2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSNavigation2.h; sourceTree = "<group>"; };
+		FF583F8B1E1B8F94004748D1 /* JSNavigation2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSNavigation2.m; sourceTree = "<group>"; };
+		FF583F8C1E1B8F94004748D1 /* JSObjManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSObjManager.h; sourceTree = "<group>"; };
+		FF583F8D1E1B8F94004748D1 /* JSObjManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSObjManager.m; sourceTree = "<group>"; };
+		FF583F8E1E1B8F94004748D1 /* JSPoint.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPoint.h; sourceTree = "<group>"; };
+		FF583F8F1E1B8F94004748D1 /* JSPoint.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPoint.m; sourceTree = "<group>"; };
+		FF583F901E1B8F94004748D1 /* JSPoint2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPoint2D.h; sourceTree = "<group>"; };
+		FF583F911E1B8F94004748D1 /* JSPoint2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPoint2D.m; sourceTree = "<group>"; };
+		FF583F921E1B8F94004748D1 /* JSPrjCoordSys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSPrjCoordSys.h; sourceTree = "<group>"; };
+		FF583F931E1B8F94004748D1 /* JSPrjCoordSys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSPrjCoordSys.m; sourceTree = "<group>"; };
+		FF583F941E1B8F94004748D1 /* JSQueryParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQueryParameter.h; sourceTree = "<group>"; };
+		FF583F951E1B8F94004748D1 /* JSQueryParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQueryParameter.m; sourceTree = "<group>"; };
+		FF583F961E1B8F94004748D1 /* JSQueryService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSQueryService.h; sourceTree = "<group>"; };
+		FF583F971E1B8F94004748D1 /* JSQueryService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSQueryService.m; sourceTree = "<group>"; };
+		FF583F981E1B8F94004748D1 /* JSRecordset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSRecordset.h; sourceTree = "<group>"; };
+		FF583F991E1B8F94004748D1 /* JSRecordset.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSRecordset.m; sourceTree = "<group>"; };
+		FF583F9A1E1B8F94004748D1 /* JSRectangle2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSRectangle2D.h; sourceTree = "<group>"; };
+		FF583F9B1E1B8F94004748D1 /* JSRectangle2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSRectangle2D.m; sourceTree = "<group>"; };
+		FF583F9C1E1B8F94004748D1 /* JSSelection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSelection.h; sourceTree = "<group>"; };
+		FF583F9D1E1B8F94004748D1 /* JSSelection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSelection.m; sourceTree = "<group>"; };
+		FF583F9E1E1B8F94004748D1 /* JSServiceBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSServiceBase.h; sourceTree = "<group>"; };
+		FF583F9F1E1B8F94004748D1 /* JSServiceBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSServiceBase.m; sourceTree = "<group>"; };
+		FF583FA01E1B8F94004748D1 /* JSServiceQueryParameter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSServiceQueryParameter.h; sourceTree = "<group>"; };
+		FF583FA11E1B8F94004748D1 /* JSServiceQueryParameter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSServiceQueryParameter.m; sourceTree = "<group>"; };
+		FF583FA21E1B8F94004748D1 /* JSSize2D.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSSize2D.h; sourceTree = "<group>"; };
+		FF583FA31E1B8F94004748D1 /* JSSize2D.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSSize2D.m; sourceTree = "<group>"; };
+		FF583FA41E1B8F94004748D1 /* JSTrack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTrack.h; sourceTree = "<group>"; };
+		FF583FA51E1B8F94004748D1 /* JSTrack.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTrack.m; sourceTree = "<group>"; };
+		FF583FA61E1B8F94004748D1 /* JSTrackingLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSTrackingLayer.h; sourceTree = "<group>"; };
+		FF583FA71E1B8F94004748D1 /* JSTrackingLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSTrackingLayer.m; sourceTree = "<group>"; };
+		FF583FA81E1B8F94004748D1 /* JSWorkspace.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSWorkspace.h; sourceTree = "<group>"; };
+		FF583FA91E1B8F94004748D1 /* JSWorkspace.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWorkspace.m; sourceTree = "<group>"; };
+		FF583FAA1E1B8F94004748D1 /* JSWorkspaceConnectionInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSWorkspaceConnectionInfo.h; sourceTree = "<group>"; };
+		FF583FAB1E1B8F94004748D1 /* JSWorkspaceConnectionInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSWorkspaceConnectionInfo.m; sourceTree = "<group>"; };
+		FF5841481E1CC38A004748D1 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FF58415B1E1CC393004748D1 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		FF58415D1E1CC39D004748D1 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		FF58415F1E1CC3A5004748D1 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		FF5841611E1CC3B1004748D1 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		FF5841631E1CC3B8004748D1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		FF5841651E1CC3C3004748D1 /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		FF5841671E1CC3CB004748D1 /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		FF5841691E1CC3D6004748D1 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		FF58416B1E1CC3E2004748D1 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		FF58416D1E1CC3EA004748D1 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		FF58416F1E1CC3F3004748D1 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		FF5841711E1CC3FD004748D1 /* AddressBook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AddressBook.framework; path = System/Library/Frameworks/AddressBook.framework; sourceTree = SDKROOT; };
+		FF5841731E1CC405004748D1 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		FF5841751E1CC414004748D1 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "usr/lib/libstdc++.6.0.9.tbd"; sourceTree = SDKROOT; };
+		FF5841771E1CC421004748D1 /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		FF5841791E1CC436004748D1 /* SuperMap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SuperMap.framework; path = ../../../../../Library/SuperMap/SDKs/iPhoneSimulator.sdk/SuperMap.framework; sourceTree = "<group>"; };
+		FF58417B1E1CC478004748D1 /* SuperMap.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = SuperMap.bundle; sourceTree = "<group>"; };
+		FF5841881E1CCE13004748D1 /* JSAdoptMapView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSAdoptMapView.h; sourceTree = "<group>"; };
+		FF5841891E1CCE13004748D1 /* JSAdoptMapView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSAdoptMapView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +471,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF58417A1E1CC436004748D1 /* SuperMap.framework in Frameworks */,
+				FF5841781E1CC421004748D1 /* libstdc++.tbd in Frameworks */,
+				FF5841761E1CC414004748D1 /* libstdc++.6.0.9.tbd in Frameworks */,
+				FF5841741E1CC405004748D1 /* Accelerate.framework in Frameworks */,
+				FF5841721E1CC3FD004748D1 /* AddressBook.framework in Frameworks */,
+				FF5841701E1CC3F3004748D1 /* AudioToolbox.framework in Frameworks */,
+				FF58416E1E1CC3EA004748D1 /* AVFoundation.framework in Frameworks */,
+				FF58416C1E1CC3E2004748D1 /* CoreGraphics.framework in Frameworks */,
+				FF58416A1E1CC3D6004748D1 /* CoreLocation.framework in Frameworks */,
+				FF5841681E1CC3CB004748D1 /* CoreTelephony.framework in Frameworks */,
+				FF5841661E1CC3C3004748D1 /* CoreText.framework in Frameworks */,
+				FF5841641E1CC3B8004748D1 /* Foundation.framework in Frameworks */,
+				FF5841621E1CC3B1004748D1 /* MediaPlayer.framework in Frameworks */,
+				FF5841601E1CC3A5004748D1 /* MobileCoreServices.framework in Frameworks */,
+				FF58415E1E1CC39D004748D1 /* QuartzCore.framework in Frameworks */,
+				FF58415C1E1CC393004748D1 /* Security.framework in Frameworks */,
+				FF5841491E1CC38A004748D1 /* SystemConfiguration.framework in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -178,6 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				00C302C01ABCB91800DB3ED1 /* libRCTImage.a */,
+				FF583ECA1E1B8F73004748D1 /* libRCTImage-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,6 +533,7 @@
 			isa = PBXGroup;
 			children = (
 				00C302DC1ABCB9D200DB3ED1 /* libRCTNetwork.a */,
+				FF583ED21E1B8F73004748D1 /* libRCTNetwork-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -219,6 +567,7 @@
 			isa = PBXGroup;
 			children = (
 				139105C11AF99BAD00B5F7CC /* libRCTSettings.a */,
+				FF583ED61E1B8F73004748D1 /* libRCTSettings-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,6 +576,7 @@
 			isa = PBXGroup;
 			children = (
 				139FDEF41B06529B00C62182 /* libRCTWebSocket.a */,
+				FF583EDF1E1B8F73004748D1 /* libRCTWebSocket-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -249,6 +599,7 @@
 			isa = PBXGroup;
 			children = (
 				146834041AC3E56700842450 /* libReact.a */,
+				FF583EE31E1B8F73004748D1 /* libReact-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -257,6 +608,7 @@
 			isa = PBXGroup;
 			children = (
 				78C398B91ACF4ADC00677621 /* libRCTLinking.a */,
+				FF583ECE1E1B8F73004748D1 /* libRCTLinking-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -282,6 +634,7 @@
 			isa = PBXGroup;
 			children = (
 				832341B51AAA6A8300B99B32 /* libRCTText.a */,
+				FF583EDA1E1B8F73004748D1 /* libRCTText-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -289,10 +642,14 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FF583EC31E1B8F73004748D1 /* index.ios.js */,
+				FF583EE41E1B8F85004748D1 /* NativeModule */,
+				FF583F4F1E1B8F94004748D1 /* RNObjCode */,
 				13B07FAE1A68108700A75B9A /* GeometryInfo */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* GeometryInfoTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
+				FF5841471E1CC389004748D1 /* Frameworks */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -305,6 +662,206 @@
 				00E356EE1AD99517003FC87E /* GeometryInfoTests.xctest */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		FF583EE41E1B8F85004748D1 /* NativeModule */ = {
+			isa = PBXGroup;
+			children = (
+				FF583EE51E1B8F85004748D1 /* BufferAnalystGeometry.js */,
+				FF583EE61E1B8F85004748D1 /* BufferAnalystParameter.js */,
+				FF583EE71E1B8F85004748D1 /* CallOut.js */,
+				FF583EE81E1B8F85004748D1 /* components */,
+				FF583EEE1E1B8F85004748D1 /* CursorType.js */,
+				FF583EEF1E1B8F85004748D1 /* DataDownloadService.js */,
+				FF583EF01E1B8F85004748D1 /* Dataset.js */,
+				FF583EF11E1B8F85004748D1 /* Datasets.js */,
+				FF583EF21E1B8F85004748D1 /* DatasetVector.js */,
+				FF583EF31E1B8F85004748D1 /* DatasetVectorInfo.js */,
+				FF583EF41E1B8F85004748D1 /* Datasource.js */,
+				FF583EF51E1B8F85004748D1 /* DatasourceConnectionInfo.js */,
+				FF583EF61E1B8F85004748D1 /* Datasources.js */,
+				FF583EF71E1B8F85004748D1 /* DataUploadService.js */,
+				FF583EF81E1B8F85004748D1 /* Feature.js */,
+				FF583EF91E1B8F85004748D1 /* FeatureSet.js */,
+				FF583EFA1E1B8F85004748D1 /* GeoLine.js */,
+				FF583EFB1E1B8F85004748D1 /* Geometry.js */,
+				FF583EFC1E1B8F85004748D1 /* GeoPoint.js */,
+				FF583EFD1E1B8F85004748D1 /* GeoRegion.js */,
+				FF583EFE1E1B8F85004748D1 /* GeoStyle.js */,
+				FF583EFF1E1B8F85004748D1 /* Layer.js */,
+				FF583F001E1B8F85004748D1 /* Layers.js */,
+				FF583F011E1B8F85004748D1 /* LayerSetting.js */,
+				FF583F021E1B8F85004748D1 /* LayerSettingVector.js */,
+				FF583F031E1B8F85004748D1 /* LocationManager.js */,
+				FF583F041E1B8F85004748D1 /* Map.js */,
+				FF583F051E1B8F85004748D1 /* MapControl.js */,
+				FF583F061E1B8F85004748D1 /* Maps.js */,
+				FF583F071E1B8F85004748D1 /* MapView.js */,
+				FF583F081E1B8F85004748D1 /* Navigation2.js */,
+				FF583F091E1B8F85004748D1 /* Point.js */,
+				FF583F0A1E1B8F85004748D1 /* Point2D.js */,
+				FF583F0B1E1B8F85004748D1 /* PrjCoordSys.js */,
+				FF583F0C1E1B8F85004748D1 /* QueryParameter.js */,
+				FF583F0D1E1B8F85004748D1 /* QueryService.js */,
+				FF583F0E1E1B8F85004748D1 /* Recordset.js */,
+				FF583F0F1E1B8F85004748D1 /* Rectangle2D.js */,
+				FF583F101E1B8F85004748D1 /* resource */,
+				FF583F131E1B8F85004748D1 /* Selection.js */,
+				FF583F141E1B8F85004748D1 /* ServiceBase.js */,
+				FF583F151E1B8F85004748D1 /* ServiceQueryParameter.js */,
+				FF583F161E1B8F85004748D1 /* Size2D.js */,
+				FF583F171E1B8F85004748D1 /* Track.js */,
+				FF583F181E1B8F85004748D1 /* TrackingLayer.js */,
+				FF583F191E1B8F85004748D1 /* Workspace.js */,
+				FF583F1A1E1B8F85004748D1 /* WorkspaceConnectionInfo.js */,
+			);
+			name = NativeModule;
+			path = ../NativeModule;
+			sourceTree = "<group>";
+		};
+		FF583EE81E1B8F85004748D1 /* components */ = {
+			isa = PBXGroup;
+			children = (
+				FF583EE91E1B8F85004748D1 /* SMCallOut.js */,
+				FF583EEA1E1B8F85004748D1 /* SMLayerListViewUI.js */,
+				FF583EEB1E1B8F85004748D1 /* SMLegendViewUI.js */,
+				FF583EEC1E1B8F85004748D1 /* SMMapViewUI.js */,
+				FF583EED1E1B8F85004748D1 /* SMScaleViewUI.js */,
+			);
+			path = components;
+			sourceTree = "<group>";
+		};
+		FF583F101E1B8F85004748D1 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				FF583F111E1B8F85004748D1 /* destpoint.png */,
+				FF583F121E1B8F85004748D1 /* startpoint.png */,
+			);
+			path = resource;
+			sourceTree = "<group>";
+		};
+		FF583F4F1E1B8F94004748D1 /* RNObjCode */ = {
+			isa = PBXGroup;
+			children = (
+				FF583F501E1B8F94004748D1 /* JSBufferAnalystGeometry.h */,
+				FF583F511E1B8F94004748D1 /* JSBufferAnalystGeometry.m */,
+				FF583F541E1B8F94004748D1 /* JSCallOut.h */,
+				FF583F551E1B8F94004748D1 /* JSCallOut.m */,
+				FF583F561E1B8F94004748D1 /* JSDataDownloadService.h */,
+				FF583F571E1B8F94004748D1 /* JSDataDownloadService.m */,
+				FF583F581E1B8F94004748D1 /* JSDataset.h */,
+				FF583F591E1B8F94004748D1 /* JSDataset.m */,
+				FF583F5A1E1B8F94004748D1 /* JSDatasets.h */,
+				FF583F5B1E1B8F94004748D1 /* JSDatasets.m */,
+				FF583F5C1E1B8F94004748D1 /* JSDatasetVector.h */,
+				FF583F5D1E1B8F94004748D1 /* JSDatasetVector.m */,
+				FF583F5E1E1B8F94004748D1 /* JSDatasetVectorInfo.h */,
+				FF583F5F1E1B8F94004748D1 /* JSDatasetVectorInfo.m */,
+				FF583F601E1B8F94004748D1 /* JSDatasource.h */,
+				FF583F611E1B8F94004748D1 /* JSDatasource.m */,
+				FF583F621E1B8F94004748D1 /* JSDatasourceConnectionInfo.h */,
+				FF583F631E1B8F94004748D1 /* JSDatasourceConnectionInfo.m */,
+				FF583F641E1B8F94004748D1 /* JSDatasources.h */,
+				FF583F651E1B8F94004748D1 /* JSDatasources.m */,
+				FF583F661E1B8F94004748D1 /* JSDataUploadService.h */,
+				FF583F671E1B8F94004748D1 /* JSDataUploadService.m */,
+				FF583F681E1B8F94004748D1 /* JSEnvironment.h */,
+				FF583F691E1B8F94004748D1 /* JSEnvironment.m */,
+				FF583F6A1E1B8F94004748D1 /* JSFeature.h */,
+				FF583F6B1E1B8F94004748D1 /* JSFeature.m */,
+				FF583F6C1E1B8F94004748D1 /* JSFeatureSet.h */,
+				FF583F6D1E1B8F94004748D1 /* JSFeatureSet.m */,
+				FF583F6E1E1B8F94004748D1 /* JSGeoLine.h */,
+				FF583F6F1E1B8F94004748D1 /* JSGeoLine.m */,
+				FF583F701E1B8F94004748D1 /* JSGeometry.h */,
+				FF583F711E1B8F94004748D1 /* JSGeometry.m */,
+				FF583F721E1B8F94004748D1 /* JSGeoPoint.h */,
+				FF583F731E1B8F94004748D1 /* JSGeoPoint.m */,
+				FF583F741E1B8F94004748D1 /* JSGeoRegion.h */,
+				FF583F751E1B8F94004748D1 /* JSGeoRegion.m */,
+				FF583F761E1B8F94004748D1 /* JSGeoStyle.h */,
+				FF583F771E1B8F94004748D1 /* JSGeoStyle.m */,
+				FF583F781E1B8F94004748D1 /* JSLayer.h */,
+				FF583F791E1B8F94004748D1 /* JSLayer.m */,
+				FF583F7A1E1B8F94004748D1 /* JSLayers.h */,
+				FF583F7B1E1B8F94004748D1 /* JSLayers.m */,
+				FF583F7C1E1B8F94004748D1 /* JSLayerSetting.h */,
+				FF583F7D1E1B8F94004748D1 /* JSLayerSetting.m */,
+				FF583F7E1E1B8F94004748D1 /* JSLayerSettingVector.h */,
+				FF583F7F1E1B8F94004748D1 /* JSLayerSettingVector.m */,
+				FF583F801E1B8F94004748D1 /* JSLocationManager.h */,
+				FF583F811E1B8F94004748D1 /* JSLocationManager.m */,
+				FF583F821E1B8F94004748D1 /* JSMap.h */,
+				FF583F831E1B8F94004748D1 /* JSMap.m */,
+				FF583F841E1B8F94004748D1 /* JSMapControl.h */,
+				FF583F851E1B8F94004748D1 /* JSMapControl.m */,
+				FF583F861E1B8F94004748D1 /* JSMaps.h */,
+				FF583F871E1B8F94004748D1 /* JSMaps.m */,
+				FF583F881E1B8F94004748D1 /* JSMapView.h */,
+				FF583F891E1B8F94004748D1 /* JSMapView.m */,
+				FF5841881E1CCE13004748D1 /* JSAdoptMapView.h */,
+				FF5841891E1CCE13004748D1 /* JSAdoptMapView.m */,
+				FF583F8A1E1B8F94004748D1 /* JSNavigation2.h */,
+				FF583F8B1E1B8F94004748D1 /* JSNavigation2.m */,
+				FF583F8C1E1B8F94004748D1 /* JSObjManager.h */,
+				FF583F8D1E1B8F94004748D1 /* JSObjManager.m */,
+				FF583F8E1E1B8F94004748D1 /* JSPoint.h */,
+				FF583F8F1E1B8F94004748D1 /* JSPoint.m */,
+				FF583F901E1B8F94004748D1 /* JSPoint2D.h */,
+				FF583F911E1B8F94004748D1 /* JSPoint2D.m */,
+				FF583F921E1B8F94004748D1 /* JSPrjCoordSys.h */,
+				FF583F931E1B8F94004748D1 /* JSPrjCoordSys.m */,
+				FF583F941E1B8F94004748D1 /* JSQueryParameter.h */,
+				FF583F951E1B8F94004748D1 /* JSQueryParameter.m */,
+				FF583F961E1B8F94004748D1 /* JSQueryService.h */,
+				FF583F971E1B8F94004748D1 /* JSQueryService.m */,
+				FF583F981E1B8F94004748D1 /* JSRecordset.h */,
+				FF583F991E1B8F94004748D1 /* JSRecordset.m */,
+				FF583F9A1E1B8F94004748D1 /* JSRectangle2D.h */,
+				FF583F9B1E1B8F94004748D1 /* JSRectangle2D.m */,
+				FF583F9C1E1B8F94004748D1 /* JSSelection.h */,
+				FF583F9D1E1B8F94004748D1 /* JSSelection.m */,
+				FF583F9E1E1B8F94004748D1 /* JSServiceBase.h */,
+				FF583F9F1E1B8F94004748D1 /* JSServiceBase.m */,
+				FF583FA01E1B8F94004748D1 /* JSServiceQueryParameter.h */,
+				FF583FA11E1B8F94004748D1 /* JSServiceQueryParameter.m */,
+				FF583FA21E1B8F94004748D1 /* JSSize2D.h */,
+				FF583FA31E1B8F94004748D1 /* JSSize2D.m */,
+				FF583FA41E1B8F94004748D1 /* JSTrack.h */,
+				FF583FA51E1B8F94004748D1 /* JSTrack.m */,
+				FF583FA61E1B8F94004748D1 /* JSTrackingLayer.h */,
+				FF583FA71E1B8F94004748D1 /* JSTrackingLayer.m */,
+				FF583FA81E1B8F94004748D1 /* JSWorkspace.h */,
+				FF583FA91E1B8F94004748D1 /* JSWorkspace.m */,
+				FF583FAA1E1B8F94004748D1 /* JSWorkspaceConnectionInfo.h */,
+				FF583FAB1E1B8F94004748D1 /* JSWorkspaceConnectionInfo.m */,
+			);
+			path = RNObjCode;
+			sourceTree = "<group>";
+		};
+		FF5841471E1CC389004748D1 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FF58417B1E1CC478004748D1 /* SuperMap.bundle */,
+				FF5841791E1CC436004748D1 /* SuperMap.framework */,
+				FF5841771E1CC421004748D1 /* libstdc++.tbd */,
+				FF5841751E1CC414004748D1 /* libstdc++.6.0.9.tbd */,
+				FF5841731E1CC405004748D1 /* Accelerate.framework */,
+				FF5841711E1CC3FD004748D1 /* AddressBook.framework */,
+				FF58416F1E1CC3F3004748D1 /* AudioToolbox.framework */,
+				FF58416D1E1CC3EA004748D1 /* AVFoundation.framework */,
+				FF58416B1E1CC3E2004748D1 /* CoreGraphics.framework */,
+				FF5841691E1CC3D6004748D1 /* CoreLocation.framework */,
+				FF5841671E1CC3CB004748D1 /* CoreTelephony.framework */,
+				FF5841651E1CC3C3004748D1 /* CoreText.framework */,
+				FF5841631E1CC3B8004748D1 /* Foundation.framework */,
+				FF5841611E1CC3B1004748D1 /* MediaPlayer.framework */,
+				FF58415F1E1CC3A5004748D1 /* MobileCoreServices.framework */,
+				FF58415D1E1CC39D004748D1 /* QuartzCore.framework */,
+				FF58415B1E1CC393004748D1 /* Security.framework */,
+				FF5841481E1CC38A004748D1 /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -493,6 +1050,55 @@
 			remoteRef = 832341B41AAA6A8300B99B32 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FF583ECA1E1B8F73004748D1 /* libRCTImage-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTImage-tvOS.a";
+			remoteRef = FF583EC91E1B8F73004748D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FF583ECE1E1B8F73004748D1 /* libRCTLinking-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTLinking-tvOS.a";
+			remoteRef = FF583ECD1E1B8F73004748D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FF583ED21E1B8F73004748D1 /* libRCTNetwork-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTNetwork-tvOS.a";
+			remoteRef = FF583ED11E1B8F73004748D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FF583ED61E1B8F73004748D1 /* libRCTSettings-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTSettings-tvOS.a";
+			remoteRef = FF583ED51E1B8F73004748D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FF583EDA1E1B8F73004748D1 /* libRCTText-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTText-tvOS.a";
+			remoteRef = FF583ED91E1B8F73004748D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FF583EDF1E1B8F73004748D1 /* libRCTWebSocket-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRCTWebSocket-tvOS.a";
+			remoteRef = FF583EDE1E1B8F73004748D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		FF583EE31E1B8F73004748D1 /* libReact-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReact-tvOS.a";
+			remoteRef = FF583EE21E1B8F73004748D1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -507,8 +1113,62 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF583F3E1E1B8F85004748D1 /* Point.js in Resources */,
+				FF583F2F1E1B8F85004748D1 /* GeoLine.js in Resources */,
+				FF583F231E1B8F85004748D1 /* CursorType.js in Resources */,
+				FF583F4C1E1B8F85004748D1 /* TrackingLayer.js in Resources */,
+				FF58417C1E1CC478004748D1 /* SuperMap.bundle in Resources */,
+				FF583F221E1B8F85004748D1 /* SMScaleViewUI.js in Resources */,
+				FF583F201E1B8F85004748D1 /* SMLegendViewUI.js in Resources */,
+				FF583F3F1E1B8F85004748D1 /* Point2D.js in Resources */,
+				FF583F441E1B8F85004748D1 /* Rectangle2D.js in Resources */,
+				FF583F2B1E1B8F85004748D1 /* Datasources.js in Resources */,
+				FF583F241E1B8F85004748D1 /* DataDownloadService.js in Resources */,
+				FF583F271E1B8F85004748D1 /* DatasetVector.js in Resources */,
+				FF583F341E1B8F85004748D1 /* Layer.js in Resources */,
+				FF583F431E1B8F85004748D1 /* Recordset.js in Resources */,
+				FF583F1C1E1B8F85004748D1 /* BufferAnalystParameter.js in Resources */,
+				FF583F3D1E1B8F85004748D1 /* Navigation2.js in Resources */,
+				FF583F2C1E1B8F85004748D1 /* DataUploadService.js in Resources */,
+				FF583F2A1E1B8F85004748D1 /* DatasourceConnectionInfo.js in Resources */,
+				FF583F2D1E1B8F85004748D1 /* Feature.js in Resources */,
+				FF583F3A1E1B8F85004748D1 /* MapControl.js in Resources */,
+				FF583F351E1B8F85004748D1 /* Layers.js in Resources */,
+				FF583F3C1E1B8F85004748D1 /* MapView.js in Resources */,
+				FF583F461E1B8F85004748D1 /* startpoint.png in Resources */,
+				FF583F4D1E1B8F85004748D1 /* Workspace.js in Resources */,
+				FF583F491E1B8F85004748D1 /* ServiceQueryParameter.js in Resources */,
+				FF583F451E1B8F85004748D1 /* destpoint.png in Resources */,
+				FF583F311E1B8F85004748D1 /* GeoPoint.js in Resources */,
+				FF583F3B1E1B8F85004748D1 /* Maps.js in Resources */,
+				FF583F4E1E1B8F85004748D1 /* WorkspaceConnectionInfo.js in Resources */,
+				FF583F371E1B8F85004748D1 /* LayerSettingVector.js in Resources */,
+				FF583F481E1B8F85004748D1 /* ServiceBase.js in Resources */,
+				FF583F361E1B8F85004748D1 /* LayerSetting.js in Resources */,
+				FF583F401E1B8F85004748D1 /* PrjCoordSys.js in Resources */,
+				FF583F1F1E1B8F85004748D1 /* SMLayerListViewUI.js in Resources */,
+				FF583F421E1B8F85004748D1 /* QueryService.js in Resources */,
+				FF583F291E1B8F85004748D1 /* Datasource.js in Resources */,
+				FF583F411E1B8F85004748D1 /* QueryParameter.js in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				FF583F261E1B8F85004748D1 /* Datasets.js in Resources */,
+				FF583F251E1B8F85004748D1 /* Dataset.js in Resources */,
+				FF583F4B1E1B8F85004748D1 /* Track.js in Resources */,
+				FF583F321E1B8F85004748D1 /* GeoRegion.js in Resources */,
+				FF583F301E1B8F85004748D1 /* Geometry.js in Resources */,
+				FF583F1B1E1B8F85004748D1 /* BufferAnalystGeometry.js in Resources */,
+				FF583F1E1E1B8F85004748D1 /* SMCallOut.js in Resources */,
+				FF583F391E1B8F85004748D1 /* Map.js in Resources */,
+				FF583F1D1E1B8F85004748D1 /* CallOut.js in Resources */,
+				FF583EC41E1B8F73004748D1 /* index.ios.js in Resources */,
+				FF583F281E1B8F85004748D1 /* DatasetVectorInfo.js in Resources */,
+				FF583F211E1B8F85004748D1 /* SMMapViewUI.js in Resources */,
+				FF583F381E1B8F85004748D1 /* LocationManager.js in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
+				FF583F471E1B8F85004748D1 /* Selection.js in Resources */,
+				FF583F331E1B8F85004748D1 /* GeoStyle.js in Resources */,
+				FF583F2E1E1B8F85004748D1 /* FeatureSet.js in Resources */,
+				FF583F4A1E1B8F85004748D1 /* Size2D.js in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -528,7 +1188,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/packager/react-native-xcode.sh";
-			showEnvVarsInLog = 1;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -545,8 +1204,54 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF583FCE1E1B8F94004748D1 /* JSQueryParameter.m in Sources */,
+				FF583FCF1E1B8F94004748D1 /* JSQueryService.m in Sources */,
+				FF583FBF1E1B8F94004748D1 /* JSGeoStyle.m in Sources */,
+				FF583FC51E1B8F94004748D1 /* JSMap.m in Sources */,
+				FF583FAC1E1B8F94004748D1 /* JSBufferAnalystGeometry.m in Sources */,
+				FF583FB81E1B8F94004748D1 /* JSEnvironment.m in Sources */,
+				FF583FBB1E1B8F94004748D1 /* JSGeoLine.m in Sources */,
+				FF583FD51E1B8F94004748D1 /* JSSize2D.m in Sources */,
+				FF583FD31E1B8F94004748D1 /* JSServiceBase.m in Sources */,
+				FF58418A1E1CCE13004748D1 /* JSAdoptMapView.m in Sources */,
+				FF583FCD1E1B8F94004748D1 /* JSPrjCoordSys.m in Sources */,
+				FF583FCB1E1B8F94004748D1 /* JSPoint.m in Sources */,
+				FF583FB61E1B8F94004748D1 /* JSDatasources.m in Sources */,
+				FF583FD11E1B8F94004748D1 /* JSRectangle2D.m in Sources */,
+				FF583FC81E1B8F94004748D1 /* JSMapView.m in Sources */,
+				FF583FD81E1B8F94004748D1 /* JSWorkspace.m in Sources */,
+				FF583FBA1E1B8F94004748D1 /* JSFeatureSet.m in Sources */,
+				FF583FAE1E1B8F94004748D1 /* JSCallOut.m in Sources */,
+				FF583FC91E1B8F94004748D1 /* JSNavigation2.m in Sources */,
+				FF583FC61E1B8F94004748D1 /* JSMapControl.m in Sources */,
+				FF583FB71E1B8F94004748D1 /* JSDataUploadService.m in Sources */,
+				FF583FBE1E1B8F94004748D1 /* JSGeoRegion.m in Sources */,
+				FF583FC41E1B8F94004748D1 /* JSLocationManager.m in Sources */,
+				FF583FD01E1B8F94004748D1 /* JSRecordset.m in Sources */,
+				FF583FAF1E1B8F94004748D1 /* JSDataDownloadService.m in Sources */,
+				FF583FD71E1B8F94004748D1 /* JSTrackingLayer.m in Sources */,
+				FF583FC11E1B8F94004748D1 /* JSLayers.m in Sources */,
+				FF583FB01E1B8F94004748D1 /* JSDataset.m in Sources */,
+				FF583FB41E1B8F94004748D1 /* JSDatasource.m in Sources */,
+				FF583FB11E1B8F94004748D1 /* JSDatasets.m in Sources */,
+				FF583FD91E1B8F94004748D1 /* JSWorkspaceConnectionInfo.m in Sources */,
+				FF583FC01E1B8F94004748D1 /* JSLayer.m in Sources */,
+				FF583FC21E1B8F94004748D1 /* JSLayerSetting.m in Sources */,
+				FF583FCC1E1B8F94004748D1 /* JSPoint2D.m in Sources */,
+				FF583FB21E1B8F94004748D1 /* JSDatasetVector.m in Sources */,
+				FF583FD41E1B8F94004748D1 /* JSServiceQueryParameter.m in Sources */,
+				FF583FBD1E1B8F94004748D1 /* JSGeoPoint.m in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				FF583FC71E1B8F94004748D1 /* JSMaps.m in Sources */,
+				FF583FB31E1B8F94004748D1 /* JSDatasetVectorInfo.m in Sources */,
+				FF583FBC1E1B8F94004748D1 /* JSGeometry.m in Sources */,
+				FF583FD61E1B8F94004748D1 /* JSTrack.m in Sources */,
+				FF583FC31E1B8F94004748D1 /* JSLayerSettingVector.m in Sources */,
+				FF583FD21E1B8F94004748D1 /* JSSelection.m in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				FF583FB51E1B8F94004748D1 /* JSDatasourceConnectionInfo.m in Sources */,
+				FF583FCA1E1B8F94004748D1 /* JSObjManager.m in Sources */,
+				FF583FB91E1B8F94004748D1 /* JSFeature.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -607,18 +1312,23 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/SuperMap/SDKs/iPhoneSimulator.sdk",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
-				INFOPLIST_FILE = "GeometryInfo/Info.plist";
+				INFOPLIST_FILE = GeometryInfo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-        OTHER_LDFLAGS = (
+				OTHER_LDFLAGS = (
 					"$(inherited)",
-          "-ObjC",
-          "-lc++",
-        );
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_NAME = GeometryInfo;
 			};
 			name = Debug;
@@ -627,18 +1337,23 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(LOCAL_LIBRARY_DIR)/SuperMap/SDKs/iPhoneSimulator.sdk",
+				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
 					"$(SRCROOT)/../node_modules/react-native/React/**",
 				);
-				INFOPLIST_FILE = "GeometryInfo/Info.plist";
+				INFOPLIST_FILE = GeometryInfo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-        OTHER_LDFLAGS = (
+				OTHER_LDFLAGS = (
 					"$(inherited)",
-          "-ObjC",
-          "-lc++",
-        );
+					"-ObjC",
+					"-lc++",
+				);
 				PRODUCT_NAME = GeometryInfo;
 			};
 			name = Release;

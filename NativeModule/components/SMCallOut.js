@@ -1,7 +1,7 @@
 /**
  * Created by will on 2016/7/27.
  */
-let React = require('React');
+let React = require('react');
 let {requireNativeComponent,View}=require('react-native');
 
 class SMCallOut extends React.Component{

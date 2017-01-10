@@ -1,7 +1,7 @@
 /**
  * Created by will on 2016/6/15.
  */
-let React = require('React');
+let React = require('react');
 let {
         requireNativeComponent,
         View,
@@ -10,7 +10,7 @@ let {
         NativeModules,
         PixelRatio  /*像素转换工具*/
     }=require('react-native');
-let resolveAssetSource = require('resolveAssetSource'); /*解析静态图片工具*/
+let resolveAssetSource = require('react-native/Libraries/Image/resolveAssetSource'); /*解析静态图片工具*/
 import MapView from '../MapView.js';
 import Point2D from '../Point2D.js';
 import Point from '../Point.js';

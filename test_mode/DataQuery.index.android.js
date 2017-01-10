@@ -65,8 +65,6 @@ class GeometryInfo extends Component {
 
                     await this.map.open(mapName);
                     await this.map.refresh();
-
-                    // this.layers = await this.map.getLayers();
                 } catch (e) {
                     console.error(e);
                 }

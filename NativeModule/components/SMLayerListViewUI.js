@@ -1,7 +1,7 @@
 /**
  * Created by will on 2016/9/22.
  */
-let React = require('React');
+let React = require('react');
 let {requireNativeComponent,View}=require('react-native');
 
 class SMLayerListView extends React.Component{

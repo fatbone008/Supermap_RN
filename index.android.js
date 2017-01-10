@@ -1,134 +1,106 @@
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
- * @flow 导航测试案例
+ * @flow 图层管理、比例尺、图例控件测试案例。
  */
 
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
-    AppRegistry,
-    StyleSheet,
-    Text,
-    ListView,
-    Image,
-    TouchableHighlight,
-    View
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View
 } from 'react-native';
 import Workspace from './NativeModule/Workspace.js';
 import WorkspaceConnectionInfo from './NativeModule/WorkspaceConnectionInfo';
 import ServerMapView from './NativeModule/components/SMMapViewUI.js';
-import DatasourceConnectionInfo from './NativeModule/DatasourceConnectionInfo.js';
-
+import LegendView from './NativeModule/components/SMLegendViewUI.js';
+import LayerListView from './NativeModule/components/SMLayerListViewUI.js';
+import ScaleView from './NativeModule/components/SMScaleViewUI.js';
 
 class GeometryInfo extends Component {
-    _onGetInstance = (mapView) => {
-        this.mapView = mapView;
-        this._addMap();
-    }
+  state = {
+    mapId:false,
+  }
 
-    /**
-     * 初始化地图
-     * @private
-     */
-    _addMap = () => {
+  _onGetInstance = (mapView) => {
+    this.mapView = mapView;
+    this._addMap();
+  }
+
+  /**
+   * 初始化地图
+   * @private
+   */
+  _addMap = () => {
+    try {
+      //创建workspace模块对象
+      var workspaceModule = new Workspace();
+      var WorkspaceConnectionInfoModule = new WorkspaceConnectionInfo();
+
+      //加载工作空间等一系列打开地图的操作
+      (async function () {
         try {
-            //创建workspace模块对象
-            var workspaceModule = new Workspace();
-            // var WorkspaceConnectionInfoModule = new WorkspaceConnectionInfo();
-            var datasourceConnectionInfoFac = new DatasourceConnectionInfo();
+          this.workspace = await workspaceModule.createObj();
+
+          this.workspaceConnectionInfo = await WorkspaceConnectionInfoModule.createJSObj();
+          await this.workspaceConnectionInfo.setType(Workspace.SMWU);
+          await this.workspaceConnectionInfo.setServer("/SuperMap/data/Changchun.smwu");
+
+          await this.workspace.open(this.workspaceConnectionInfo);
+          this.maps = await this.workspace.getMaps();
+
+          this.mapControl = await this.mapView.getMapControl();
+          this.map = await this.mapControl.getMap();
 
 
-            //加载工作空间等一系列打开地图的操作
-            (async function () {
-                try {
-                    this.workspace = await workspaceModule.createObj();
 
-                    var mapControl = await this.mapView.getMapControl();
-                    var map = await mapControl.getMap();
-                    await map.setWorkspace(this.workspace);
-                    //设置在线地图路径
-                    var datasourceConnectionInfo = await datasourceConnectionInfoFac.createObj();
-                    console.log('datasourceConnectionInfoId:'+datasourceConnectionInfo.datasourceConnectionInfoId);
+          await this.map.setWorkspace(this.workspace);
+          var mapName = await this.maps.get(0);
 
-                    await datasourceConnectionInfo.setServer('http://192.168.12.13:8090/iserver/services/map-china400/rest/maps/China');
-                    await datasourceConnectionInfo.setEngineType("Rest");
-                    await datasourceConnectionInfo.setAlias("ChinaRest");
-                    //添加服务器远程地图
-                    var datasource = await this.workspace.openDatasourceConnectionInfo(datasourceConnectionInfo);
-                    var dataset = await datasource.getDataset(0);
-                    await map.addDataset(dataset,true);
+          await this.map.open(mapName);
+          await this.map.refresh();
 
-                    await map.refresh();
-                } catch (e) {
-                    console.error(e);
-                }
-            }).bind(this)();
+          this.setState({
+            bindMapId:this.map.mapId,
+          });
         } catch (e) {
-            console.error(e);
+          console.error(e);
         }
+      }).bind(this)();
+    } catch (e) {
+      console.error(e);
     }
+  }
 
-    _callback = () => {
-        console.log("locationManager");
-    }
-
-    // 测试查询
-    render() {
-        return (
-            <View style={styles.container}>
-                <ServerMapView ref="mapView" onGetInstance={this._onGetInstance}/>
-            </View>
-        );
-    }
+  render() {
+    return (
+      <View style={styles.container}>
+        <ServerMapView ref="mapView" style={styles.map} onGetInstance={this._onGetInstance}/>
+        {/*{ this.state.mapId && <LegendView style={styles.legend} mapId={this.state.mapId}/> }*/}
+        {/*{ this.state.mapId && <ScaleView style={styles.legend} mapId={this.state.mapId}/> }*/}
+          { this.state.bindMapId && <LayerListView style={styles.legend} bindMapId={this.state.bindMapId}/> }
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#333333',
-    },
-    contorlPane: {
-        opacity: .7,
-        backgroundColor: 'black',
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        height: 50,
-        flexDirection: 'row',
-        alignItems: 'center',
-    },
-    textLabel: {
-        padding: 5,
-        color: '#ffffff',
-    },
-    inputWrapper: {
-        flex: 1,
-        borderRadius: 10,
-        backgroundColor: 'white',
-        justifyContent: 'center',
-        // padding:5,
-    },
-    textInputor: {
-        height: 40,
-        color: 'black',
-        textAlignVertical:'center',
-    },
-    imageWrapper: {
-        flexDirection: 'row',
-        justifyContent: 'center',
-        width: 40,
-        height: 40,
-        marginLeft: 5,
-        alignItems: 'center',
-        backgroundColor: '#666666',
-        borderRadius: 10,
-    },
-    searchButton:{
-        color:'white',
-    }
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  map: {
+    flex: 1,
+    alignSelf: 'stretch',
+  },
+  legend:{
+    flex:.5,
+    backgroundColor:'#ffffff',
+    alignSelf: 'stretch',
+  }
 });
 
 AppRegistry.registerComponent('GeometryInfo', () => GeometryInfo);

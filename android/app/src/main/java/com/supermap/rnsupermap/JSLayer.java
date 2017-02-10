@@ -7,6 +7,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.supermap.data.Dataset;
+import com.supermap.data.Recordset;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.LayerSetting;
 import com.supermap.mapping.Selection;
@@ -105,8 +106,12 @@ public class JSLayer extends ReactContextBaseJavaModule {
             Selection selection = layer.getSelection();
             String selectionId = JSSelection.registerId(selection);
 
+            Recordset recordset = selection.toRecordset();
+            String recordsetId = JSRecordset.registerId(recordset);
+
             WritableMap map = Arguments.createMap();
             map.putString("selectionId",selectionId);
+            map.putString("recordsetId",recordsetId);
             promise.resolve(map);
         }catch(Exception e){
             promise.reject(e);

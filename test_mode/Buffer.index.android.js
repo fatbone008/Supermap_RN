@@ -15,17 +15,17 @@ import {
     View,
     TextInput
 } from 'react-native';
-import Workspace from './NativeModule/Workspace.js';
-import WorkspaceConnectionInfo from './NativeModule/WorkspaceConnectionInfo';
-import ServerMapView from './NativeModule/components/SMMapViewUI.js';
-import DatasourceConnectionInfo from './NativeModule/DatasourceConnectionInfo.js';
-import Dataset from './NativeModule/Dataset.js';
-import CursorType from './NativeModule/CursorType.js';
-import DatasetVectorInfo from './NativeModule/DatasetVectorInfo.js';
-import BufferAnalystParameter from './NativeModule/BufferAnalystParameter.js';
-import BufferAnalystGeometry from './NativeModule/BufferAnalystGeometry.js';
-import GeoStyle from './NativeModule/GeoStyle.js';
-import Size2D from './NativeModule/Size2D.js';
+import Workspace from '../NativeModule/Workspace.js';
+import WorkspaceConnectionInfo from '../NativeModule/WorkspaceConnectionInfo';
+import ServerMapView from '../NativeModule/components/SMMapViewUI.js';
+import DatasourceConnectionInfo from '../NativeModule/DatasourceConnectionInfo.js';
+import Dataset from '../NativeModule/Dataset.js';
+import CursorType from '../NativeModule/CursorType.js';
+import DatasetVectorInfo from '../NativeModule/DatasetVectorInfo.js';
+import BufferAnalystParameter from '../NativeModule/BufferAnalystParameter.js';
+import BufferAnalystGeometry from '../NativeModule/BufferAnalystGeometry.js';
+import GeoStyle from '../NativeModule/GeoStyle.js';
+import Size2D from '../NativeModule/Size2D.js';
 
 
 class GeometryInfo extends Component {

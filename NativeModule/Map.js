@@ -4,6 +4,7 @@
 import { NativeModules } from 'react-native';
 let M = NativeModules.JSMap;
 import Layer from './Layer.js';
+import Layers from './Layers.js';
 import Point2D from './Point2D.js';
 import Point from './Point.js';
 import TrackingLayer from './TrackingLayer.js';

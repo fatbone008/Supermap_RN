@@ -70,18 +70,6 @@ public class JSWorkspaceConnectionInfo extends ReactContextBaseJavaModule {
         }
     }
 
-//    @ReactMethod
-//    public static void getCurJSObj(Promise promise) {
-//        try {
-//            WritableMap map = Arguments.createMap();
-//            map.putString("ID", mSTine);
-//            promise.resolve(map);
-//        } catch (Exception e) {
-//            //e.printStackTrace();
-//            promise.reject("",e.getMessage());
-//        }
-//    }
-
     @ReactMethod
     public void getName(String id,Promise promise) {
         try {

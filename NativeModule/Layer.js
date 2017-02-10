@@ -46,9 +46,10 @@ export default class Layer{
 
     async getSelection(){
         try{
-            var {selectionId} = await L.getSelection(this.layerId);
+            var {selectionId,recordsetId} = await L.getSelection(this.layerId);
             var selection = new Selection();
             selection.selectionId = selectionId;
+            selection.recordsetId = recordsetId;
             return selection;
         }catch(e){
             console.error(e);

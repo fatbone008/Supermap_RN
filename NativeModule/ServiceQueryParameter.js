@@ -58,14 +58,6 @@ export default class ServiceQueryParameter {
         }
     }
 
-    async setQueryDistance(geometry){
-        try{
-            await SQP.setQueryDistance(this._serviceQueryParameterId_, geometry.geometryId);
-        }catch (e){
-            console.error(e);
-        }
-    }
-
     async getQueryGeometry(){
         try{
             var {geometryId} = await SQP.getQueryGeometry(this._serviceQueryParameterId_);

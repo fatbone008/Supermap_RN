@@ -1,0 +1,16 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc","closure"]
+  },
+  "source": {
+    "include":["test_mode/jsdocTest"],
+    "includePattern": ".+\\.js(doc|x)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": ["node_modules/jsdoc-strip-async-await"],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false
+  }
+}

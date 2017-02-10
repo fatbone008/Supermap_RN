@@ -18,8 +18,10 @@ import com.supermap.data.StrokeType;
 import com.supermap.data.Workspace;
 import com.supermap.data.WorkspaceConnectionInfo;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -150,6 +152,23 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
+    public void openLocalDatasource(String workspaceId,String path,int engineType,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+
+            DatasourceConnectionInfo dsInfo = new DatasourceConnectionInfo();
+            dsInfo.setServer(path);
+            dsInfo.setEngineType((EngineType) Enum.parse(EngineType.class,engineType));
+
+            Datasource ds = workspace.getDatasources().open(dsInfo);
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
     public void openDatasourceConnectionInfo(String workspaceId,String datasrouceConnectionInfoId,Promise promise){
         try {
             Workspace workspace = getObjById(workspaceId);
@@ -224,5 +243,95 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
             promise.reject(e);
         }
 
+    }
+
+    @ReactMethod
+    public void saveWorkspace(String workspaceId,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+
+            boolean saved = workspace.save();
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("saved",saved);
+            promise.resolve(map);
+        }catch(Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void createDatasource(String workspaceId,String filePath,int engineType,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+
+            DatasourceConnectionInfo info = new DatasourceConnectionInfo();
+            info.setServer(android.os.Environment.getExternalStorageDirectory().getAbsolutePath() + filePath);
+            info.setEngineType((EngineType) Enum.parse(EngineType.class,engineType));
+            Datasource datasource = workspace.getDatasources().create(info);
+
+            String datasourceId = JSDatasource.registerId(datasource);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasourceId",datasourceId);
+            promise.resolve(map);
+        }catch(Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void closeDatasource(String workspaceId,String datasourceName,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+
+            boolean closed = workspace.getDatasources().close(datasourceName);
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("closed",closed);
+            promise.resolve(map);
+        }catch(Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void closeAllDatasource(String workspaceId,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+            workspace.getDatasources().closeAll();
+
+            promise.resolve(true);
+        }catch(Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void removeMap(String workspaceId,String mapName,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+            Maps maps = workspace.getMaps();
+
+            boolean removed = maps.remove(mapName);
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("removed",removed);
+            promise.resolve(map);
+        }catch(Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void clearMap(String workspaceId,Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+            Maps maps = workspace.getMaps();
+
+            maps.clear();
+            promise.resolve(true);
+        }catch(Exception e) {
+            promise.reject(e);
+        }
     }
 }

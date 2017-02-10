@@ -83,6 +83,14 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
         }
     }
 
+    /**
+     * 返回一个recordset的JSON对象，包含records记录数组
+     * @param dataVectorId
+     * @param queryParameterId
+     * @param size
+     * @param batch
+     * @param promise
+     */
     @ReactMethod
     public void query(String dataVectorId,String queryParameterId,int size,int batch,Promise promise){
         try{

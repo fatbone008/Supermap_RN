@@ -6,11 +6,17 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.github.mikephil.charting.data.DataSet;
 import com.supermap.data.Dataset;
+import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
 import com.supermap.data.DatasetVectorInfo;
 import com.supermap.data.Datasets;
 import com.supermap.data.Datasource;
+import com.supermap.data.DatasourceEncrytionType;
+import com.supermap.data.EncodeType;
+import com.supermap.data.Enum;
+import com.supermap.data.PrjCoordSys;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -109,6 +115,111 @@ public class JSDatasource extends ReactContextBaseJavaModule {
         try {
             m_datasource = m_DatasourceList.get(datasourceId);
             DatasetVectorInfo datasetVectorInfo = JSDatasetVectorInfo.getObjFromList(datasetVectorInfoId);
+            DatasetVector datasetVector = m_datasource.getDatasets().create(datasetVectorInfo);
+            String datasetVectorId = JSDatasetVector.registerId(datasetVector);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasetVectorId",datasetVectorId);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void copyDataset(String datasourceId,String datasetId,String desDatasetName,int encodeType,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            Dataset dataset = JSDataset.getObjById(datasetId);
+            Dataset desDataset = m_datasource.copyDataset(dataset,desDatasetName,(EncodeType) Enum.parse(EncodeType.class,encodeType));
+            String datasetId1 = JSDataset.registerId(dataset);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasetId",datasetId1);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void changepassword(String datasourceId,String oldPassword,String newPassword,int datasourceEncrytionType,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            boolean changed = m_datasource.changePassword(oldPassword,newPassword,
+                    (DatasourceEncrytionType)Enum.parse(DatasourceEncrytionType.class,datasourceEncrytionType));
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("changed",changed);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getPrjCoordSys(String datasourceId,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            PrjCoordSys prjCoordSys = m_datasource.getPrjCoordSys();
+            String prjCoordSysId = JSPrjCoordSys.registerId(prjCoordSys);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("prjCoordSysId",prjCoordSysId);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void containDataset(String datasourceId,String datasetName,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            boolean contain = m_datasource.getDatasets().contains(datasetName);
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("contain",contain);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void deleteDataset(String datasourceId,String datasetName,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            boolean deleted = m_datasource.getDatasets().delete(datasetName);
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("deleted",deleted);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getDatasetCount(String datasourceId,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            int count = m_datasource.getDatasets().getCount();
+
+            WritableMap map = Arguments.createMap();
+            map.putInt("count",count);
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void createDatasetVector(String datasourceId,String nameOrInfoObj,int datasetType,int encodeType,Promise promise){
+        try {
+            m_datasource = m_DatasourceList.get(datasourceId);
+            DatasetVectorInfo datasetVectorInfo = new DatasetVectorInfo(nameOrInfoObj,(DatasetType)Enum.parse(DatasetType.class,datasetType));
+            datasetVectorInfo.setEncodeType((EncodeType)Enum.parse(EncodeType.class,encodeType));
             DatasetVector datasetVector = m_datasource.getDatasets().create(datasetVectorInfo);
             String datasetVectorId = JSDatasetVector.registerId(datasetVector);
 

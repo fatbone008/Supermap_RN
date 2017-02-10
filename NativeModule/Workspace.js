@@ -69,9 +69,9 @@ export default class Workspace{
     }
 
     /**
-     * 通过序号或者名字（别名）获取数据集
+     * 通过序号或者名字（别名）获取数据源
      * @memberOf Worksapce
-     * @param {number | string} index|name - 既可以是序号，也可以是数据集名称
+     * @param {number | string} index|name - 既可以是序号，也可以是数据源名称
      * @returns {Promise.<Datasource>}
      */
     async getDatasource(index){

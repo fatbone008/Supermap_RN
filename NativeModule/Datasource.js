@@ -119,6 +119,7 @@ export default class Datasource{
 
     /**
      * 修改当前数据源的密码
+     * @memberOf Datasource
      * @param {number} oldPassword - 原始密码,不能为null
      * @param {number} newPassword - 新密码,不能为null
      * @param {Datasource.DatasourceEncrytionType} datasourceEncrytionType
@@ -136,6 +137,7 @@ export default class Datasource{
 
     /**
      * 返回数据源的投影信息。
+     * @memberOf Datasource
      * @returns {Promise.<PrjCoordSys>}
      */
     async getPrjCoordSys(){
@@ -151,6 +153,7 @@ export default class Datasource{
 
     /**
      * 检查当前数据源中是否包含指定名称的数据集。
+     * @memberOf Datasource
      * @param {string} datasetName - 数据集名称
      * @returns {boolean}
      */
@@ -165,6 +168,7 @@ export default class Datasource{
 
     /**
      * 用于删除指定名称的数据集。
+     * @memberOf Datasource
      * @param {string} datasetName - 数据集名称
      * @returns {boolean}
      */
@@ -179,6 +183,7 @@ export default class Datasource{
 
     /**
      * 返回数据集集合中数据集的个数。
+     * @memberOf Datasource
      * @returns {number}
      */
     async getDatasetCount(){

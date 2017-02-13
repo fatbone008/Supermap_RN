@@ -7,7 +7,11 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
 import com.supermap.data.Dataset;
+import com.supermap.data.DatasetType;
 import com.supermap.data.DatasetVector;
+import com.supermap.data.Datasource;
+import com.supermap.data.EncodeType;
+import com.supermap.data.Enum;
 import com.supermap.data.PrjCoordSys;
 
 import java.util.Calendar;
@@ -72,6 +76,79 @@ public class JSDataset extends ReactContextBaseJavaModule {
 
             WritableMap map = Arguments.createMap();
             map.putString("prjCoordSysId",prjCoordSysId);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void openDataset(String datasetId, Promise promise){
+        try{
+            Dataset dataset = m_DatasetList.get(datasetId);
+            boolean opened = dataset.open();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("opened",opened);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void isopen(String datasetId, Promise promise){
+        try{
+            Dataset dataset = m_DatasetList.get(datasetId);
+            boolean opened = dataset.isOpen();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("opened",opened);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getType(String datasetId, Promise promise){
+        try{
+            Dataset dataset = m_DatasetList.get(datasetId);
+            DatasetType type = dataset.getType();
+            int typecode = Enum.getValueByName(DatasetType.class,type.name());
+
+            WritableMap map = Arguments.createMap();
+            map.putInt("type",typecode);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getDatasource(String datasetId, Promise promise){
+        try{
+            Dataset dataset = m_DatasetList.get(datasetId);
+            Datasource datasource = dataset.getDatasource();
+            String datasourceId = JSDatasource.registerId(datasource);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("datasourceId",datasourceId);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getEncodeType(String datasetId, Promise promise){
+        try{
+            Dataset dataset = m_DatasetList.get(datasetId);
+            EncodeType type = dataset.getEncodeType();
+            int typecode = Enum.getValueByName(EncodeType.class,type.name());
+
+            WritableMap map = Arguments.createMap();
+            map.putInt("type",typecode);
             promise.resolve(map);
         }catch(Exception e){
             promise.reject(e);

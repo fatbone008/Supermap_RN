@@ -3,7 +3,7 @@ package com.supermap.rnsupermap;
 import android.content.Context;
 import android.location.LocationManager;
 
-import com.supermap.RNUtils.SimpleDateUtil;
+import com.supermap.RNUtils.DateUtil;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
@@ -170,7 +170,7 @@ public class JSLocationManager extends ReactContextBaseJavaModule {
 //        Calendar c = Calendar.getInstance();
 //        c.setTimeInMillis(gps.lTime);
 //        String lTime = c.getTime().toString();
-        String lTime = SimpleDateUtil.longToString(gps.lTime);
+        String lTime = DateUtil.longToString(gps.lTime);
         gpsMap.putString("lTime",lTime);
 
         gpsMap.putInt("nDay",gps.nDay);
@@ -196,7 +196,7 @@ public class JSLocationManager extends ReactContextBaseJavaModule {
     public static LocationManagePlugin.GPSData convertToGPSData(ReadableMap gpsData){
         LocationManagePlugin.GPSData data = new LocationManagePlugin.GPSData();
 
-        data.lTime = SimpleDateUtil.stringToLong(gpsData.getString("lTime"));
+        data.lTime = DateUtil.stringToLong(gpsData.getString("lTime"));
         data.dAltitude = gpsData.getDouble("dAltitude");
         data.dBearing = gpsData.getDouble("dBearing");
         data.dLatitude = gpsData.getDouble("dLatitude");

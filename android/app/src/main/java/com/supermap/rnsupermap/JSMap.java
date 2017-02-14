@@ -3,16 +3,23 @@ package com.supermap.rnsupermap;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.supermap.RNUtils.JsonUtil;
 import com.supermap.data.Dataset;
 import com.supermap.data.Point;
 import com.supermap.data.Point2D;
+import com.supermap.data.Rectangle2D;
 import com.supermap.data.Workspace;
 import com.supermap.mapping.Layer;
 import com.supermap.mapping.Layers;
 import com.supermap.mapping.Map;
+import com.supermap.mapping.MapLoadedListener;
+import com.supermap.mapping.MapOperateListener;
 import com.supermap.mapping.TrackingLayer;
 
 import java.util.Calendar;
@@ -26,13 +33,18 @@ public class JSMap extends ReactContextBaseJavaModule {
     private static java.util.Map<String,Map> mapList=new HashMap<String,Map>();
     private static final String NAVIGATION_STARTPOINT = "STARTPOINT";
     private static final String NAVIGATION_DESTPOINT = "DESTPOINT";
+    private static final String MAP_LOADED = "com.supermap.RN.JSMap.map_loaded";
+    private static final String MAP_OPENED = "com.supermap.RN.JSMap.map_opened";
+    private static final String MAP_CLOSED = "com.supermap.RN.JSMap.map_closed";
     private Map m_Map;
+    ReactContext mReactContext;
 
     @Override
     public String getName(){return "JSMap";}
 
     public JSMap(ReactApplicationContext context){
         super(context);
+        mReactContext = context;
     }
 
     public static Map getObjFromList(String id) {
@@ -242,6 +254,162 @@ public class JSMap extends ReactContextBaseJavaModule {
             WritableMap wMap = Arguments.createMap();
             wMap.putString("trackingLayerId",trackingLayerId);
             promise.resolve(wMap);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void saveAs(String mapId,String mapName,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            boolean saved = map.saveAs(mapName);
+
+            WritableMap wMap = Arguments.createMap();
+            wMap.putBoolean("saved",saved);
+            promise.resolve(wMap);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getBounds(String mapId,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            Rectangle2D rectangle2D = map.getBounds();
+
+            WritableMap wMap = JsonUtil.rectangleToJson(rectangle2D);
+            promise.resolve(wMap);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getViewBounds(String mapId,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            Rectangle2D rectangle2D = map.getViewBounds();
+
+            WritableMap wMap = JsonUtil.rectangleToJson(rectangle2D);
+            promise.resolve(wMap);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setViewBound(String mapId, ReadableMap readableMap,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            Rectangle2D rectangle2D = JsonUtil.jsonToRectangle(readableMap);
+
+            map.setViewBounds(rectangle2D);
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void isDynamicProjection(String mapId,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            boolean is = map.isDynamicProjection();
+
+            WritableMap map1 = Arguments.createMap();
+            map1.putBoolean("is",is);
+            promise.resolve(map1);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setDynamicProjection(String mapId,boolean value,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            map.setDynamicProjection(value);
+
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setMapLoadedListener(String mapId,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            map.setMapLoadedListener(new MapLoadedListener() {
+                @Override
+                public void onMapLoaded() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                            .emit(MAP_LOADED,null);
+                }
+            });
+
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setMapOperateListener(String mapId,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            map.setMapOperateListener(new MapOperateListener() {
+                @Override
+                public void mapOpened() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                            .emit(MAP_OPENED,null);
+                }
+
+                @Override
+                public void mapClosed() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                            .emit(MAP_CLOSED,null);
+                }
+            });
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void pan(String mapId,double offsetX,double offsetY,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            map.pan(offsetX,offsetY);
+
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void viewEntire(String mapId,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            map.viewEntire();
+
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void zoom(String mapId,double ratio,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            map.zoom(ratio);
+
+            promise.resolve(true);
         }catch (Exception e){
             promise.reject(e);
         }

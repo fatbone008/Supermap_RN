@@ -11,18 +11,25 @@ import GeoPoint from './GeoPoint.js';
 import GeoRegion from './GeoRegion.js';
 import GeoLine from './GeoLine.js';
 import Geometry from './Geometry.js';
-export default class MapControl{
-    static ACTION = {
-        PAN:1,
-        VERTEXADD:55,
-        VERTEXDELETE:56,
-        SELECT:8,
-        VERTEXEDIT:54,
-        CREATEPOINT:16,
-        CREATEPOLYLINE:17,
-        CREATEPOLYGON:27,
-    }
 
+/**
+ * @class MapControl
+ * @property {object} ACTION - PAN:地图漫游。
+ VERTEXADD:在可编辑图层中为对象添加节点。
+ VERTEXDELETE:在可编辑图层中为对象删除节点。
+ SELECT:在对象上点击，选择对象。
+ VERTEXEDIT:在可编辑图层中编辑对象的节点。
+ CREATEPOINT:在可编辑图层上点击式绘点。
+ CREATEPOLYLINE:在可编辑图层中点击式绘直线。
+ CREATEPOLYGON:在可编辑图层中点击式绘多边形。
+ */
+export default class MapControl{
+
+    /**
+     * 返回在地图控件中显示的地图对象。
+     * @memberOf MapControl
+     * @returns {Promise.<Map>}
+     */
     async getMap(){
         try{
             var {mapId} =await MC.getMap(this.mapControlId);
@@ -34,6 +41,12 @@ export default class MapControl{
         }
     }
 
+    /**
+     * 设置地图控件中地图的当前操作状态。
+     * @memberOf MapControl
+     * @param {number} actionType
+     * @returns {Promise.<void>}
+     */
     async setAction(actionType){
         try{
             await MC.setAction(this.mapControlId,actionType);
@@ -42,6 +55,11 @@ export default class MapControl{
         }
     }
 
+    /**
+     * 提交操作，对于采集而言，该接口将把采集的新几何对象写入到数据集，对于编辑，则是更新数据集中的正在编辑的对象。
+     * @memberOf MapControl
+     * @returns {Promise.<Promise|*|{phasedRegistrationNames}>}
+     */
     async submit(){
         try{
             var submited = await MC.submit(this.mapControlId);
@@ -53,7 +71,8 @@ export default class MapControl{
 
     /**
      * 监听编辑行为的变更事件
-     * @param actionChange 编辑行为变更函数，回调事件参数：e:newAction,e:oldAction
+     * @memberOf MapControl
+     * @param {function} actionChange 编辑行为变更函数，回调事件参数：e:newAction,e:oldAction
      */
     async addActionChangedListener(actionChange){
         try{
@@ -72,10 +91,10 @@ export default class MapControl{
 
     /**
      * 监听导航事件
-     * @param longPressHandler 长按事件处理函数,回调事件参数: e:x,e:y，即长按点的屏幕坐标。
-     * @param scrollHandler 滑动事件处理函数
+     * @memberOf MapControl
+     * @param {object} events - 传入一个对象作为参数，该对象可以包含两个属性：longPressHandler和scrollHandler。两个属性的值均为function类型，分部作为长按与滚动监听事件的处理函数。
+     * @returns {Promise.<void>}
      */
-    // async setGestureDetector(longPressHandler,scrollHandler){
     async setGestureDetector(handlers){
         try{
             if(!handlers) return;
@@ -93,10 +112,10 @@ export default class MapControl{
                 });
             }
 
-            console.log('MapControl.js:----------------------------------');
+            // console.log('MapControl.js:----------------------------------');
             if(handlers){
                 await MC.setGestureDetector(this.mapControlId);
-                console.log("GestrueDetector listening!");
+                // console.log("GestrueDetector listening!");
             }else{
                 throw new Error("setGestureDetector need callback functions as first two argument!");
             }
@@ -107,6 +126,7 @@ export default class MapControl{
 
     /**
      *  监听地图参数变化，分别由边界变化sizeChanged,比例尺变化scaleChanged,角度变化angleChanged,中心店变化boundsChanged。
+     * @memberOf MapControl
      * @param events 该对象有下面四个函数类型的属性分别处理四种监听事件
      * {boundsChanged,scaleChanged,angleChanged,sizeChanged}
      */
@@ -207,4 +227,45 @@ export default class MapControl{
             console.error(e);
         }
     }
+    /**
+     * 设置横竖屏切换监听器。
+     * @memberOf MapControl
+     * @param {object} events - 传入一个对象作为参数，该对象可以包含两个属性：toHorizontalScreen和toVerticalScreen。两个属性的值均为function类型，分部作为横屏与竖屏监听事件的处理函数。
+     * @returns {Promise.<void>}
+     */
+    async  setConfigurationChangedListener(events){
+        try{
+            var success = await MC. setConfigurationChangedListener();
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapControl.to_horizontal_screen',function (e) {
+                if(typeof events.toHorizontal_screen == 'function'){
+                    events.toHorizontalScreen();
+                }else{
+                    console.error("Please set a callback to the property 'toHorizontalScreen' in the first argument.");
+                }
+            });
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapControl.to_verticalscreen',function (e) {
+                if(typeof events.toVerticalScreen == 'function'){
+                    events.toVerticalScreen();
+                }else{
+                    console.error("Please set a callback to the property 'toVerticalScreen' in the first argument.");
+                }
+            });
+
+        }catch (e){
+            console.error(e);
+        }
+    }
+}
+
+MapControl.ACTION = {
+    PAN:1,
+    VERTEXADD:55,
+    VERTEXDELETE:56,
+    SELECT:8,
+    VERTEXEDIT:54,
+    CREATEPOINT:16,
+    CREATEPOLYLINE:17,
+    CREATEPOLYGON:27,
 }

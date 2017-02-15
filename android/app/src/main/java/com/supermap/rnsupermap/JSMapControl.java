@@ -21,6 +21,7 @@ import com.supermap.data.Geometry;
 import com.supermap.data.Point2D;
 import com.supermap.mapping.Action;
 import com.supermap.mapping.ActionChangedListener;
+import com.supermap.mapping.ConfigurationChangedListener;
 import com.supermap.mapping.MapControl;
 import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.RefreshListener;
@@ -45,6 +46,8 @@ public class JSMapControl extends ReactContextBaseJavaModule {
     private static final String SCALECHANGED = "Supermap.MapControl.MapParamChanged.ScaleChanged";
     private static final String ANGLECHANGED = "Supermap.MapControl.MapParamChanged.AngleChanged";
     private static final String SIZECHANGED = "Supermap.MapControl.MapParamChanged.SizeChanged";
+    private static final String TOHORIZONTALSCREEN = "com.supermap.RN.JSMapControl.to_horizontal_screen";
+    private static final String TOVERTICALSCREEN = "com.supermap.RN.JSMapControl.to_verticalscreen";
 
 
     private static final String LONGPRESS_EVENT = "com.supermap.RN.JSMapcontrol.long_press_event";
@@ -275,6 +278,30 @@ public class JSMapControl extends ReactContextBaseJavaModule {
             map.putString("geoType",type);
 
             promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setConfigurationChangedListener(String mapControlId,Promise promise){
+        try{
+            mMapControl = mapControlList.get(mapControlId);
+            mMapControl.setConfigurationChangedListener(new ConfigurationChangedListener() {
+                @Override
+                public void toHorizontalScreen() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                            .emit(TOHORIZONTALSCREEN,null);
+                }
+
+                @Override
+                public void toVerticalScreen() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                            .emit(TOVERTICALSCREEN,null);
+                }
+            });
+
+            promise.resolve(true);
         }catch(Exception e){
             promise.reject(e);
         }

@@ -304,7 +304,7 @@ export default class Map{
     /**
      * 添加一个用于接收地图打开、关闭事件的监听器。
      * @memberOf Map
-     * @param {object} events - 传入一个对象作为参数，该对象可以包含两个属性：mapOpened和mapClosed。两个属性的值均为function类型，分部作为打开地图和关闭地图监听事件的处理函数。例：{"mapOpened":()=>return console.log('map opened'),"mapClosed":()=> console.log('map closed',)
+     * @param {object} events - 传入一个对象作为参数，该对象可以包含两个属性：mapOpened和mapClosed。两个属性的值均为function类型，分部作为打开地图和关闭地图监听事件的处理函数。例：{"mapOpened":()=>return console.log('map opened'),"mapClosed":()=> console.log('map closed')}
      * @returns {Promise.<void>}
      */
     async setMapOperateListener(events){

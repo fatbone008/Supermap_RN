@@ -414,4 +414,19 @@ public class JSMap extends ReactContextBaseJavaModule {
             promise.reject(e);
         }
     }
+
+    @ReactMethod
+    public void getLayerByName(String mapId,String layerName,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            Layer layer = map.getLayers().get(layerName);
+            String layerId = JSLayer.registerId(layer);
+
+            WritableMap map1 = Arguments.createMap();
+            map1.putString("layerId",layerId);
+            promise.resolve(map1);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
 }

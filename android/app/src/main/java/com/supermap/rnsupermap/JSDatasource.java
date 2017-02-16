@@ -215,7 +215,7 @@ public class JSDatasource extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void createDatasetVector(String datasourceId,String nameOrInfoObj,int datasetType,int encodeType,Promise promise){
+    public void createDatasetVectorDirectly(String datasourceId,String nameOrInfoObj,int datasetType,int encodeType,Promise promise){
         try {
             m_datasource = m_DatasourceList.get(datasourceId);
             DatasetVectorInfo datasetVectorInfo = new DatasetVectorInfo(nameOrInfoObj,(DatasetType)Enum.parse(DatasetType.class,datasetType));

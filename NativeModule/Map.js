@@ -51,9 +51,9 @@ export default class Map{
         try{
             var layer = new Layer();
             if(typeof index == "string"){
-                var {layerId} = await L.getByName(this.layersId,index);
+                var {layerId} = await M.getLayerByName(this.mapId,layerIndex);
             }else{
-                var {layerId} = await L.get(this.layersId,index);
+                var {layerId} = await M.getLayer(this.mapId,layerIndex);
             }
             layer.layerId = layerId;
             return layer;

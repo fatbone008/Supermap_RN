@@ -21,7 +21,7 @@ import MapControl from '../NativeModule/MapControl.js';
 import QueryParameter from '../NativeModule/QueryParameter.js';
 
 
-class GeometryInfo extends Component {
+export default class GeometryInfo extends Component {
     constructor (props) {
         super(props);
         const ds = new ListView.DataSource({rowHasChanged:(r1,r2) => r1 !== r2});
@@ -174,4 +174,4 @@ const styles = StyleSheet.create({
     },
 });
 
-AppRegistry.registerComponent('GeometryInfo', () => GeometryInfo);
+// AppRegistry.registerComponent('GeometryInfo', () => GeometryInfo);

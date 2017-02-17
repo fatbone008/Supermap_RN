@@ -1,12 +1,14 @@
 package com.supermap.rnsupermap;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.JsonWriter;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.supermap.RNUtils.JsonUtil;
 import com.supermap.data.CursorType;
 import com.supermap.data.DatasetVector;
 import com.supermap.data.Enum;
@@ -15,11 +17,18 @@ import com.supermap.data.FieldType;
 import com.supermap.data.QueryParameter;
 import com.supermap.data.Recordset;
 import com.supermap.data.Rectangle2D;
+import com.supermap.data.SpatialIndexType;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+
+import static com.facebook.react.bridge.ReadableType.Array;
 
 public class JSDatasetVector extends ReactContextBaseJavaModule {
     public static final String REACT_CLASS = "JSDatasetVector";
@@ -187,6 +196,92 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
             }
         }
         return map;
+    }
+
+    @ReactMethod
+    public void buildSpatialIndex(String dataVectorId, int spatialIndexType, Promise promise) {
+        try {
+            DatasetVector datasetVector = getObjFromList(dataVectorId);
+            boolean built = datasetVector.buildSpatialIndex((SpatialIndexType) Enum.parse(SpatialIndexType.class, spatialIndexType));
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("built", built);
+            promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void dropSpatialIndex(String dataVectorId, Promise promise) {
+        try {
+            DatasetVector datasetVector = getObjFromList(dataVectorId);
+            boolean dropped = datasetVector.dropSpatialIndex();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("dropped", dropped);
+            promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getSpatialIndexType(String dataVectorId, Promise promise) {
+        try {
+            DatasetVector datasetVector = getObjFromList(dataVectorId);
+            SpatialIndexType s = datasetVector.getSpatialIndexType();
+            int type = Enum.getValueByName(SpatialIndexType.class, s.name());
+
+            WritableMap map = Arguments.createMap();
+            map.putInt("type", type);
+            promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void computeBounds(String dataVectorId, Promise promise) {
+        try {
+            DatasetVector datasetVector = getObjFromList(dataVectorId);
+            Rectangle2D rectangle2D = datasetVector.computeBounds();
+            WritableMap bounds = JsonUtil.rectangleToJson(rectangle2D);
+
+            WritableMap map = Arguments.createMap();
+            map.putMap("bounds", bounds);
+            promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void toGeoJSON(String dataVectorId, Boolean hasAttribute, int startId, int endId, Promise promise) {
+        try {
+            DatasetVector datasetVector = getObjFromList(dataVectorId);
+            String geoJSON = datasetVector.toGeoJSON(hasAttribute, startId, endId);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("geoJSON", geoJSON);
+            promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void fromGeoJSON(String dataVectorId, String geoJson, Promise promise) {
+        try {
+            DatasetVector datasetVector = getObjFromList(dataVectorId);
+            boolean done = datasetVector.fromGeoJSON(geoJson);
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("done", done);
+            promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject(e);
+        }
     }
 }
 

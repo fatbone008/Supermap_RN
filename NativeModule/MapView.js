@@ -12,10 +12,6 @@ export default class JSMapView{
 
     async getMapControl(){
         try{
-            if(Platform.OS === 'ios'){
-                this.mapControlId = this.mapViewId;
-                return this;
-            }
             var {mapControlId} =await MV.getMapControl(this.mapViewId);
             var mapControl = new MapControl();
             mapControl.mapControlId = mapControlId;

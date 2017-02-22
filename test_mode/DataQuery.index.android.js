@@ -85,6 +85,7 @@ export default class GeometryInfo extends Component {
         }
     }
 
+
     _done = async () => {
         try{
             this.geoRegion = await this.mapControl.getCurrentGeometry();
@@ -98,17 +99,17 @@ export default class GeometryInfo extends Component {
             var layer = await this.map.getLayer(10);
             var dataset = await layer.getDataset();
             var datasetVector = await dataset.toDatasetVector();
-            console.log("DataQuery:datasetVectorId_" + datasetVector.datasetVectorId);
             var result = await datasetVector.query({
                 spatialQueryObject:this.geoRegion,
                 spatialQueryMode:QueryParameter.QUERYMODE.INTERSECT,
                 hasGeometry:true,
                 size:10,
-                batch:3,
+                batch:1,
             });
-            console.log("DataQuery:" + JSON.stringify(result));
+            console.log("DataQuery:" + result.geoJson);
+            var geoJson = JSON.parse(result.geoJson);
             this.setState({
-                dataSource:this.state.dataSource.cloneWithRows(result.records),
+                dataSource:this.state.dataSource.cloneWithRows(geoJson.features),
                 showListView:true,
             });
         }catch (e){
@@ -141,7 +142,7 @@ export default class GeometryInfo extends Component {
                         <ListView style={{flex:.3,alignSelf: 'stretch',}}
                             dataSource={this.state.dataSource}
                             renderRow={(rowData)=>
-                                <Text style={{color:'white'}}>{rowData.COUNTRY}</Text>}>
+                                <Text style={{color:'white'}}>{rowData.properties.SmID}</Text>}>
                         </ListView>
                 }
             </View>

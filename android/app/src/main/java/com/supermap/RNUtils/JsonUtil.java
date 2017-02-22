@@ -66,7 +66,7 @@ public class JsonUtil {
     }
 
     /**
-     * 将记录集recordset转换成JSON数组
+     * 将记录集recordset转换成JSON数组（非GeoJSON）
      * @param recordset 动态记录集
      * @param count 计数器
      * @param size 记录数
@@ -131,5 +131,36 @@ public class JsonUtil {
             }
         }
         return map;
+    }
+
+    /**
+     * 修正toGeoJson方法返回的字符串中包含“,,”跳空数组元素的情况。
+     * @param json
+     * @return
+     */
+    static public String rectifyGeoJSON(String json){
+        String geojson = json.replaceAll(",,",",");
+        return geojson;
+    }
+
+    /**
+     * recordset.toGeoJson（）方法只能返回十条geoJSON记录，此方法用于迭代返回所有记录，
+     * @param {string[]} recordset - 返回字符串数组，每个数组元素的值为recordset.toGeoJson（）每返回的一批（即十条）记录。
+     * @return
+     */
+    static public String[] recordsetToGeoJsons(Recordset recordset){
+        int total = recordset.getRecordCount();
+        recordset.moveFirst();
+        int batches = 0;
+        String[] geoJsons = {};
+        if(batches / total == 0 ){
+            batches = batches / total - 1;
+        }else {
+            batches = batches / total;
+        }
+        for(int i = 0 ; i < batches ; i++){
+            geoJsons[i] = recordset.toGeoJSON(true,10);
+        }
+        return geoJsons;
     }
 }

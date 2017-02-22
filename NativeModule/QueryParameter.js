@@ -26,7 +26,7 @@ export default class QueryParameter {
             queryParameter.queryParameterId = queryParameterId;
             //Return records in batches. by default, 20 records
             //first batch would be return(initial with "1")
-            queryParameter.size = 20;
+            queryParameter.size = 10;
             queryParameter.batch = 1;
             return queryParameter;
         }catch (e){

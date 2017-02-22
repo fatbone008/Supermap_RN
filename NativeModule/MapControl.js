@@ -183,7 +183,7 @@ export default class MapControl{
                 DeviceEventEmitter.addListener("com.supermap.RN.JSMapcontrol.refresh_event",function (e) {
                     // console.log("MapControl:监听到地图刷新");
                     if(typeof callback == 'function'){
-                        callback(e);0
+                        callback(e);
                     }else{
                         console.error("Please set a callback function as the first argument.");
                     }

@@ -4,16 +4,22 @@ import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.JsonWriter;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
 import com.supermap.RNUtils.JsonUtil;
+import com.supermap.RNUtils.N_R_EventSender;
 import com.supermap.data.CursorType;
+import com.supermap.data.Dataset;
 import com.supermap.data.DatasetVector;
 import com.supermap.data.Enum;
 import com.supermap.data.FieldInfos;
 import com.supermap.data.FieldType;
+import com.supermap.data.Geometry;
+import com.supermap.data.QueryListener;
 import com.supermap.data.QueryParameter;
 import com.supermap.data.Recordset;
 import com.supermap.data.Rectangle2D;
@@ -27,13 +33,16 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Vector;
 
 import static com.facebook.react.bridge.ReadableType.Array;
 
 public class JSDatasetVector extends ReactContextBaseJavaModule {
     public static final String REACT_CLASS = "JSDatasetVector";
+    public static final String QUERYBYFILTER = "com.supermap.RN.JSDatasetVector.query_by_filter";
     private static Map<String, DatasetVector> m_DatasetVectorList = new HashMap<String, DatasetVector>();
     DatasetVector m_DatasetVector;
+    ReactContext mReactContext;
 
     public JSDatasetVector(ReactApplicationContext context) {
         super(context);
@@ -106,46 +115,55 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
         try {
             DatasetVector datasetVector = getObjFromList(dataVectorId);
             Recordset recordset;
+            QueryParameter queryParameter = null;
+            String geoJson = "";    //返回的dataset集合字符串（JSON格式）
             if (queryParameterId.equals("0")) {
                 recordset = datasetVector.getRecordset(false, CursorType.STATIC);
             } else {
-                QueryParameter queryParameter = JSQueryParameter.getObjFromList(queryParameterId);
+                queryParameter = JSQueryParameter.getObjFromList(queryParameterId);
                 recordset = datasetVector.query(queryParameter);
             }
 
             String recordsetId = JSRecordset.registerId(recordset);
-
+            if(recordset.getRecordCount() == 0) throw new Error("No records be found.");
             //获取字段信息
-            FieldInfos fieldInfos = recordset.getFieldInfos();
-            Map<String, FieldType> fields = new HashMap<>();
-
-            for (int i = 0; i < fieldInfos.getCount(); i++) {
-                fields.put(fieldInfos.get(i).getName(), fieldInfos.get(i).getType());
-            }
+//            FieldInfos fieldInfos = recordset.getFieldInfos();
+//            Map<String, FieldType> fields = new HashMap<>();
+//
+//            for (int i = 0; i < fieldInfos.getCount(); i++) {
+//                fields.put(fieldInfos.get(i).getName(), fieldInfos.get(i).getType());
+//            }
             //JS数组，存放
-            WritableArray recordArray = Arguments.createArray();
+//            WritableArray recordArray = Arguments.createArray();
 
             //分批处理
             int totalCount = recordset.getRecordCount(); //记录总数
             int batches;    //总批数
+            size = size > 10 ? 10 : size ;  //一次返回最多10条记录
             if (totalCount % size != 0) {
                 batches = totalCount / size + 1;
             } else {
                 batches = totalCount / size;
             }
             recordset.moveFirst();
-            if (batch < batches && batch > 1) recordset.moveTo(size * (batch - 1));
 
-            int count = 0;
-            while (!recordset.isEmpty() && !recordset.isEOF() && count < size) {
-                WritableMap recordsMap = parseRecordset(recordset, fields);
-                recordArray.pushMap(recordsMap);
-                recordset.moveNext();
-                count++;
-            }
+            //batch超出范围
+            batch = batch < 1 ? 1 : batch ;
+            batch = batch > batches ? batches : batch;
+            recordset.moveTo(size * (batch - 1));
+            geoJson = recordset.toGeoJSON(true,size);
+            geoJson = JsonUtil.rectifyGeoJSON(geoJson);
+//            int count = 0;
+//            while (!recordset.isEmpty() && !recordset.isEOF() && count < size) {
+//                WritableMap recordsMap = parseRecordset(recordset, fields);
+//                recordArray.pushMap(recordsMap);
+//                recordset.moveNext();
+//                count++;
+//            }
 
             WritableMap returnMap = Arguments.createMap();
-            returnMap.putArray("records", recordArray);
+//            returnMap.putArray("records", recordArray);
+            returnMap.putString("geoJson",geoJson);
             returnMap.putString("queryParameterId", queryParameterId);
             returnMap.putInt("counts", totalCount);
             returnMap.putInt("batch", batch);
@@ -261,6 +279,7 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
         try {
             DatasetVector datasetVector = getObjFromList(dataVectorId);
             String geoJSON = datasetVector.toGeoJSON(hasAttribute, startId, endId);
+            geoJSON = JsonUtil.rectifyGeoJSON(geoJSON);
 
             WritableMap map = Arguments.createMap();
             map.putString("geoJSON", geoJSON);
@@ -279,6 +298,39 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
             WritableMap map = Arguments.createMap();
             map.putBoolean("done", done);
             promise.resolve(map);
+        } catch (Exception e) {
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void queryByFilter(String dataVectorId, String attributeFilter,String geometryId,int count, Promise promise) {
+        try {
+            DatasetVector datasetVector = getObjFromList(dataVectorId);
+            Geometry geometry = JSGeometry.getObjFromList(geometryId);
+
+            datasetVector.setQueryListener(new QueryListener() {
+                @Override
+                public void queryResult(Dataset dataset, String fieldName, Vector<Integer> SmIDs) {
+                    DatasetVector datasetVector1 = (DatasetVector)dataset;
+                    Object[] arr = SmIDs.toArray();
+                    int[] ids = {};
+                    for ( int i = 0 ; i < arr.length ; i ++ ){
+                        ids[i] = (int)arr[i];
+                    }
+                    Recordset recordset = datasetVector1.query(ids,CursorType.STATIC);
+                    String[] geoJson = JsonUtil.recordsetToGeoJsons(recordset);
+
+                    WritableArray writableArray = Arguments.createArray();
+                    for (int i = 0 ; i < geoJson.length ; i++ ){
+                        writableArray.pushString(geoJson[i]);
+                    }
+                    N_R_EventSender.sendEvent(mReactContext,QUERYBYFILTER,writableArray);
+                }
+            });
+            datasetVector.queryByFilter(attributeFilter,geometry,count);
+
+            promise.resolve(true);
         } catch (Exception e) {
             promise.reject(e);
         }

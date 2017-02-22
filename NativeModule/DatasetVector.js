@@ -19,7 +19,13 @@ export default class DatasetVector {
         }
     }
 
-
+    /**
+     * 根据给定的参数来返回空的记录集或者返回包括所有记录的记录集对象。
+     * @deprecated - 弃用，所有recordset都使用json格式表达
+     * @param isEmptyRecordset
+     * @param cursorType
+     * @returns {Promise.<Recordset>}
+     */
     async getRecordset(isEmptyRecordset, cursorType) {
         try {
             var {recordsetId} =await DV.getRecordset(this.datasetVectorId, isEmptyRecordset, cursorType);
@@ -31,6 +37,11 @@ export default class DatasetVector {
         }
     }
 
+    /**
+     * 通过设置查询条件对矢量数据集进行查询，该方法默认查询空间信息与属性信息。
+     * @param {object}queryParameter - 定义的查询条件。
+     * @returns {Promise} - 返回查询结果对象:result:{geoJson:geoJson结果集数组，每次10条,queryParameterId:查询条件对象的引用，可用于重复查询，counts:总记录数，batch：返回的批次数量，size：每批次记录数（最大为10），recordsetId：记录集对象引用}
+     */
     async query(queryParameter) {
         try {
             var QueryParameterFac = new QueryParameter();
@@ -155,6 +166,38 @@ export default class DatasetVector {
         try {
             var {done} =await DV.computeBounds(this.datasetVectorId,geoJson);
             return done;
+        } catch (e) {
+            console.error(e);
+        }
+    }
+
+    /**
+     * 异步空间查询，查询指定空间范围内符合字段条件的记录；
+     * @param {string} attributeFilter - 查询过滤字段
+     * @param {object} geoRegion - 查询的区域
+     * @param count - 返回的查询结果个数
+     * @param {function} callback - 返回结果的处理函数,回调参数callback(e){},e为Recordset的geoJson格式对象的数组
+     * @returns {Promise.<null>}
+     */
+    async queryByFilter(attributeFilter,geoRegion,count,callback) {
+        try {
+            var success = await DV.queryByFilter(this.datasetVectorId,attributeFilter,geoRegion.geometryId,count);
+            if(!success) return null;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSDatasetVector.query_by_filter', function(e) {
+                var features = [];
+                var records = [];
+                for(var i in e){
+                    features[i] = JSON.parse(e[i]);
+                    records = records.concat(features[i]);
+                }
+                if(typeof callback == 'function'){
+                    callback(records);
+                }else{
+                    console.error("Please set a callback function as the fourth argument.");
+                }
+            });
+
         } catch (e) {
             console.error(e);
         }

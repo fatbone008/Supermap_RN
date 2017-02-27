@@ -5,7 +5,16 @@ import {NativeModules} from 'react-native';
 let D = NativeModules.JSDatasources;
 import Datasource from './Datasource.js';
 
+/**
+ * @deprecated
+ * @class Datasources
+ */
 export default class Datasources{
+    /**
+     * @memberOf Datasources
+     * @param datasourceConnectionInfo
+     * @returns {Promise.<Datasource>}
+     */
     async open(datasourceConnectionInfo){
         this._drepecated();
         try{

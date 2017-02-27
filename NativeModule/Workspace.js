@@ -7,6 +7,7 @@ import DS from './Datasources.js';
 import Ds from './Datasource.js';
 import Maps from './Maps.js';
 import Map from './Map.js';
+import WorkspaceConnectionInfo from './WorkspaceConnectionInfo';
 
 /**
  * @class Workspace
@@ -100,9 +101,21 @@ export default class Workspace{
      */
     async open(workspaceConnectionInfo){
         try{
-            var {isOpen} = await W.open(this.workspaceId,workspaceConnectionInfo.workspaceConnectionInfoId);
-            console.log('workspace open connectionInfo:'+isOpen);
-            return isOpen;
+            var WorkspaceConnectionInfoModule = new WorkspaceConnectionInfo();
+
+            if(typeof workspaceConnectionInfo === 'string'){
+                var wci = await WorkspaceConnectionInfoModule.createJSObj();
+                var type = this.workspaceType(workspaceConnectionInfo.split('.').pop());
+                await wci.setType(type);
+                await wci.setServer(workspaceConnectionInfo);
+
+                var {isOpen} = await W.open(this.workspaceId,wci.workspaceConnectionInfoId)
+                return isOpen;
+            }else{
+                var {isOpen} = await W.open(this.workspaceId,workspaceConnectionInfo.workspaceConnectionInfoId);
+                console.log('workspace open connectionInfo:'+isOpen);
+                return isOpen;
+            }
         }catch(e){
             console.error(e);
         }
@@ -282,6 +295,28 @@ export default class Workspace{
         }catch(e){
             console.error(e);
         }
+    }
+
+    workspaceType = (type) => {
+        var value = 1;
+        switch (value){
+            case 'SMWU':
+                value = 9;
+                break;
+            case 'SXWU':
+                value = 8;
+                break;
+            case 'SMW':
+                value = 5;
+                break;
+            case 'SXW':
+                value = 4;
+                break;
+            case 'UDB':
+                value = 219;
+                break;
+        }
+        return value;
     }
 }
 

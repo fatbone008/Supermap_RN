@@ -21,6 +21,7 @@ export default class DatasetVector {
 
     /**
      * 根据给定的参数来返回空的记录集或者返回包括所有记录的记录集对象。
+     * @memberOf DatasetVector
      * @deprecated - 弃用，所有recordset都使用json格式表达
      * @param isEmptyRecordset
      * @param cursorType
@@ -39,6 +40,7 @@ export default class DatasetVector {
 
     /**
      * 通过设置查询条件对矢量数据集进行查询，该方法默认查询空间信息与属性信息。
+     * @memberOf DatasetVector
      * @param {object}queryParameter - 定义的查询条件。
      * @returns {Promise} - 返回查询结果对象:result:{geoJson:geoJson结果集数组，每次10条,queryParameterId:查询条件对象的引用，可用于重复查询，counts:总记录数，batch：返回的批次数量，size：每批次记录数（最大为10），recordsetId：记录集对象引用}
      */
@@ -141,6 +143,7 @@ export default class DatasetVector {
     /**
      *从GeoJSON字符串中获取几何对象，并将其存入数据集中
      *仅支持点、线、面和CAD数据集，获取点、线、面对象
+     * @memberOf DatasetVector
      * @param {boolean} hasAttributte - 是否包含属性值
      * @param {number} startID - 起始SmID
      * @param {number} endID - 结束SmID
@@ -159,6 +162,7 @@ export default class DatasetVector {
     /**
      * 将数据集中指定起止SmID的对象，转换成GeoJSON格式的字符串
      *仅支持点、线、面和CAD数据集，转换点、线、面对象.hasAtrributte为true时，结果中包含属性值;hasAtrribute为false时，只有几何对象。
+     * @memberOf DatasetVector
      * @param {string} geoJson - json字符串
      * @returns {Promise.<Promise.boolean>}
      */
@@ -173,6 +177,7 @@ export default class DatasetVector {
 
     /**
      * 异步空间查询，查询指定空间范围内符合字段条件的记录；
+     * @memberOf DatasetVector
      * @param {string} attributeFilter - 查询过滤字段
      * @param {object} geoRegion - 查询的区域
      * @param count - 返回的查询结果个数

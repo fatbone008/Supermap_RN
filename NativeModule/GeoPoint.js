@@ -2,6 +2,9 @@ import {NativeModules} from 'react-native';
 let P = NativeModules.JSGeoPoint;
 import Geometry from './Geometry.js';
 
+/**
+ * @class GeoPoint
+ */
 export default class GeoPoint extends Geometry{
     constructor(){
         super();
@@ -15,6 +18,14 @@ export default class GeoPoint extends Geometry{
             }
         })
     }
+
+    /**
+     * 构造一个新的 GeoPoint 对象,x,y参数为可选参数，无参数时此几何点对象的坐标 X，Y 分别为-1.7976931348623157e+308。
+     * @memberOf GeoPoint
+     * @param {number} x - 指定点几何对象的 X 坐标值。
+     * @param {number} y - 指定点几何对象的 y 坐标值。
+     * @returns {Promise.<GeoPoint>}
+     */
     async createObj(){
         try{
             if(typeof arguments[0] == 'number' && typeof arguments[1] == 'number'){
@@ -33,6 +44,11 @@ export default class GeoPoint extends Geometry{
         }
     }
 
+    /**
+     * 返回此点几何对象的 X 坐标。使用无参构造函数构造的点对象的 X 坐标值为默认值。
+     * @memberOf GeoPoint
+     * @returns {Promise.<Promise.number>}
+     */
     async getX(){
         try {
             var {coordsX} = await P.getX(this.geoPointId);
@@ -43,6 +59,11 @@ export default class GeoPoint extends Geometry{
         }
     }
 
+    /**
+     * 返回此点几何对象的 Y 坐标。使用无参构造函数构造的点对象的 Y 坐标值为默认值。
+     * @memberOf GeoPoint
+     * @returns {Promise.<Promise.number>}
+     */
     async getY(){
         try {
             var {coordsY} = await P.getY(this.geoPointId);

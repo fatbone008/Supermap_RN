@@ -11,14 +11,14 @@ import {
   Text,
   View
 } from 'react-native';
-import Workspace from './NativeModule/Workspace.js';
-import WorkspaceConnectionInfo from './NativeModule/WorkspaceConnectionInfo';
-import ServerMapView from './NativeModule/components/SMMapViewUI.js';
-import LegendView from './NativeModule/components/SMLegendViewUI.js';
-import LayerListView from './NativeModule/components/SMLayerListViewUI.js';
-import ScaleView from './NativeModule/components/SMScaleViewUI.js';
+import Workspace from './../NativeModule/Workspace.js';
+import WorkspaceConnectionInfo from './../NativeModule/WorkspaceConnectionInfo';
+import ServerMapView from './../NativeModule/components/SMMapViewUI.js';
+import LegendView from './../NativeModule/components/SMLegendViewUI.js';
+import LayerListView from './../NativeModule/components/SMLayerListViewUI.js';
+import ScaleView from './../NativeModule/components/SMScaleViewUI.js';
 
-class GeometryInfo extends Component {
+export default class GeometryInfo extends Component {
   state = {
     mapId:false,
   }
@@ -79,7 +79,7 @@ class GeometryInfo extends Component {
         <ServerMapView ref="mapView" style={styles.map} onGetInstance={this._onGetInstance}/>
         {/*{ this.state.mapId && <LegendView style={styles.legend} mapId={this.state.mapId}/> }*/}
         {/*{ this.state.mapId && <ScaleView style={styles.legend} mapId={this.state.mapId}/> }*/}
-          { this.state.bindMapId && <LayerListView style={styles.legend} bindMapId={this.state.bindMapId}/> }
+          {/*{ this.state.bindMapId && <LayerListView style={styles.legend} bindMapId={this.state.bindMapId}/> }*/}
       </View>
     );
   }

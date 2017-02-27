@@ -2,6 +2,9 @@ import {NativeModules} from 'react-native';
 let X = NativeModules.JSGeoRegion;
 import Geometry from './Geometry.js';
 
+/**
+ * @class GeoRegion
+ */
 export default class GeoRegion extends Geometry{
     constructor(){
         super();

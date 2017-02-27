@@ -23,6 +23,7 @@ let MV = NativeModules.JSMapView;
  */
 const STARTPOINT = require('./../resource/startpoint.png');
 const DESTPOINT = require('./../resource/destpoint.png');
+
 class SMMapView extends React.Component{
     state = {
         startPoint:{},
@@ -84,9 +85,6 @@ class SMMapView extends React.Component{
                                 }
                             })
                         }
-                        // this.setState({
-                        //     callouts:arr
-                        // })
                     }
                 );
 

@@ -50,7 +50,7 @@ class GeometryInfo extends Component {
                     var datasourceConnectionInfo = await datasourceConnectionInfoFac.createObj();
                     console.log('datasourceConnectionInfoId:'+datasourceConnectionInfo.datasourceConnectionInfoId);
 
-                    await datasourceConnectionInfo.setServer('http://192.168.12.13:8090/iserver/services/map-china400/rest/maps/China');
+                    await datasourceConnectionInfo.setServer('http://192.168.13.64:8090/iserver/services/map-china400/rest/maps/China');
                     await datasourceConnectionInfo.setEngineType("Rest");
                     await datasourceConnectionInfo.setAlias("ChinaRest");
                     //添加服务器远程地图

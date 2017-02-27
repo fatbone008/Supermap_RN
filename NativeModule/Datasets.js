@@ -7,6 +7,10 @@ import Dataset from './Dataset.js';
 import DatasetVector from './DatasetVector.js';
 import Recordset from './Recordset.js';
 
+/**
+ * @class Datasets
+ * @deprecated
+ */
 export default class Datasets{
     async get(index){
         this._drepecated();

@@ -76,7 +76,7 @@ export default class GeometryInfo extends Component {
 
     _drawPolygon = async () => {
         try{
-            var layer = await this.map.getLayer(10);
+            var layer = await this.map.getLayer(9);
             console.log("layerId:"+JSON.stringify(layer));
             await layer.setEditable(true);
             await this.mapControl.setAction(MapControl.ACTION.CREATEPOLYGON);

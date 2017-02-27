@@ -2,6 +2,9 @@ import {NativeModules} from 'react-native';
 let GL = NativeModules.JSGeoLine;
 import Geometry from './Geometry.js';
 
+/**
+ * @class GeoLine
+ */
 export default class GeoLine extends Geometry{
     constructor(){
         super();
@@ -18,6 +21,7 @@ export default class GeoLine extends Geometry{
 
     /**
      * create a GeoLine instance
+     * @memberOf GeoLine
      * @param points an Array laden with point objects. For example: [ {x:1.1,y:1.2} , {x:2.3,y:3.4} ]
      * @returns {Promise.<GeoLine>}
      */

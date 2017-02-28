@@ -27,7 +27,7 @@ export default class DataDownloadService extends ServiceBase{
      */
     async createObj(url){
         try{
-            var {_dataDownloadServiceId_} = await DUS.createObj(url);
+            var {_dataDownloadServiceId_} = await DDS.createObj(url);
             var dataDownloadService = new DataDownloadService();
             dataDownloadService._dataDownloadServiceId_ = _dataDownloadServiceId_;
             return dataDownloadService;

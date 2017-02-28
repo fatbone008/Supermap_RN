@@ -3,6 +3,10 @@ let R = NativeModules.JSRecordset;
 import Geometry from './Geometry.js';
 import Dataset from './Dataset';
 
+/**
+ * @class Recordset
+ * @deprecated
+ */
 export default class Recordset {
     async getRecordCount(){
         try{

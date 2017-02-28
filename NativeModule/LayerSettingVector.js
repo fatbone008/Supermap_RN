@@ -2,7 +2,15 @@ import {NativeModules} from 'react-native';
 let LSV = NativeModules.JSLayerSettingVector;
 import GeoStyle from './GeoStyle.js';
 
+/**
+ * @class LayerSettingVector
+ */
 export default class LayerSettingVector {
+    /**
+     * 创建一个LayerSettingVector实例
+     * @memberOf LayerSettingVector
+     * @returns {Promise.<LayerSettingVector>}
+     */
     async createObj(){
         try{
             var {_layerSettingVectorId_} = await LSV.createObj();
@@ -14,6 +22,11 @@ export default class LayerSettingVector {
         }
     }
 
+    /**
+     * 获取矢量图层的风格。
+     * @memberOf LayerSettingVector
+     * @returns {Promise.<GeoStyle>}
+     */
     async getStyle(){
         try{
 
@@ -26,6 +39,12 @@ export default class LayerSettingVector {
         }
     }
 
+    /**
+     * 设置矢量图层的风格。
+     * @memberOf LayerSettingVector
+     * @param {object} geoStyle - 矢量图层的风格。
+     * @returns {Promise.<void>}
+     */
     async setStyle(geoStyle){
         try{
             await LSV.setStyle(this._layerSettingVectorId_,geoStyle.geoStyleId);

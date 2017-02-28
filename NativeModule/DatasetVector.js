@@ -151,7 +151,7 @@ export default class DatasetVector {
      */
     async toGeoJSON(hasAttributte, startID, endID) {
         try {
-            var {geoJSON} =await DV.computeBounds(this.datasetVectorId);
+            var {geoJSON} =await DV.toGeoJSON(this.datasetVectorId);
             var json = JSON.parse(geoJSON);
             return geoJSON;
         } catch (e) {
@@ -168,7 +168,7 @@ export default class DatasetVector {
      */
     async fromGeoJSON(geoJson) {
         try {
-            var {done} =await DV.computeBounds(this.datasetVectorId,geoJson);
+            var {done} =await DV.fromGeoJSON(this.datasetVectorId,geoJson);
             return done;
         } catch (e) {
             console.error(e);

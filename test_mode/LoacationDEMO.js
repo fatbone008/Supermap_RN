@@ -49,11 +49,11 @@ export default class LocationDEMO extends Component {
                 try{
                     this.workspace = await workspaceModule.createObj();
 
-                    // this.workspaceConnectionInfo = await WorkspaceConnectionInfoModule.createJSObj();
-                    // await this.workspaceConnectionInfo.setType(Workspace.SMWU);
-                    // await this.workspaceConnectionInfo.setServer("/SampleData/GeometryInfo/World.smwu");
+                    this.workspaceConnectionInfo = await WorkspaceConnectionInfoModule.createJSObj();
+                    await this.workspaceConnectionInfo.setType(Workspace.SMWU);
+                    await this.workspaceConnectionInfo.setServer("/SampleData/GeometryInfo/World.smwu");
 
-                    await this.workspace.open("/SampleData/GeometryInfo/World.smwu");
+                    await this.workspace.open(this.workspaceConnectionInfo);
                     this.maps = await this.workspace.getMaps();
 
                     this.mapControl = await this.mapView.getMapControl();

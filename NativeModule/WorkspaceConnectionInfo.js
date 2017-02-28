@@ -4,7 +4,15 @@
 var {NativeModules}=require('react-native');
 let WCI=NativeModules.JSWorkspaceConnectionInfo;
 
+/**
+ * @class WorkspaceConnectionInfo
+ */
 export default class WorkspaceConnectionInfo{
+    /**
+     * 创建一个WorkspaceConnectionInfo对象
+     * @memberOf WorkspaceConnectionInfo
+     * @returns {Promise.<WorkspaceConnectionInfo>}
+     */
     async createJSObj(){
         try{
             var {ID}=await WCI.createJSObj();
@@ -16,6 +24,12 @@ export default class WorkspaceConnectionInfo{
         }
     }
 
+    /**
+     * 设置工作空间类型
+     * @memberOf WorkspaceConnectionInfo
+     * @param {number} type - {@link Workspace}
+     * @returns {Promise.<void>}
+     */
     async setType(type){
         try{
             await WCI.setType(this.workspaceConnectionInfoId,type);
@@ -24,6 +38,12 @@ export default class WorkspaceConnectionInfo{
         }
     }
 
+    /**
+     * 设置数据源路径
+     * @memberOf WorkspaceConnectionInfo
+     * @param path
+     * @returns {Promise.<void>}
+     */
     async setServer(path){
         try{
             await WCI.setServer(this.workspaceConnectionInfoId,path);

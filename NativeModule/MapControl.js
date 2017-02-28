@@ -175,6 +175,12 @@ export default class MapControl{
         }
     }
 
+    /**
+     * 地图刷新监听器
+     * @memberOf MapControl
+     * @param {function} callback - 刷新处理回调函数
+     * @returns {Promise.<void>}
+     */
     async setRefreshListener(callback){
         try{
             var success = await MC.setRefreshListener(this.mapControlId);
@@ -194,6 +200,11 @@ export default class MapControl{
         }
     }
 
+    /**
+     * 获得当前Geometry几何对象
+     * @memberOf MapControl
+     * @returns {Promise.<GeoPoint|GeoLine|GeoRegion|Geometry>}
+     */
     async getCurrentGeometry(){
         try{
             var {geometryId,geoType} = await MC.getCurrentGeometry(this.mapControlId);
@@ -217,6 +228,11 @@ export default class MapControl{
         }
     }
 
+    /**
+     * 获取导航控件
+     * @memberOf MapControl
+     * @returns {Promise.<Navigation2>}
+     */
     async getNavigation2(){
         try{
             var {navigation2Id} = await MC.getNavigation2(this.mapControlId);

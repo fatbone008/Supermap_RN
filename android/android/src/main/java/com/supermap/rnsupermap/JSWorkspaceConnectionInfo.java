@@ -180,13 +180,6 @@ public class JSWorkspaceConnectionInfo extends ReactContextBaseJavaModule {
         try {
             mWorkspaceConnectionInfo = mObjLise.get(infoid);
             mWorkspaceConnectionInfo.setType((WorkspaceType) Enum.parse(WorkspaceType.class,type));
-//            if (mWorkspaceConnectionInfo != null){
-//                if (value.equals("SMWU")){
-//                    mWorkspaceConnectionInfo.setType(WorkspaceType.SMWU);
-//                }else{
-//                    mWorkspaceConnectionInfo.setType(WorkspaceType.SXWU);
-//                }
-//            }
             promise.resolve(true);
         } catch (Exception e) {
             promise.reject(e);

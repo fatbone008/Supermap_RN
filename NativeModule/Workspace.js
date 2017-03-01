@@ -105,7 +105,10 @@ export default class Workspace{
 
             if(typeof workspaceConnectionInfo === 'string'){
                 var wci = await WorkspaceConnectionInfoModule.createJSObj();
-                var type = this.workspaceType(workspaceConnectionInfo.split('.').pop());
+                var str = workspaceConnectionInfo.split('.').pop();
+                console.log("工作空间类型字符串：" + str);
+                var type = this.workspaceType(str);
+                console.log("工作空间类型：" + type);
                 await wci.setType(type);
                 await wci.setServer(workspaceConnectionInfo);
 
@@ -298,22 +301,30 @@ export default class Workspace{
     }
 
     workspaceType = (type) => {
-        var value = 1;
-        switch (value){
+        var value;
+        switch (type){
             case 'SMWU':
+            case 'smwu':
                 value = 9;
                 break;
             case 'SXWU':
+            case 'sxwu':
                 value = 8;
                 break;
             case 'SMW':
+            case 'smw':
                 value = 5;
                 break;
             case 'SXW':
+            case 'sxw':
                 value = 4;
                 break;
             case 'UDB':
+            case 'udb':
                 value = 219;
+                break;
+            default:
+                value = 1;
                 break;
         }
         return value;

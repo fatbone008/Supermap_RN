@@ -41,7 +41,6 @@ export default class LocationDEMO extends Component {
 
             //创建workspace模块对象
             var workspaceModule = new Workspace();
-            console.log("构造函数workspace试验：workspaceId:" + workspaceModule.workspaceId);
             var WorkspaceConnectionInfoModule = new WorkspaceConnectionInfo();
 
             //加载工作空间等一系列打开地图的操作
@@ -49,11 +48,11 @@ export default class LocationDEMO extends Component {
                 try{
                     this.workspace = await workspaceModule.createObj();
 
-                    this.workspaceConnectionInfo = await WorkspaceConnectionInfoModule.createJSObj();
-                    await this.workspaceConnectionInfo.setType(Workspace.SMWU);
-                    await this.workspaceConnectionInfo.setServer("/SampleData/GeometryInfo/World.smwu");
+                    // this.workspaceConnectionInfo = await WorkspaceConnectionInfoModule.createJSObj();
+                    // await this.workspaceConnectionInfo.setType(Workspace.SMWU);
+                    // await this.workspaceConnectionInfo.setServer("/SampleData/GeometryInfo/World.smwu");
 
-                    await this.workspace.open(this.workspaceConnectionInfo);
+                    await this.workspace.open("/SampleData/GeometryInfo/World.smwu");
                     this.maps = await this.workspace.getMaps();
 
                     this.mapControl = await this.mapView.getMapControl();

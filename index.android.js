@@ -15,9 +15,11 @@ import {
 } from 'react-native';
 
 // import DataQuery from './test_mode/DataQuery.index.android.js';
-import LocationDEMO from './test_mode/LoacationDEMO';
+// import LocationDEMO from './test_mode/LoacationDEMO';
 // import BoundsQuery from './test_mode/BoundsQuery';
 // import MapView from './test_mode/index.android';
+// import ComponentDemo from './test_mode/Components.index.android.js';
+import Navigation2 from './test_mode/Navigation2.android';
 
 
-AppRegistry.registerComponent('GeometryInfo', () => LocationDEMO);
+AppRegistry.registerComponent('GeometryInfo', () => Navigation2);

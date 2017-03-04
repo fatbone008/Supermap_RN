@@ -48,7 +48,7 @@ public class JSDatasetVector extends ReactContextBaseJavaModule {
         super(context);
     }
 
-    public DatasetVector getObjFromList(String id) {
+    public static DatasetVector getObjFromList(String id) {
         return m_DatasetVectorList.get(id);
     }
 

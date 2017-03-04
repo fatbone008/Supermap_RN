@@ -58,8 +58,9 @@ public class JSNavigation2 extends ReactContextBaseJavaModule {
     public void setNetworkDataset(String navigation2Id,String datasetId,Promise promise){
         try{
             Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
-            Dataset dataset = JSDataset.m_DatasetList.get(datasetId);
-            navigation2.setNetworkDataset((DatasetVector) dataset);
+            DatasetVector datasetVector = JSDatasetVector.getObjFromList(datasetId);
+//            Dataset dataset = JSDataset.m_DatasetList.get(datasetId);
+            navigation2.setNetworkDataset(datasetVector);
             promise.resolve(true);
         }catch (Exception e){
             promise.reject(e);

@@ -60,7 +60,9 @@ export default class LocationDEMO extends Component {
                     this.map = await this.mapControl.getMap();
 
                     await this.map.setWorkspace(this.workspace);
-                    var mapName = await this.maps.get(0);
+                    // var mapName = await this.maps.get(0);
+                    var mapName = "世界地图_Day";
+                    console.log("地图名称：" + mapName);
 
                     await this.map.open(mapName);
                     await this.map.refresh();
@@ -175,4 +177,3 @@ const styles = StyleSheet.create({
     }
 });
 
-AppRegistry.registerComponent('LocationDEMO', () => LocationDEMO);

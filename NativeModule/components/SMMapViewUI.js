@@ -27,6 +27,7 @@ const DESTPOINT = require('./../resource/destpoint.png');
 class SMMapView extends React.Component{
     state = {
         startPoint:{},
+        callouts:[],
         path:require('./../resource/startpoint.png'),
     }
 
@@ -60,65 +61,78 @@ class SMMapView extends React.Component{
                 this.mapControl.setRefreshListener(
                     //刷新地图重绘callouts
                     async () => {
-                        var arr = this.state.callouts;
-                        for(var i = 0 ; i < arr.length; i++){
-                            var Point2DFac = new Point2D();
-                            console.log("SMMapViewUI:mapPoint:" + arr[i].mapX + "," + arr[i].mapY);
-                            var point2D = await Point2DFac.createObj(arr[i].mapX,arr[i].mapY);
-                            var pixalPoint = await this.map.mapToPixel(point2D);
-                            console.log("SMMapViewUI:pixalPoint:" + pixalPoint.x + "," + pixalPoint.y);
-                            //转布局坐标
-                            arr[i].top = pixalPoint.y / PixelRatio.get();
-                            arr[i].left = pixalPoint.x / PixelRatio.get();
+                        if(this.state.callouts.length !== 0) {
+                            var arr = this.state.callouts;
+                            for(var i = 0 ; i < arr.length; i++){
+                                var Point2DFac = new Point2D();
+                                console.log("SMMapViewUI:mapPoint:" + arr[i].mapX + "," + arr[i].mapY);
+                                var point2D = await Point2DFac.createObj(arr[i].mapX,arr[i].mapY);
+                                var pixalPoint = await this.map.mapToPixel(point2D);
+                                console.log("SMMapViewUI:pixalPoint:" + pixalPoint.x + "," + pixalPoint.y);
+                                //转布局坐标
+                                arr[i].top = pixalPoint.y / PixelRatio.get();
+                                arr[i].left = pixalPoint.x / PixelRatio.get();
 
-                            //调整图标锚点位置
-                            const sourceBody = resolveAssetSource(arr[i].uri);
-                            let {width,height} = sourceBody;
-                            var offY = arr[i].top - height;
-                            var offX = arr[i].left - width/2;
+                                //调整图标锚点位置
+                                const sourceBody = resolveAssetSource(arr[i].uri);
+                                let {width,height} = sourceBody;
+                                var offY = arr[i].top - height;
+                                var offX = arr[i].left - width/2;
 
-                            var indexer = "callout" + i;
-                            this.refs[indexer].setNativeProps({
-                                style:{
-                                    top:offY,
-                                    left:offX,
-                                }
-                            })
+                                var indexer = "callout" + i;
+                                this.refs[indexer].setNativeProps({
+                                    style:{
+                                        top:offY,
+                                        left:offX,
+                                    }
+                                });
+                            }
                         }
                     }
                 );
 
-                //长按地图添加callouts
-                !this.props.addCalloutByLongPress ||
-                await this.mapControl.setGestureDetector({longPressHandler:(e)=>{
-                    console.log('MapControl:Longpress:' + JSON.stringify(e));
 
-                    (async function () {
-                        var pointFac = new Point();
-                        var point = await pointFac.createObj(e.x,e.y);
-                        var mapPoint = await this.map.pixelToMap(point);
-
-                        var arr = this.state.callouts;
-                        arr.push({uri:require('./../resource/destpoint.png'),mapX:mapPoint.x,mapY:mapPoint.y});
-                        this.setState({
-                            callouts:arr,
-                        })
-
-                    }).bind(this)();
-                    //像素单位转布局单位
-                    // var layoutY = e.y/PixelRatio.get();
-                    // var layoutX = e.x/PixelRatio.get();
-                    // console.log('MapControl:Longpress:' + layoutX + ", " + layoutY);
-                    // var arr = this.state.callouts;
-                    // arr.push({uri:require('./resource/destpoint.png'),top:layoutY,left:layoutX});
-                    // this.setState({
-                    //     callouts:arr,
-                    // });
-                }})
             }catch (e){
                 console.log(e);
             }
         }).bind(this)();
+    }
+
+    /**
+     * 长按添加图片callout监听器
+     * @param callout - callout对象，e.g:{uri:require('./../resource/destpoint.png'),mapX:mapPoint.x,mapY:mapPoint.y}
+     * @private
+     */
+    async _addCallouts(callout,index){
+        await this.mapControl.setGestureDetector({longPressHandler:(e)=>{
+            console.log('MapControl:Longpress:' + JSON.stringify(e));
+
+            (async function () {
+                var pointFac = new Point();
+                var point = await pointFac.createObj(e.x,e.y);
+                var mapPoint = await this.map.pixelToMap(point);
+
+                var arr = this.state.callouts;
+                if(!index){
+                    arr.push(callout);
+                }else{
+                    arr[index] = callout;
+                }
+                this.setState({
+                    callouts:arr,
+                });
+
+            }).bind(this)();
+            //像素单位转布局单位
+            // var layoutY = e.y/PixelRatio.get();
+            // var layoutX = e.x/PixelRatio.get();
+            // console.log('MapControl:Longpress:' + layoutX + ", " + layoutY);
+            // var arr = this.state.callouts;
+            // arr.push({uri:require('./resource/destpoint.png'),top:layoutY,left:layoutX});
+            // this.setState({
+            //     callouts:arr,
+            // });
+        }});
     }
 
     static propTypes = {

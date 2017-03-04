@@ -196,7 +196,8 @@ public class JSMapControl extends ReactContextBaseJavaModule {
     public void getNavigation2(String mapControlId,Promise promise){
         try{
             mMapControl = mapControlList.get(mapControlId);
-            getCurrentActivity().runOnUiThread(updateThread);
+            mNavigation2 = mMapControl.getNavigation2();
+//            getCurrentActivity().runOnUiThread(updateThread);
             String navigation2Id = JSNavigation2.registerId(mNavigation2);
 
             WritableMap map = Arguments.createMap();

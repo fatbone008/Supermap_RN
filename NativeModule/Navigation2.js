@@ -26,13 +26,12 @@ export default class Navigation2{
     /**
      * 设置用于分析的网络数据集。必选。
      * @memberOf Navigation2
-     * @param {object} datasetId - 网络数据集。
+     * @param {object} datasetVector - 网络数据集。
      * @returns {Promise.<void>}
      */
-    async setNetworkDataset(dataset){
-
+    async setNetworkDataset(datasetVector){
             try{
-                await N.setNetworkDataset(this.navigation2Id,dataset.datasetId);
+                await N.setNetworkDataset(this.navigation2Id,datasetVector.datasetVectorId);
             }catch (e){
                 console.error(e);
             }
@@ -46,7 +45,7 @@ export default class Navigation2{
      */
     async loadModel(path){
         try{
-            await D.loadModel(this.navigation2Id,path);
+            await N.loadModel(this.navigation2Id,path);
         }catch(e){
             console.error(e);
         }

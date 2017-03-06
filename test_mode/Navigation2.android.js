@@ -83,16 +83,17 @@ export default class Navigation2 extends Component{
                         //         });
                         //     }).bind(this)();
                         // }
+                        var mapPoint = null;
                         (async function () {
                             try{
                                 if(this.state.pointType === 0){
-                                    this.startpoint = {x:e.x,y:e.y};
                                     var urlAsset = require('./../NativeModule/resource/startpoint.png');
-                                    await this._longPressHandler(urlAsset,'startpoint',e.x,e.y);
+                                    mapPoint = await this._longPressHandler(urlAsset,'startpoint',e.x,e.y);
+                                    this.startpoint = {x:mapPoint.x,y:mapPoint.y}
                                 }else if(this.state.pointType === 1){
-                                    this.destpoint = {x:e.x,y:e.y};
                                     var urlAsset = require('./../NativeModule/resource/destpoint.png');
-                                    await this._longPressHandler(urlAsset,'destpoint',e.x,e.y);
+                                    mapPoint = await this._longPressHandler(urlAsset,'destpoint',e.x,e.y);
+                                    this.destpoint = {x:mapPoint.x,y:mapPoint.y}
                                 }
                             }catch (e){
                                 console.error(e);
@@ -108,7 +109,7 @@ export default class Navigation2 extends Component{
                     this.navigation2 = await this.mapControl.getNavigation2();
                     await this.navigation2.setPathVisible(true);
                     await this.navigation2.setNetworkDataset(roadworkDV);
-                    await this.navigation2.loadModel("SampleData/Navigation2Data/netModel.snm");
+                    await this.navigation2.loadModel("/SampleData/Navigation2Data/netModel.snm");
                 }catch(e){
                     console.error(e);
                 }
@@ -131,6 +132,24 @@ export default class Navigation2 extends Component{
         })
     }
 
+    _route = async () => {
+        try{
+            await this.navigation2.setStartPoint(this.startpoint.x,this.startpoint.y,this.map);
+            await this.navigation2.setDestinationPoint(this.destpoint.x,this.destpoint.y,this.map);
+            await this.navigation2.routeAnalyst();
+            await this.map.refresh();
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+    _guide = async () => {
+        try{
+            await this.navigation2.startGuide(1);
+        }catch (e){
+            console.error(e);
+        }
+    }
     /**
      * 长按出图效果
      * @param callout - 图片资源
@@ -142,6 +161,7 @@ export default class Navigation2 extends Component{
          try{
              var arr = this.refs['mapView'].state.callouts;
              var mapPoint = await Utility.Point2Map(this.map,x,y);
+             this.state.pointType ? this.destpoint = {x:mapPoint.x,y:mapPoint.y} : this.startpoint = {x:mapPoint.x,y:mapPoint.y}
              var callout = {uri:uriAsset,name:calloutName,mapX:mapPoint.x,mapY:mapPoint.y}
 
              // 防止重复添加起点或终点
@@ -161,10 +181,13 @@ export default class Navigation2 extends Component{
              this.refs['mapView'].setState({
                  callouts:arr,
              });
+
+             return mapPoint;
          }catch (e){
              console.error(e);
          }
     }
+
 
     render() {
         return (

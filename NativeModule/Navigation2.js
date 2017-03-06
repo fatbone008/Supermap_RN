@@ -50,4 +50,62 @@ export default class Navigation2{
             console.error(e);
         }
     }
+
+    /**
+     * 设置导航起点
+     * @memberOf Navigation2
+     * @param x - 起点横坐标
+     * @param y - 起点纵坐标
+     * @returns {Promise.<void>}
+     */
+    async setStartPoint(x,y,map){
+        try{
+            console.log("科学计数法？"+ x);
+            await N.setStartPoint(this.navigation2Id,x,y,map.mapId);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置导航终点
+     * @memberOf Navigation2
+     * @param x - 终点横坐标
+     * @param y - 终点纵坐标
+     * @returns {Promise.<void>}
+     */
+    async setDestinationPoint(x,y,map){
+        try{
+            await N.setDestinationPoint(this.navigation2Id,x,y,map.mapId);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 路径分析
+     * @returns {Promise.<Promise.boolean>}
+     */
+    async routeAnalyst(){
+        try{
+            var {finished} = await N.routeAnalyst(this.navigation2Id);
+            return finished;
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 开始导航
+     * @param guideMode - 导航模式：1：真实导航；2：模拟导航
+     * @returns {Promise.<Promise.boolean>}
+     */
+    async startGuide(guideMode){
+        try{
+            var {isGuiding} = await N.startGuide(this.navigation2Id,guideMode);
+            return isGuiding;
+        }catch(e){
+            console.error(e);
+        }
+    }
 }

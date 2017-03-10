@@ -144,8 +144,11 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
             dsInfo.setDriver(driver);
 
             Datasource ds = workspace.getDatasources().open(dsInfo);
+            String datasourceId = JSDatasource.registerId(ds);
 
-            promise.resolve(true);
+            WritableMap map = Arguments.createMap();
+            map.putString("datasourceId",datasourceId);
+            promise.resolve(map);
         }catch(Exception e){
             promise.reject(e);
         }
@@ -161,8 +164,11 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
             dsInfo.setEngineType((EngineType) Enum.parse(EngineType.class,engineType));
 
             Datasource ds = workspace.getDatasources().open(dsInfo);
+            String datasourceId = JSDatasource.registerId(ds);
 
-            promise.resolve(true);
+            WritableMap map = Arguments.createMap();
+            map.putString("datasourceId",datasourceId);
+            promise.resolve(map);
         }catch(Exception e){
             promise.reject(e);
         }

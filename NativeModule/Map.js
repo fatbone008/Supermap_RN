@@ -1,7 +1,7 @@
 /**
  * Created by will on 2016/6/17.
  */
-import { NativeModules } from 'react-native';
+import { NativeModules,DeviceEventEmitter,NativeEventEmitter,Platform } from 'react-native';
 let M = NativeModules.JSMap;
 import Layer from './Layer.js';
 import Layers from './Layers.js';
@@ -9,11 +9,13 @@ import Point2D from './Point2D.js';
 import Point from './Point.js';
 import TrackingLayer from './TrackingLayer.js';
 
+const nativeEvt = new NativeEventEmitter(M);
 
 /**
  * @class Map
  */
 export default class Map{
+
     /**
      * 设置当前地图所关联的工作空间。地图是对其所关联的工作空间中的数据的显示。
      * @memberOf Map
@@ -50,7 +52,7 @@ export default class Map{
     async getLayer(layerIndex){
         try{
             var layer = new Layer();
-            if(typeof index == "string"){
+            if(typeof layerIndex == "string"){
                 var {layerId} = await M.getLayerByName(this.mapId,layerIndex);
             }else{
                 var {layerId} = await M.getLayer(this.mapId,layerIndex);
@@ -288,6 +290,18 @@ export default class Map{
             var success = await M.setMapLoadedListener(this.mapId);
 
             if(!success) return ;
+            //差异化处理
+            if(Platform.OS === 'ios'){
+                
+                nativeEvt.addListener("com.supermap.RN.JSMap.map_loaded",function (e) {
+                    if(typeof onMapLoaded === 'function'){
+                        onMapLoaded();
+                    }else{
+                        console.error("Please set a callback function to the first argument.");
+                    }
+                });
+                return
+            }
 
             DeviceEventEmitter.addListener("com.supermap.RN.JSMap.map_loaded",function (e) {
                 if(typeof onMapLoaded === 'function'){
@@ -312,6 +326,26 @@ export default class Map{
             var success = await M.setMapOperateListener(this.mapId);
 
             if(!success) return ;
+            //差异化处理
+            if(Platform.OS === 'ios'){
+                
+                nativeEvt.addListener("com.supermap.RN.JSMap.map_opened",function (e) {
+                    if(typeof events.mapOpened === 'function'){
+                        events.mapOpened();
+                    }else{
+                        console.error("Please set a callback to the property 'mapOpened' in the first argument.");
+                    }
+                });
+                
+                nativeEvt.addListener("com.supermap.RN.JSMap.map_closed",function (e) {
+                    if(typeof events.mapClosed === 'function'){
+                        events.mapClosed();
+                    }else{
+                        console.error("Please set a callback to the property 'mapClosed' in the first argument.");
+                    }
+                });
+                return
+            }
 
             DeviceEventEmitter.addListener("com.supermap.RN.JSMap.map_opened",function (e) {
                 if(typeof events.mapOpened === 'function'){
@@ -371,6 +405,24 @@ export default class Map{
         try{
             if(ratio < 0) throw new Error("Ratio can`t be nagative.");
             await M.zoom(this.mapId,ratio);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 用于把一个数据集添加到此图层集合作为一个普通图层显示，即创建一个普通图层。其风格由系统默认设置。
+     * @memberOf Map
+     * @param dataset - 要添加到图层的数据集。
+     * @param addToHead - 指定新创建图层是否放在图层集合的最上面一层。当设置为 false 时，则将此新创建图层放在最底层。
+     * @returns {Promise.<void>}
+     */
+    async addLayer(dataset,addToHead){
+        try{
+            var {layerId} = await M.addLayer(this.mapId,dataset.datasetId,addToHead);
+            var layer = new Layer();
+            layer.layerId = layerId;
+            return layer;
         }catch(e){
             console.error(e);
         }

@@ -6,7 +6,8 @@ const LONGPRESS_EVENT = "com.supermap.RN.JSMapcontrol.long_press_event";
 import { NativeModules,DeviceEventEmitter } from 'react-native';
 let MC = NativeModules.JSMapControl;
 import Map from './Map.js';
-import Navigation2 from './Navigation2.js';
+import Navigation2 from './IndustryNavi.js';
+import TraditionalNavi from './TraditionalNavi';
 import GeoPoint from './GeoPoint.js';
 import GeoRegion from './GeoRegion.js';
 import GeoLine from './GeoLine.js';
@@ -233,7 +234,7 @@ export default class MapControl{
      * @memberOf MapControl
      * @returns {Promise.<Navigation2>}
      */
-    async getNavigation2(){
+    async getIndustryNavi(){
         try{
             var {navigation2Id} = await MC.getNavigation2(this.mapControlId);
             var navigation2 = new Navigation2();
@@ -243,6 +244,7 @@ export default class MapControl{
             console.error(e);
         }
     }
+
     /**
      * 设置横竖屏切换监听器。
      * @memberOf MapControl
@@ -269,6 +271,22 @@ export default class MapControl{
                 }
             });
 
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 获得传统导航控件
+     * @memberOf MapControl
+     * @returns {Promise.<TraditionalNavi>}
+     */
+    async getTraditionalNavi(){
+        try{
+            var {traditionNaviId} = await MC.getIndustryNavi(this.mapControlId);
+            var traditionNavi= new TraditionalNavi();
+            traditionNavi.traditionNaviId = traditionNaviId;
+            return traditionNavi;
         }catch (e){
             console.error(e);
         }

@@ -11,6 +11,7 @@ import com.supermap.data.CoordSysTransParameter;
 import com.supermap.data.CoordSysTranslator;
 import com.supermap.data.Dataset;
 import com.supermap.data.DatasetVector;
+import com.supermap.data.GeoLine;
 import com.supermap.data.Point2D;
 import com.supermap.data.Point2Ds;
 import com.supermap.data.PrjCoordSys;
@@ -163,5 +164,134 @@ public class JSNavigation2 extends ReactContextBaseJavaModule {
             toTrans = points.getItem(0);
         }
         return toTrans;
+    }
+
+    @ReactMethod
+    public void setTurnDataset(String navigation2Id,String datasetVectorId,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            DatasetVector datasetVector = JSDatasetVector.getObjFromList(datasetVectorId);
+            navigation2.setTurnDataset(datasetVector);
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setAltimetricPointDataset(String navigation2Id,String datasetVectorId,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            DatasetVector datasetVector = JSDatasetVector.getObjFromList(datasetVectorId);
+            navigation2.setDatasetPoint(datasetVector);
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getRoute(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            GeoLine geoLine = navigation2.getRoute();
+            String geoLineId = JSGeoLine.registerId(geoLine);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("geoLineId",geoLineId);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void cleanPath(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.cleanPath();
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void pauseGuide(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.pauseGuide();
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void resumeGuide(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.resumeGuide();
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void stopGuide(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            boolean stoped = navigation2.stopGuide();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("stoped",stoped);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void isGuiding(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            boolean yes = navigation2.isGuiding();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("yes",yes);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void enablePanOnGuide(String navigation2Id,boolean pan,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.enablePanOnGuide(pan);
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void locateMap(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.locateMap();
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
     }
 }

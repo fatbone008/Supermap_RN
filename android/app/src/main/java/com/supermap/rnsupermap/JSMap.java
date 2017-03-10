@@ -429,4 +429,20 @@ public class JSMap extends ReactContextBaseJavaModule {
             promise.reject(e);
         }
     }
+
+    @ReactMethod
+    public void addLayer(String mapId,String datasetId,boolean addToHead,Promise promise){
+        try{
+            Map map = mapList.get(mapId);
+            Dataset dataset = JSDataset.getObjById(datasetId);
+            Layer layer = map.getLayers().add(dataset,addToHead);
+            String layerId = JSLayer.registerId(layer);
+
+            WritableMap map1 = Arguments.createMap();
+            map1.putString("layerId",layerId);
+            promise.resolve(map1);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
 }

@@ -17,13 +17,13 @@ export default class QueryService {
      * @param url
      * @returns {Promise.<QueryService>}
      */
-    async createObj(url){
-        try{
+    async createObj(url) {
+        try {
             var {_queryServiceId_} = await SS.createObj(url);
             var queryService = new QueryService();
             queryService._queryServiceId_ = _queryServiceId_;
             return queryService;
-        }catch (e){
+        } catch (e) {
             console.error(e);
         }
     }
@@ -34,12 +34,12 @@ export default class QueryService {
      * @param mode - 查询模式QueryMode
      * @returns {Promise.<*>}
      */
-    async query(serviceQueryParameter,mode){
-        try{
+    async query(serviceQueryParameter, mode) {
+        try {
             await SS.query(this._queryServiceId_,
-                serviceQueryParameter._serviceQueryParameterId_,mode);
+                serviceQueryParameter._serviceQueryParameterId_, mode);
             return queryService;
-        }catch (e){
+        } catch (e) {
             console.error(e);
         }
     }
@@ -51,21 +51,21 @@ export default class QueryService {
      * @param mode - 查询模式。
      * @returns {Promise.<*>}
      */
-    async queryByUrl(url,serviceQueryParameter,mode){
-        try{
-            await SS.queryByUrl(this._queryServiceId_,url,
-                serviceQueryParameter._serviceQueryParameterId_,mode);
+    async queryByUrl(url, serviceQueryParameter, mode) {
+        try {
+            await SS.queryByUrl(this._queryServiceId_, url,
+                serviceQueryParameter._serviceQueryParameterId_, mode);
             return queryService;
-        }catch (e){
+        } catch (e) {
             console.error(e);
         }
     }
 }
 
 QueryService.QueryMode = {
-    SqlQuery:0,
-    FindNearest:1,
-    DistanceQuery:2,
-    SpatialQuery:3,
-    BoundsQuery:4,
+    SqlQuery: 0,
+    FindNearest: 1,
+    DistanceQuery: 2,
+    SpatialQuery: 3,
+    BoundsQuery: 4,
 }

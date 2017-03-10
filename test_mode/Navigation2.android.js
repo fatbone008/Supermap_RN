@@ -106,7 +106,7 @@ export default class Navigation2 extends Component{
                     var roadworkDataset = await datasource.getDataset("RoadNetwork");
                     var roadworkDV = await roadworkDataset.toDatasetVector();
 
-                    this.navigation2 = await this.mapControl.getNavigation2();
+                    this.navigation2 = await this.mapControl.getIndustryNavi();
                     await this.navigation2.setPathVisible(true);
                     await this.navigation2.setNetworkDataset(roadworkDV);
                     await this.navigation2.loadModel("/SampleData/Navigation2Data/netModel.snm");

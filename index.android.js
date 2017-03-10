@@ -19,7 +19,7 @@ import {
 // import BoundsQuery from './test_mode/BoundsQuery';
 // import MapView from './test_mode/index.android';
 // import ComponentDemo from './test_mode/Components.index.android.js';
-import Navigation2 from './test_mode/Navigation2.android';
+// import Navigation2 from './test_mode/Navigation2.android';
+import TraditionalNavi from './test_mode/TraditionalNavi.android';
 
-
-AppRegistry.registerComponent('GeometryInfo', () => Navigation2);
+AppRegistry.registerComponent('GeometryInfo', () => TraditionalNavi);

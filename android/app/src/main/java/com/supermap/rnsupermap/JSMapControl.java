@@ -25,6 +25,7 @@ import com.supermap.mapping.ConfigurationChangedListener;
 import com.supermap.mapping.MapControl;
 import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.RefreshListener;
+import com.supermap.navi.Navigation;
 import com.supermap.navi.Navigation2;
 
 import java.util.Calendar;
@@ -304,6 +305,21 @@ public class JSMapControl extends ReactContextBaseJavaModule {
 
             promise.resolve(true);
         }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getTraditionalNavi(String mapControlId,Promise promise){
+        try {
+            mMapControl = mapControlList.get(mapControlId);
+            Navigation traditionalNavi = mMapControl.getNavigation();
+            String traditionalNaviId = JSNavigation.registerId(traditionalNavi);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("traditionalNaviId",traditionalNaviId );
+            promise.resolve(map);
+        }catch (Exception e){
             promise.reject(e);
         }
     }

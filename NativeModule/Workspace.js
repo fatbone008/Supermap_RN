@@ -158,7 +158,7 @@ export default class Workspace{
     }
 
     /**
-     * 打开数据源 path , engineType [,driver] 无driver参数时，获取本地数据源，有driver参数时获取网络数据源
+     * 打开数据源 path , engineType [,driver] 获取网络数据源
      * @memberOf Workspace
      * @param {string} path 服务器路径或本地数据库路径
      * @param {number} engineType 引擎类型
@@ -168,10 +168,13 @@ export default class Workspace{
     async openDatasource(path,engineType,driver){
         try{
             if(arguments.length < 3){
-                await W.openLocalDatasource(this.workspaceId,path,engineType);
+                var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
             }else{
-                await W.openDatasource(this.workspaceId,path,engineType,driver);
+                var {datasourceId} = await W.openDatasource(this.workspaceId,path,engineType,driver);
             }
+            var datasource = new Datasource();
+            datasource.datasourceId = datasourceId;
+            return datasource;
         }catch(e){
             console.error(e);
         }

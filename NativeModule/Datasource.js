@@ -49,6 +49,7 @@ export default class Datasource{
                 var {datasetId} = await D.getDatasetByName(this.datasourceId,arg);
             }
             dataset.datasetId = datasetId;
+            console.log("Datasource.js:----------------------datasetId:"+dataset.datasetId);
 
             return dataset;
         }catch(e){

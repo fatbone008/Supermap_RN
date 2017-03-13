@@ -283,10 +283,10 @@ export default class MapControl{
      */
     async getTraditionalNavi(){
         try{
-            var {traditionNaviId} = await MC.getIndustryNavi(this.mapControlId);
-            var traditionNavi= new TraditionalNavi();
-            traditionNavi.traditionNaviId = traditionNaviId;
-            return traditionNavi;
+            var {traditionalNaviId} = await MC.getTraditionalNavi(this.mapControlId);
+            var traditionalNavi= new TraditionalNavi();
+            traditionalNavi.traditionalNaviId = traditionalNaviId;
+            return traditionalNavi;
         }catch (e){
             console.error(e);
         }

@@ -8,6 +8,7 @@ import Ds from './Datasource.js';
 import Maps from './Maps.js';
 import Map from './Map.js';
 import WorkspaceConnectionInfo from './WorkspaceConnectionInfo';
+import Datasource from './Datasource';
 
 /**
  * @class Workspace

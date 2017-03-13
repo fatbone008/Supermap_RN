@@ -147,7 +147,7 @@ public class JSNavigation2 extends ReactContextBaseJavaModule {
         }
     }
 
-    private Point2D toLatLotSys(Point2D beTrans, com.supermap.mapping.Map m_Map){
+    public static Point2D toLatLotSys(Point2D beTrans, com.supermap.mapping.Map m_Map){
         PrjCoordSys Prj = m_Map.getPrjCoordSys();
         Point2D toTrans = beTrans;
 

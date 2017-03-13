@@ -57,11 +57,11 @@ export default class Navigation2{
      * @memberOf Navigation2
      * @param x - 起点横坐标
      * @param y - 起点纵坐标
+     * @param map - 导航所属地图对象
      * @returns {Promise.<void>}
      */
     async setStartPoint(x,y,map){
         try{
-            console.log("科学计数法？"+ x);
             await N.setStartPoint(this.navigation2Id,x,y,map.mapId);
         }catch(e){
             console.error(e);
@@ -73,6 +73,7 @@ export default class Navigation2{
      * @memberOf Navigation2
      * @param x - 终点横坐标
      * @param y - 终点纵坐标
+     * @param map - 导航所属地图对象
      * @returns {Promise.<void>}
      */
     async setDestinationPoint(x,y,map){

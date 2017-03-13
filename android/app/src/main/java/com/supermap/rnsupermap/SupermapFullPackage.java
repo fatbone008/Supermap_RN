@@ -54,6 +54,7 @@ public class SupermapFullPackage implements ReactPackage {
         modules.add(new JSWorkspace(reactContext));
         modules.add(new JSMapView(reactContext));
         modules.add(new JSWorkspaceConnectionInfo(reactContext));
+        modules.add(new JSNavigation(reactContext));
         modules.add(new JSNavigation2(reactContext));
         modules.add(new JSPoint(reactContext));
         modules.add(new JSPoint2D(reactContext));

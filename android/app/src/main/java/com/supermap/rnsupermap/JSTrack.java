@@ -7,6 +7,7 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableMap;
+import com.supermap.RNUtils.GPSUtil;
 import com.supermap.data.Dataset;
 import com.supermap.data.DatasetVector;
 import com.supermap.data.Datasets;
@@ -208,7 +209,7 @@ public class JSTrack extends ReactContextBaseJavaModule {
     public void setGPSData(String trackId, ReadableMap jsonGpsData, Promise promise){
         try{
             Track track = getObjFromList(trackId);
-            LocationManagePlugin.GPSData gspData = JSLocationManager.convertToGPSData(jsonGpsData);
+            LocationManagePlugin.GPSData gspData = GPSUtil.convertToGPSData(jsonGpsData);
             track.setGPSData(gspData);
 
             promise.resolve(true);

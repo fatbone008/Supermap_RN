@@ -22,6 +22,7 @@ import com.supermap.data.Point2D;
 import com.supermap.mapping.Action;
 import com.supermap.mapping.ActionChangedListener;
 import com.supermap.mapping.ConfigurationChangedListener;
+import com.supermap.mapping.Layer;
 import com.supermap.mapping.MapControl;
 import com.supermap.mapping.MapParameterChangedListener;
 import com.supermap.mapping.RefreshListener;
@@ -318,6 +319,92 @@ public class JSMapControl extends ReactContextBaseJavaModule {
 
             WritableMap map = Arguments.createMap();
             map.putString("traditionalNaviId",traditionalNaviId );
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getAction(String mapControlId,Promise promise){
+        try {
+            mMapControl = mapControlList.get(mapControlId);
+            Action action = mMapControl.getAction();
+            int actionType = Enum.getValueByName(Action.class,action.toString());
+
+            WritableMap map = Arguments.createMap();
+            map.putInt("actionType",actionType );
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void redo(String mapControlId,Promise promise){
+        try {
+            mMapControl = mapControlList.get(mapControlId);
+            boolean redone = mMapControl.redo();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("redone",redone );
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void undo(String mapControlId,Promise promise){
+        try {
+            mMapControl = mapControlList.get(mapControlId);
+            boolean undone = mMapControl.undo();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("undone",undone );
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void cancel(String mapControlId,Promise promise){
+        try {
+            mMapControl = mapControlList.get(mapControlId);
+            boolean canceled = mMapControl.cancel();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("canceled",canceled );
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void deleteCurrentGeometry(String mapControlId,Promise promise){
+        try {
+            mMapControl = mapControlList.get(mapControlId);
+            boolean deleted = mMapControl.deleteCurrentGeometry();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("deleted",deleted );
+            promise.resolve(map);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getEditLayer(String mapControlId,Promise promise){
+        try {
+            mMapControl = mapControlList.get(mapControlId);
+            Layer layer = mMapControl.getEditLayer();
+            String layerId = JSLayer.registerId(layer);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("layerId",layerId);
             promise.resolve(map);
         }catch (Exception e){
             promise.reject(e);

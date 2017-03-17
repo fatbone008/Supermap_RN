@@ -1,7 +1,7 @@
 /**
  * Created by will on 2016/7/12.
  */
-import {NativeModules} from 'react-native';
+import {NativeModules,DeviceEventEmitter} from 'react-native';
 let N = NativeModules.JSNavigation2;
 import Dataset from './Dataset.js';
 import GeoLine from './GeoLine';
@@ -228,7 +228,7 @@ export default class Navigation2{
     /**
      * 引导过程中是否允许平移地图。
      * @memberOf Navigation2
-     * @param pan
+     * @param {boolean} pan
      * @returns {Promise.<void>}
      */
     async enablePanOnGuide(pan){
@@ -247,6 +247,205 @@ export default class Navigation2{
     async locateMap(){
         try{
             await N.locateMap(this.navigation2Id);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置是否自动采集GPS，设置为false时，需用户自己调用setGPSData传入GPS数据。
+     * @memberOf Navigation2
+     * @param {boolean} isAutoNavi - 是否自动采集GPS，默认自动采集。
+     * @returns {Promise.<void>}
+     */
+    async setIsAutoNavi(isAutoNavi){
+        try{
+            await N.setIsAutoNavi(this.navigation2Id,isAutoNavi);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置GPS数据。
+     * @memberOf Navigation2
+     * @param {object} newGps - GPS数据。
+     * @returns {Promise.<void>}
+     */
+    async setGPSData(newGps){
+        try{
+            await N.setGPSData(this.navigation2Id,newGps);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置最高限速字段
+     * @memberOf Navigation2
+     * @param {string} value - 速度字段名称
+     * @returns {Promise.<void>}
+     */
+    async setSpeedField(value){
+        try{
+            await N.setSpeedField(this.navigation2Id,value);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 获取障碍点集合
+     * @memberOf Navigation2
+     * @returns {Promise.<array>}
+     */
+    async getBarrierPoints(){
+        try{
+            var {barrierPoints} = await N.getBarrierPoints(this.navigation2Id);
+            return barrierPoints;
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置障碍点
+     * @memberOf Navigation2
+     * @param {array} barrierPoints - 障碍点集合（参数为null时，为清空障碍点）
+     * @returns {Promise.<void>}
+     */
+    async setBarrierPoints(barrierPoints){
+        try{
+            await N.setBarrierPoints(this.navigation2Id,barrierPoints);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置障碍节点
+     * @memberOf Navigation2
+     * @param {array[number]} value - 障碍节点集合（参数为null时，为清空障碍节点）；其包含的int值为网络数据集中的节点(Node)数据的SmID值
+     * @returns {Promise.<void>}
+     */
+    async setBarrierNodes(value){
+        try{
+            await N.setBarrierNodes(this.navigation2Id,value);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置障碍边
+     * @memberOf Navigation2
+     * @param {array[number]} value - 障碍边集合（参数为null时，为清空障碍边）；其包含的int值为网络数据集中的线数据的SmID值
+     * @returns {Promise.<void>}
+     */
+    async setBarrierEdges(value){
+        try{
+            await N.setBarrierEdges(this.navigation2Id,value);
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 获取障碍边集合
+     * @memberOf Navigation2
+     * @returns {Promise.<void>}
+     */
+    async getBarrierEdges(){
+        try{
+            var {barrierEdges} = await N.getBarrierEdges(this.navigation2Id);
+            return barrierEdges;
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置离终点的距离变化监听器。
+     * @param events - 离终点的距离变化监听器回调函数对象。
+     * 用法：await industryNavi.setDistanceChangeListener({distanceChange:(e) => {console.log(e.distance}})
+     * @returns {Promise}
+     */
+    async setDistanceChangeListener(events){
+        try{
+            var success = await N.setDistanceChangeListener(this.navigation2Id);
+            if(success){
+                typeof events.distanceChange !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.distance_change",function (e) {
+                    events.distanceChange(e);
+                });
+            }
+            return success;
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置导航信息变化监听器
+     * @param callback - 导航信息变化监听器回调函数。
+     * 用法：await industryNavi.setDistanceChangeListener(
+     *      {
+     *          startNavi:(e) => {console.log("start")},
+     *          naviInfoUpdate:(e) => {console.log(e.curRoadName + e.direction ....)},
+     *          arrivedDestination:(e) => {console.log("updated")},
+     *          stopNavi:(e) => {console.log("stop")},
+     *          adjustFailure:(e) => {console.log("failure")},
+     *          playNaviMessage:(e) => {console.log(e.message)},
+     *
+     *      }
+     * );
+     * 其中naviInfoUpdate回调中的参数是一个NaviInfo对象,其结构为：
+     *      {
+     *           curRoadName：--，
+     *           direction：--，
+     *           iconType：--，
+     *           nextRoadName：--，
+     *           routeRemainDis：--，
+     *           routeRemainTime：--，
+     *           segRemainDis：--
+     *      }
+     * @returns {Promise}
+     */
+    async addNaviInfoListener(events){
+        try{
+            var success = await N.addNaviInfoListener(this.navigation2Id);
+            if(success){
+                typeof events.startNavi !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.start_navi",function (e) {
+                    events.startNavi(e);
+                });
+
+                typeof events.naviInfoUpdate !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.navi_info_update",function (e) {
+                    events.naviInfoUpdate(e);
+                });
+
+                typeof events.arrivedDestination !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.arrived_destination",function (e) {
+                    events.arrivedDestination(e);
+                });
+
+                typeof events.stopNavi !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.stop_navi",function (e) {
+                    events.stopNavi(e);
+                });
+
+                typeof events.adjustFailure !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.adjust_failure",function (e) {
+                    events.adjustFailure(e);
+                });
+
+                typeof events.playNaviMessage !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.play_navi_massage",function (e) {
+                    events.playNaviMessage(e);
+                });
+            }
+            return success;
         }catch(e){
             console.error(e);
         }

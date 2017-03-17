@@ -1,5 +1,6 @@
 import {NativeModules} from 'react-native';
 let TN = NativeModules.JSNavigation;
+import GeoLine from './GeoLine';
 
 /**
  * @class TraditionalNavi
@@ -81,6 +82,231 @@ export default class TraditionalNavi {
             return guiding;
         }catch (e){
             console.log(e);
+        }
+    }
+
+    /**
+     * 添加途经点
+     * @memberOf TraditionalNavi
+     * @param {number} x - 途经点x坐标
+     * @param {number} y - 途经点y坐标
+     * @returns {Promise.<Promise.boolean>}
+     */
+    async addWayPoint(x,y){
+        try{
+            var {added} = await TN.addWayPoint(this.traditionalNaviId,x,y);
+            return added;
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+    /**
+     * 停止引导。
+     * @memberOf TraditionalNavi
+     * @returns {Promise.<Promise.boolean>}
+     */
+    async stopGuide(){
+        try{
+            var {stopped} = await TN.stopGuide(this.traditionalNaviId);
+            return stopped;
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+    /**
+     * 设置导航指引信息控制,用于控制导航中是否播报引导信息
+     * @memberOf TraditionalNavi
+     * @param {boolean} speech
+     * @returns {Promise.<Promise.speak>}
+     */
+    async setSpeechParam(speech){
+        try{
+            var {speak} = await TN.setSpeechParam(this.traditionalNaviId,speech);
+            return speak;
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+    /**
+     * 设置GPS数据
+     * @memberOf TraditionalNavi
+     * @param {object} gpsData - gps数据
+     * @returns {Promise.<void>}
+     */
+    async setGPSData(gpsData){
+        try{
+            await TN.setGPSData(this.traditionalNaviId,gpsData);
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+    /**
+     * 导航中，将小车位置作为地图中心。 当允许导航中平移地图时，移动地图后，可以通过该接口使小车一直在地图中心显示。
+     * @memberOf TraditionalNavi
+     * @returns {Promise.<void>}
+     */
+    async locateMap(){
+        try{
+            await TN.locateMap(this.traditionalNaviId);
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+    /**
+     * 当前是否在引导过程中。
+     * @memberOf TraditionalNavi
+     * @returns {Promise.<boolean>}
+     */
+    async isGuiding(){
+        try{
+            var {guiding} = await TN.isGuiding(this.traditionalNaviId);
+            return guiding;
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+    /**
+     * 获取导航剩余时间
+     * @memberOf TraditionalNavi
+     * @param speed - 当前行驶速度
+     * @returns {Promise.<number>}
+     */
+    async getTimeToDestination(speed){
+        try{
+            var {time} = await TN.getTimeToDestination(this.traditionalNaviId,speed);
+            return time;
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+
+    /**
+     * 获得路径分析线路。
+     * @memberOf TraditionalNavi
+     * @returns {Promise.<object>}
+     */
+    async getRoute(){
+        try{
+            var {geoLineId} = await TN.getRoute(this.traditionalNaviId);
+            var geoLine = new GeoLine();
+            geoLine.geoLineId = geoLineId;
+
+            return geoLine;
+        }catch (e){
+            console.log(e);
+        }
+    }
+
+    /**
+     * 引导过程中是否允许平移地图。
+     * @memberOf TraditionalNavi
+     * @param bPan - 一个布尔值，用来指示在导航过程中是否允许平移地图，true,表示允许，false,表示不允许。
+     * @returns {Promise.<void>}
+     */
+    async enablePanOnGuide(bPan){
+     try{
+            await TN.enablePanOnGuide(this.traditionalNaviId,bPan);
+        }catch (e){
+            console.log(e);
+        }
+     }
+
+     /**
+     * 清除路径分析的结果
+     * @memberOf TraditionalNavi
+     * @returns {Promise.<void>}
+     */
+    async cleanPath(){
+        try{
+            await TN.cleanPath(this.traditionalNaviId);
+        }catch (e){
+            console.log(e);
+        }
+     }
+
+    /**
+     * 获取导航路径的详情
+     * @returns {Promise.<Promise.array>} - 返回一个导航路径上所有路径的NaviStep对象数组，每个pathInfo对象的结构为{point:{x:--,y:--},length:--,name:--,time:--,turnType:--}
+     */
+    async getNaviPath() {
+        try {
+            var {naviPath} = await TN.getNaviPath(this.traditionalNaviId);
+            return naviPath;
+        } catch (e) {
+            console.log(e);
+        }
+    }
+
+    /**
+     * 设置导航信息变化监听器。
+     * @param callback - 导航信息变化监听器回调函数。
+     * 用法：await industryNavi.setDistanceChangeListener(
+     *      {
+     *          startNavi:(e) => {console.log("start")},
+     *          naviInfoUpdate:(e) => {console.log(e.curRoadName + e.direction ....)},
+     *          arrivedDestination:(e) => {console.log("updated")},
+     *          stopNavi:(e) => {console.log("stop")},
+     *          adjustFailure:(e) => {console.log("failure")},
+     *          playNaviMessage:(e) => {console.log(e.message)},
+     *
+     *      }
+     * );
+     * 其中naviInfoUpdate回调中的参数是一个NaviInfo对象,其结构为：
+     *      {
+     *           curRoadName：--，
+     *           direction：--，
+     *           iconType：--，
+     *           nextRoadName：--，
+     *           routeRemainDis：--，
+     *           routeRemainTime：--，
+     *           segRemainDis：--
+     *      }
+     * @returns {Promise}
+     */
+    async addNaviInfoListener(events){
+        try{
+            var success = await TN.addNaviInfoListener(this.navigation2Id);
+            if(success){
+                typeof events.startNavi !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.start_navi",function (e) {
+                    events.startNavi(e);
+                });
+
+                typeof events.naviInfoUpdate !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.navi_info_update",function (e) {
+                    events.naviInfoUpdate(e);
+                });
+
+                typeof events.arrivedDestination !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.arrived_destination",function (e) {
+                    events.arrivedDestination(e);
+                });
+
+                typeof events.stopNavi !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.stop_navi",function (e) {
+                    events.stopNavi(e);
+                });
+
+                typeof events.adjustFailure !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.adjust_failure",function (e) {
+                    events.adjustFailure(e);
+                });
+
+                typeof events.playNaviMessage !== 'function'  ||
+                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.play_navi_massage",function (e) {
+                    events.playNaviMessage(e);
+                });
+            }
+            return success;
+        }catch(e){
+            console.error(e);
         }
     }
 }

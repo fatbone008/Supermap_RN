@@ -1,17 +1,24 @@
 package com.supermap.RNUtils;
 
 import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
 import com.supermap.data.FieldInfos;
 import com.supermap.data.FieldType;
 import com.supermap.data.Point2D;
+import com.supermap.data.Point2Ds;
 import com.supermap.data.Recordset;
 import com.supermap.data.Rectangle2D;
+import com.supermap.navi.NaviInfo;
+import com.supermap.navi.NaviPath;
+import com.supermap.navi.NaviStep;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -162,5 +169,96 @@ public class JsonUtil {
             geoJsons[i] = recordset.toGeoJSON(true,10);
         }
         return geoJsons;
+    }
+
+    /**
+     * 将Point2Ds转成JSON格式
+     * @param point2Ds - Point2Ds对象
+     * @return {WritableArray} - Json数组，元素为{x:---,y;---}坐标对对象。
+     * @throws Exception
+     */
+    public static WritableArray point2DsToJson(Point2Ds point2Ds) throws Exception{
+        try{
+            WritableArray array = Arguments.createArray();
+            for(int i = 0 ; i < point2Ds.getCount();i++ ){
+                Point2D point2D = point2Ds.getItem(i);
+                WritableMap jsonPoint2D = Arguments.createMap();
+                jsonPoint2D.putDouble("x",point2D.getX());
+                jsonPoint2D.putDouble("y",point2D.getY());
+                array.pushMap(jsonPoint2D);
+            }
+            return array;
+        }catch (Exception e){
+            throw e;
+        }
+    }
+
+    /**
+     * 将JSON格式转成Point2Ds
+     * @param array - Json数组
+     * @return Point2Ds
+     * @throws Exception
+     */
+    public static Point2Ds jsonToPoint2Ds(ReadableArray array) throws Exception {
+        Point2Ds point2Ds = null;
+        for (int i = 0; i < array.size(); i++) {
+            Double x = array.getMap(i).getDouble("x");
+            Double y = array.getMap(i).getDouble("y");
+            Point2D point2D = new Point2D(x, y);
+            point2Ds.add(point2D);
+        }
+        if (point2Ds == null) throw new Error("输入的点对象数组为空");
+        return point2Ds;
+    }
+
+    /**
+     * 导航信息转Json
+     * @param naviInfo - 导航信息对象
+     * @return
+     * @throws Exception
+     */
+    public static WritableMap naviInfoToJson(NaviInfo naviInfo) throws Exception{
+        WritableMap map = Arguments.createMap();
+        map.putString("curRoadName",naviInfo.CurRoadName);
+        map.putDouble("direction",naviInfo.Direction);
+        map.putInt("iconType",naviInfo.IconType);
+        map.putString("nextRoadName",naviInfo.NextRoadName);
+        map.putInt("routeRemainDis",naviInfo.RouteRemainDis);
+        map.putDouble("routeRemainTime",naviInfo.RouteRemainTime);
+        map.putInt("segRemainDis",naviInfo.SegRemainDis);
+
+        return map;
+    }
+
+    /**
+     * naviPath转JSON
+     * @param naviPath
+     * @return
+     */
+    public static WritableMap naviPathToJson(NaviPath naviPath){
+        WritableMap map = Arguments.createMap();
+        List<NaviStep> naviSteps = naviPath.getStep();
+        WritableArray steps = Arguments.createArray();
+        for(int i = 0; i < naviSteps.size(); i++){
+            NaviStep naviStep = naviSteps.get(i);
+            double stepLength = naviStep.getLength();
+            String stepName = naviStep.getName();
+            double stepTime = naviStep.getTime();
+            int stepSwerve = naviStep.getToSwerve();
+            WritableMap point = Arguments.createMap();
+            point.putDouble("x",naviStep.getPoint().getX());
+            point.putDouble("y",naviStep.getPoint().getY());
+
+            WritableMap step = Arguments.createMap();
+            step.putMap("point",point);
+            step.putDouble("length",stepLength);
+            step.putString("name",stepName);
+            step.putDouble("time",stepTime);
+            step.putInt("turnType",stepSwerve);
+            steps.pushMap(step);
+        }
+
+        map.putArray("pathInfo",steps);
+        return map;
     }
 }

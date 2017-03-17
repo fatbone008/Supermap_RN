@@ -32,6 +32,7 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
     public static Map<String,Workspace> mWorkspaceList=new HashMap<String,Workspace>();
     Workspace m_Workspace;
     WorkspaceConnectionInfo m_WorkspaceConnectionInfo;
+    private final String sdcard= android.os.Environment.getExternalStorageDirectory().getAbsolutePath().toString();
 
     public JSWorkspace(ReactApplicationContext context){
         super(context);
@@ -160,7 +161,7 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
             Workspace workspace = getObjById(workspaceId);
 
             DatasourceConnectionInfo dsInfo = new DatasourceConnectionInfo();
-            dsInfo.setServer(path);
+            dsInfo.setServer(sdcard + path);
             dsInfo.setEngineType((EngineType) Enum.parse(EngineType.class,engineType));
 
             Datasource ds = workspace.getDatasources().open(dsInfo);

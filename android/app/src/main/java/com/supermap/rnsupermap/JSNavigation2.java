@@ -3,9 +3,17 @@ package com.supermap.rnsupermap;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.ReadableArray;
+import com.facebook.react.bridge.ReadableMap;
+import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.modules.core.RCTNativeAppEventEmitter;
+import com.supermap.RNUtils.GPSUtil;
+import com.supermap.RNUtils.JsonUtil;
 import com.supermap.data.CoordSysTransMethod;
 import com.supermap.data.CoordSysTransParameter;
 import com.supermap.data.CoordSysTranslator;
@@ -16,25 +24,39 @@ import com.supermap.data.Point2D;
 import com.supermap.data.Point2Ds;
 import com.supermap.data.PrjCoordSys;
 import com.supermap.data.PrjCoordSysType;
+import com.supermap.navi.DistanceChangeListener;
+import com.supermap.navi.NaviInfo;
+import com.supermap.navi.NaviListener;
 import com.supermap.navi.Navigation2;
+import com.supermap.plugin.LocationManagePlugin;
 
 import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by will on 2016/7/12.
  */
 public class JSNavigation2 extends ReactContextBaseJavaModule {
     public static final String REACT_CLASS="JSNavigation2";
+    private static final String DISTANCECHANGE = "com.supermap.RN.JSNavigation2.distance_change";
+    private static final String STARTNAVI = "com.supermap.RN.JSNavigation2.start_navi";
+    private static final String NAVIINFOUPDATE = "com.supermap.RN.JSNavigation2.navi_info_update";
+    private static final String ARRIVEDDESTINATION = "com.supermap.RN.JSNavigation2.arrived_destination";
+    private static final String STOPNAVI = "com.supermap.RN.JSNavigation2.stop_navi";
+    private static final String ADJUSTFAILURE = "com.supermap.RN.JSNavigation2.adjust_failure";
+    private static final String PLAYNAVIMESSAGE = "com.supermap.RN.JSNavigation2.play_navi_massage";
     private final String sdcard= android.os.Environment.getExternalStorageDirectory().getAbsolutePath().toString();
+    ReactContext mReactContext;
 
     public static Map<String , Navigation2> m_Navigation2List = new HashMap<String , Navigation2>();
     Navigation2 m_Navigation2;
 
     public JSNavigation2(ReactApplicationContext context){
         super(context);
+        mReactContext = context;
     }
 
     @Override
@@ -289,6 +311,174 @@ public class JSNavigation2 extends ReactContextBaseJavaModule {
             Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
             navigation2.locateMap();
 
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setIsAutoNavi(String navigation2Id,boolean isAutoNavi,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.setIsAutoNavi(isAutoNavi);
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setGPSData(String navigation2Id, ReadableMap newGps, Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            LocationManagePlugin.GPSData gpsData = GPSUtil.convertToGPSData(newGps);
+            navigation2.setGPSData(gpsData);
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setSpeedField(String navigation2Id, String value, Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.setSpeedField(value);
+
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getBarrierPoints(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            Point2Ds point2Ds = navigation2.getBarrierPoints();
+            WritableArray array = JsonUtil.point2DsToJson(point2Ds);
+
+            WritableMap map = Arguments.createMap();
+            map.putArray("barrierPoints",array);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setBarrierNodes(String navigation2Id,ReadableArray value,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            int [] barrierNodes = null;
+            for(int i = 0;i < value.size();i++){
+                barrierNodes[i] = value.getInt(i);
+            }
+            navigation2.setBarrierNodes(barrierNodes);
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setBarrierEdges(String navigation2Id,ReadableArray value,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            int [] barrierEdges = null;
+            for(int i = 0;i < value.size();i++){
+                barrierEdges[i] = value.getInt(i);
+            }
+            navigation2.setBarrierEdges(barrierEdges);
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getBarrierEdges(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            int[] barrierEdges = navigation2.getBarrierEdges();
+            WritableArray array = Arguments.createArray();
+            for(int i = 0; i < barrierEdges.length; i++){
+                array.pushInt(barrierEdges[i]);
+            }
+
+            WritableMap map = Arguments.createMap();
+            map.putArray("barrierEdges",array);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void setDistanceChangeListener(String navigation2Id,Promise promise){
+        try{
+            Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.setDistanceChangeListener(new DistanceChangeListener() {
+                @Override
+                public void distanceChange(double v) {
+                    WritableMap map = Arguments.createMap();
+                    map.putDouble("distance",v);
+
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
+                            .emit(DISTANCECHANGE,map);
+                }
+            });
+            promise.resolve(true);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void addNaviInfoListener(String navigation2Id,Promise promise){
+        try{
+            final Navigation2 navigation2 = m_Navigation2List.get(navigation2Id);
+            navigation2.addNaviInfoListener(new NaviListener() {
+                @Override
+                public void onNaviInfoUpdate(NaviInfo naviInfo) {
+                    try{
+                        WritableMap map = JsonUtil.naviInfoToJson(naviInfo);
+                        mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(NAVIINFOUPDATE,map);
+                    }catch (Exception e){
+                        System.out.print("NaviInfo Error.");
+                    }
+                }
+
+                @Override
+                public void onStartNavi() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(STARTNAVI,null);
+                }
+
+                @Override
+                public void onAarrivedDestination() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(ARRIVEDDESTINATION,null);
+                }
+
+                @Override
+                public void onStopNavi() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(STOPNAVI,null);
+                }
+
+                @Override
+                public void onAdjustFailure() {
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(ADJUSTFAILURE,null);
+                }
+
+                @Override
+                public void onPlayNaviMessage(String s) {
+                    WritableMap map = Arguments.createMap();
+                    map.putString("message",s);
+                    mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class).emit(PLAYNAVIMESSAGE,map);
+                }
+            });
             promise.resolve(true);
         }catch(Exception e){
             promise.reject(e);

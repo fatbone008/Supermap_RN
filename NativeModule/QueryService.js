@@ -29,7 +29,7 @@ export default class QueryService {
     }
 
     /**
-     * 对Rest地图服务进行查询。
+     * 对Rest地图服务进行查询。 -- deprecated
      * @param serviceQueryParameter - 查询参数{@ling QueryParameter}。
      * @param mode - 查询模式QueryMode
      * @returns {Promise.<*>}
@@ -45,7 +45,7 @@ export default class QueryService {
     }
 
     /**
-     * 对Rest地图服务进行查询。
+     * 对Rest地图服务进行查询。 -- deprecated
      * @param url - 地图服务的全地址 ：如：http://192.168.120.1:8090/iserver/services/map-world/rest/maps/World。
      * @param serviceQueryParameter - 查询参数。
      * @param mode - 查询模式。

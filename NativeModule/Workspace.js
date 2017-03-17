@@ -168,10 +168,26 @@ export default class Workspace{
      */
     async openDatasource(path,engineType,driver){
         try{
-            if(arguments.length < 3){
-                var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
-            }else{
-                var {datasourceId} = await W.openDatasource(this.workspaceId,path,engineType,driver);
+//            if(arguments.length < 3){
+//                var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
+//            }else{
+//                var {datasourceId} = await W.openDatasource(this.workspaceId,path,engineType,driver);
+//            }
+            switch (engineType){
+                case 219 :
+                    var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
+                  break;
+                case 305 :
+                    var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
+                  break;
+                case 23 :
+                    var {datasourceId} = await W.openDatasource(this.workspaceId,path,engineType,driver);
+                  break;
+                case 225 :
+                    var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
+                  break;
+                default :
+                    var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
             }
             var datasource = new Datasource();
             datasource.datasourceId = datasourceId;

@@ -1,4 +1,4 @@
-/**
+ /**
  * Created by will on 2016/10/8.
  */
 let React = require('react');

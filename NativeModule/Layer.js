@@ -31,9 +31,9 @@ export default class Layer{
      * @param {index} index - 图层序号
      * @returns {Promise.<void>}
      */
-    async getName(index){
+    async getName(){
         try{
-            var {layerName} = await L.getName(this.layerId,index);
+            var {layerName} = await L.getName(this.layerId);
             return layerName;
         }catch(e){
             console.error(e);

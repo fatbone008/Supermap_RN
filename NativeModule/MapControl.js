@@ -94,6 +94,19 @@ export default class MapControl{
     }
 
     /**
+     * 移除动作变更监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeActionChangedListener(actionChange){
+        try{
+            await MC.removeActionChangedListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
      * 监听导航事件
      * @memberOf MapControl
      * @param {object} events - 传入一个对象作为参数，该对象可以包含两个属性：longPressHandler和scrollHandler。两个属性的值均为function类型，分部作为长按与滚动监听事件的处理函数。
@@ -104,14 +117,14 @@ export default class MapControl{
             if(!handlers) return;
 
             if(typeof handlers.longPressHandler === "function"){
-                DeviceEventEmitter.addListener(LONGPRESS_EVENT,function (e) {
+                DeviceEventEmitter.addListener("com.supermap.RN.JSMapcontrol.long_press_event",function (e) {
                     // longPressHandler && longPressHandler(e);
                     handlers.longPressHandler(e);
                 });
             }
 
             if(typeof handlers.scrollHandler === "function"){
-                DeviceEventEmitter.addListener('NavigationScroll',function (e) {
+                DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.scroll_event',function (e) {
                     scrollHandler && scrollHandler(e);
                 });
             }
@@ -123,6 +136,14 @@ export default class MapControl{
             }else{
                 throw new Error("setGestureDetector need callback functions as first two argument!");
             }
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    async deleteGestureDetector(){
+        try{
+            await MC.deleteGestureDetector(this.mapControlId)
         }catch (e){
             console.error(e);
         }
@@ -321,7 +342,7 @@ export default class MapControl{
      */
     async getAction(){
         try{
-            var {actionType} = await MC.getAction();
+            var {actionType} = await MC.getAction(this.mapControlId);
             for( p in this.ACTION){
                 if(this.ACTION[p] === actionType){
                     console.log("MapControl.js:"+p);
@@ -342,7 +363,7 @@ export default class MapControl{
      */
     async redo(){
         try{
-            var {redone} = await MC.redo();
+            var {redone} = await MC.redo(this.mapControlId);
             return redone;
         }catch (e){
             console.error(e);
@@ -356,7 +377,7 @@ export default class MapControl{
      */
     async undo(){
         try{
-            var {undone} = await MC.undo();
+            var {undone} = await MC.undo(this.mapControlId);
             return undone;
         }catch (e){
             console.error(e);
@@ -370,7 +391,7 @@ export default class MapControl{
      */
     async cancel(){
         try{
-            var {canceled} = await MC.cancel();
+            var {canceled} = await MC.cancel(this.mapControlId);
             return canceled;
         }catch (e){
             console.error(e);
@@ -384,7 +405,7 @@ export default class MapControl{
      */
     async deleteCurrentGeometry(){
         try{
-            var {deleted} = await MC.deleteCurrentGeometry();
+            var {deleted} = await MC.deleteCurrentGeometry(this.mapControlId);
             return deleted;
         }catch (e){
             console.error(e);
@@ -398,7 +419,7 @@ export default class MapControl{
      */
     async getEditLayer(){
         try{
-            var {layerId} = await MC.getEditLayer();
+            var {layerId} = await MC.getEditLayer(this.mapControlId);
             var layer = new Layer();
             layer.layerId = layerId;
             return layer;
@@ -407,7 +428,396 @@ export default class MapControl{
         }
     }
 
+    /**
+     * 添加对象删除完成监听器。
+     * @memberOf MapControl
+     * @param {object} event - event:{geometryDeleted: e => {...}} e:{layer:--, id:--,canceled:--} layer:操作的图层，被删除对象id，删除结果canceled,ture为删除成功，否则为false.
+     * @returns {Promise.<boolean>}
+     */
+    async addGeometryDeletedListener(event){
+        try{
+            var success = await MC.addGeometryDeletedListener(this.mapControlId);
+            if(!success) return ;
 
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapControl.geometry_deleted',function (e) {
+                if(typeof event.geometryDeleted === 'function'){
+                    var layer = new Layer();
+                    layer.layerId = e.layerId;
+                    e.layer = layer;
+                    event.geometryDeleted(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 移除对象删除完成监听器
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeGeometryDeletedListener(){
+        try{
+            await MC. removeGeometryDeletedListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 添加对象添加监听器
+     * @memberOf MapControl
+     * @param {object} event - event:{geometryAdded: e => {...}} e:{layer:--, id:--,canceled:--} layer:操作的图层，操作对象id，操作结果canceled,ture为操作成功，否则为false.
+     * @returns {Promise.<*>}
+     */
+    async addGeometryAddedListener(event){
+        try{
+            var success = await MC.addGeometryAddedListener(this.mapControlId);
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.grometry_added',function (e) {
+                if(typeof event.geometryAdded === 'function'){
+                    var layer = new Layer();
+                    layer.layerId = e.layerId;
+                    e.layer = layer;
+                    event.geometryAdded(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 移除对象添加监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeGeometryAddedListener(){
+        try{
+            await MC. removeGeometryAddedListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 添加对象删除完成前监听器。
+     * @memberOf MapControl
+     * @param {object} event - event:{geometryDeleting: e => {...}} e:{layer:--, id:--,canceled:--} layer:操作的图层，操作对象id，操作结果canceled,ture为操作成功，否则为false.
+     * @returns {Promise.<*>}
+     */
+    async addGeometryDeletingListener(event){
+        try{
+            var success = await MC.addGeometryDeletingListener(this.mapControlId);
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.geometry_deleting',function (e) {
+                if(typeof event.geometryDeleting === 'function'){
+                    var layer = new Layer();
+                    layer.layerId = e.layerId;
+                    e.layer = layer;
+                    event.geometryDeleting(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 移除对象删除完成前监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeGeometryDeletingListener(){
+        try{
+            await MC. removeGeometryDeletingListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 添加对象修改完成监听器
+     * @memberOf MapControl
+     * @param {object} event - event:{geometryModified: e => {...}} e:{layer:--, id:--,canceled:--} layer:操作的图层，操作对象id，操作结果canceled,ture为操作成功，否则为false.
+     * @returns {Promise.<*>}
+     */
+    async addGeometryModifiedListener(event){
+        try{
+            var success = await MC.addGeometryModifiedListener(this.mapControlId);
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.geometry_modified',function (e) {
+                if(typeof event.geometryModified === 'function'){
+                    var layer = new Layer();
+                    layer.layerId = e.layerId;
+                    e.layer = layer;
+                    event.geometryModified(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 移除对象删除完成前监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeGeometryModifiedListener(){
+        try{
+            await MC. removeGeometryModifiedListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 添加对象修改前监听器
+     * @memberOf MapControl
+     * @param event - event:{geometryModifying: e => {...}} e:{layer:--, id:--,canceled:--} layer:操作的图层，操作对象id，操作结果canceled,ture为操作成功，否则为false.
+     * @returns {Promise.<*>}
+     */
+    async addGeometryModifyingListener(event){
+        try{
+            var success = await MC.addGeometryModifyingListener(this.mapControlId);
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.geometry_modifying',function (e) {
+                if(typeof event.geometryModifying === 'function'){
+                    var layer = new Layer();
+                    layer.layerId = e.layerId;
+                    e.layer = layer;
+                    event.geometryModifying(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 移除对象修改完成监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeGeometryModifyingListener(){
+        try{
+            await MC. removeGeometryModifyingListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 添加对象修改前监听器
+     * @memberOf MapControl
+     * @param events - events:{geometrySelected: e => {...},geometryMultiSelected e => {...}}
+     * geometrySelected 单个集合对象被选中事件的回调函数，参数e为获取结果 e:{layer:--, id:--} layer:操作的图层，操作对象id.
+     * geometryMultiSelected 多个集合对象被选中事件的回调函数，参数e为获取结果数组：e:{geometries:[layer:--,id:--]}
+     * @returns {Promise.<*>}
+     */
+    async addGeometrySelectedListener(events){
+        try{
+            var success = await MC.addGeometryModifyingListener(this.mapControlId);
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.geometry_selected',function (e) {
+                if(typeof events.geometrySelected === 'function'){
+                    var layer = new Layer();
+                    layer.layerId = e.layerId;
+                    e.layer = layer;
+                    events.geometrySelected(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.geometry_multi_selected',function (e) {
+                if(typeof events.geometryMultiSelected === 'function'){
+                    e.geometries.map(function (geometry) {
+                        var layer = new Layer();
+                        layer.layerId = geometry.layerId;
+                        geometry.layer = layer;
+                    })
+                    events.geometryMultiSelected(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 移除对象选中监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeGeometrySelectedListener(){
+        try{
+            await MC. removeGeometrySelectedListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 添加对象修改前监听器
+     * @memberOf MapControl
+     * @param events - events:{lengthMeasured: e => {...},areaMeasured: e => {...},e => {...},angleMeasured: e => {...}}
+     * lengthMeasured 长度量算结果。 e:{curResult:--, curPoint:{x:--,y--}
+     * areaMeasured 面积量算结果。 e:{curResult:--, curPoint:{x:--,y--}
+     * angleMeasured 测量角度结果 通过设置Action.MEASUREANGLE实现测量角度。  e:{curAngle:--, curPoint:{x:--,y--}
+     * @returns {Promise.<*>}
+     */
+    async addMeasureListener(events){
+        try{
+            var success = await MC.addGeometryModifyingListener(this.mapControlId);
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.length_measured',function (e) {
+                if(typeof events.lengthMeasured === 'function'){
+                    events.lengthMeasured(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.area_measured',function (e) {
+                if(typeof events.areaMeasured === 'function'){
+                    events.areaMeasured(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.angle_measured',function (e) {
+                if(typeof events.angleMeasured === 'function'){
+                    events.angleMeasured(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 移除量算监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeMeasureListener(){
+        try{
+            await MC. removeMeasureListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置Undo监听器。
+     * @memberOf MapControl
+     * @param event - event:{undoStateChange: e => {...}}  e:{canUndo:--,canRedo:--} 返回参数canUndo表示是否可取消，canRedo表示是否可重复
+     * @returns {Promise.<*>}
+     */
+    async addUndoStateChangeListener(event){
+        try{
+            var success = await MC.addUndoStateChangeListener(this.mapControlId);
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.undo_state_change',function (e) {
+                if(typeof event.undoStateChange === 'function'){
+                    event.undo_state_change(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 移除Undo监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeUndoStateChangeListener(){
+        try{
+            await MC.removeUndoStateChangeListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 设置编辑状态监听器。
+     * @memberOf MapControl
+     * @param events - events:{addNodeEnable: e => {...},deleteNodeEnable: e => {...}}
+     * addNodeEnable: 添加节点有效。e:{isEnable:--}
+     * deleteNodeEnable: 删除节点有效。 e:{isEnable:--}
+     * @returns {Promise.<*>}
+     */
+    async setEditStatusListener(events){
+        try{
+            var success = await MC.setEditStatusListener(this.mapControlId);
+            if(!success) return ;
+
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.add_node_enable',function (e) {
+                if(typeof events.addNodeEnable === 'function'){
+                    events.addNodeEnable(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.delete_node_enable',function (e) {
+                if(typeof events.deleteNodeEnable === 'function'){
+                    events.deleteNodeEnable(e);
+                }else{
+                    console.error("Please set a callback to the first argument.");
+                }
+            });
+            return success;
+        }catch (e){
+            console.error(e);
+        }
+    }
+
+    /**
+     * 添加、删除节点事件的监听器。
+     * @memberOf MapControl
+     * @returns {Promise.<void>}
+     */
+    async removeEditStatusListener(){
+        try{
+            await MC.removeEditStatusListener(this.mapControlId);
+        }catch (e){
+            console.error(e);
+        }
+    }
 }
 
 MapControl.ACTION = {

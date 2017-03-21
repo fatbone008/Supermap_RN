@@ -56,33 +56,33 @@ export default class Navigation2 extends Component{
 
                     // 监听长按，设置图标
                     await this.mapControl.setGestureDetector({longPressHandler:(e) => {
-                        // console.log("长按地图控件，返回坐标：x" + e.x +',y' + e.y);
-                        // var callout = null;
-                        // if(this.state.pointType === 0){
-                        //     (async function () {
-                        //         var arr = this.refs['mapView'].state.callouts;
-                        //         var mapPoint = await Utility.Point2Map(this.map,e.x,e.y);
-                        //         callout = {uri:require('./../NativeModule/resource/startpoint.png'),name:"startpoint",mapX:mapPoint.x,mapY:mapPoint.y}
-                        //
-                        //         // 防止重复添加起点或终点
-                        //         var calloutIndex = null;
-                        //         arr.map(function (c,index) {
-                        //             if(c.name === callout.name) calloutIndex = index;
-                        //         });
-                        //         console.log('calloutIndex:' + calloutIndex);
-                        //
-                        //         if(calloutIndex == null){
-                        //             arr.push(callout); //该点尚未存在，则新增
-                        //         }else {
-                        //             arr[calloutIndex] = callout;  //该点已经存在，则替换
-                        //         }
-                        //
-                        //         console.log('arr:' + arr);
-                        //         this.refs['mapView'].setState({
-                        //             callouts:arr,
-                        //         });
-                        //     }).bind(this)();
-                        // }
+                        console.log("长按地图控件，返回坐标：x" + e.x +',y' + e.y);
+                        var callout = null;
+                        if(this.state.pointType === 0){
+                            (async function () {
+                                var arr = this.refs['mapView'].state.callouts;
+                                var mapPoint = await Utility.Point2Map(this.map,e.x,e.y);
+                                callout = {uri:require('./../NativeModule/resource/startpoint.png'),name:"startpoint",mapX:mapPoint.x,mapY:mapPoint.y}
+
+                                // 防止重复添加起点或终点
+                                var calloutIndex = null;
+                                arr.map(function (c,index) {
+                                    if(c.name === callout.name) calloutIndex = index;
+                                });
+                                console.log('calloutIndex:' + calloutIndex);
+
+                                if(calloutIndex == null){
+                                    arr.push(callout); //该点尚未存在，则新增
+                                }else {
+                                    arr[calloutIndex] = callout;  //该点已经存在，则替换
+                                }
+
+                                console.log('arr:' + arr);
+                                this.refs['mapView'].setState({
+                                    callouts:arr,
+                                });
+                            }).bind(this)();
+                        }
                         var mapPoint = null;
                         (async function () {
                             try{

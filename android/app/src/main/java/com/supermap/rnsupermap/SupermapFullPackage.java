@@ -25,6 +25,7 @@ public class SupermapFullPackage implements ReactPackage {
         return Arrays.<ViewManager>asList(
                 new MapViewManager(),new LegendViewManager(),
                 new LayerListViewManager(),new ScaleViewManager(),new CallOutManager()
+                ,new SceneViewManager()
         );
     }
 
@@ -64,6 +65,8 @@ public class SupermapFullPackage implements ReactPackage {
         modules.add(new JSSelection(reactContext));
         modules.add(new JSSize2D(reactContext));
         modules.add(new JSServiceBase(reactContext));
+        modules.add(new JSScene(reactContext));
+        modules.add(new JSSceneControl(reactContext));
         modules.add(new JSGeoStyle(reactContext));
         modules.add(new JSGeometry(reactContext));
         modules.add(new JSGeoLine(reactContext));

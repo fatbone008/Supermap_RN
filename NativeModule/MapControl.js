@@ -114,28 +114,40 @@ export default class MapControl{
      */
     async setGestureDetector(handlers){
         try{
-            if(!handlers) return;
-
-            if(typeof handlers.longPressHandler === "function"){
-                DeviceEventEmitter.addListener("com.supermap.RN.JSMapcontrol.long_press_event",function (e) {
-                    // longPressHandler && longPressHandler(e);
-                    handlers.longPressHandler(e);
-                });
-            }
-
-            if(typeof handlers.scrollHandler === "function"){
-                DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.scroll_event',function (e) {
-                    scrollHandler && scrollHandler(e);
-                });
-            }
-
-            // console.log('MapControl.js:----------------------------------');
             if(handlers){
                 await MC.setGestureDetector(this.mapControlId);
-                // console.log("GestrueDetector listening!");
             }else{
                 throw new Error("setGestureDetector need callback functions as first two argument!");
             }
+            //差异化
+            if(Platform.OS === 'ios'){
+                if(typeof handlers.longPressHandler === "function"){
+                    nativeEvt.addListener("com.supermap.RN.JSMapcontrol.long_press_event",function (e) {
+                                                   // longPressHandler && longPressHandler(e);
+                                                   handlers.longPressHandler(e);
+                                                   });
+                }
+                
+                if(typeof handlers.scrollHandler === "function"){
+                    nativeEvt.addListener('com.supermap.RN.JSMapcontrol.scroll_event',function (e) {
+                                                   scrollHandler && scrollHandler(e);
+                                                   });
+                }
+            }else{
+                if(typeof handlers.longPressHandler === "function"){
+                    DeviceEventEmitter.addListener("com.supermap.RN.JSMapcontrol.long_press_event",function (e) {
+                                                   // longPressHandler && longPressHandler(e);
+                                                   handlers.longPressHandler(e);
+                                                   });
+                }
+                
+                if(typeof handlers.scrollHandler === "function"){
+                    DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.scroll_event',function (e) {
+                                                   scrollHandler && scrollHandler(e);
+                                                   });
+                }
+            }
+
         }catch (e){
             console.error(e);
         }
@@ -638,9 +650,33 @@ export default class MapControl{
      */
     async addGeometrySelectedListener(events){
         try{
-            var success = await MC.addGeometryModifyingListener(this.mapControlId);
+            var success = await MC.addGeometrySelectedListener(this.mapControlId);
             if(!success) return ;
-
+            //差异化
+            if(Platform.OS === 'ios'){
+                nativeEvt.addListener('com.supermap.RN.JSMapcontrol.geometry_selected',function (e) {
+                        if(typeof events.geometrySelected === 'function'){
+                            var layer = new Layer();
+                            layer.layerId = e.layerId;
+                            e.layer = layer;
+                            events.geometrySelected(e);
+                        }else{
+                            console.error("Please set a callback to the first argument.");
+                        }
+                });
+                nativeEvt.addListener('com.supermap.RN.JSMapcontrol.geometry_multi_selected',function (e) {
+                        if(typeof events.geometryMultiSelected === 'function'){
+                            e.geometries.map(function (geometry) {
+                                var layer = new Layer();
+                                layer.layerId = geometry.layerId;
+                                geometry.layer = layer;
+                            })
+                            events.geometryMultiSelected(e);
+                         }else{
+                            console.error("Please set a callback to the first argument.");
+                         }
+                        });
+            }else{
             DeviceEventEmitter.addListener('com.supermap.RN.JSMapcontrol.geometry_selected',function (e) {
                 if(typeof events.geometrySelected === 'function'){
                     var layer = new Layer();
@@ -663,6 +699,7 @@ export default class MapControl{
                     console.error("Please set a callback to the first argument.");
                 }
             });
+            }
             return success;
         }catch (e){
             console.error(e);

@@ -31,9 +31,9 @@ export default class Layer{
      * @param {index} index - 图层序号
      * @returns {Promise.<void>}
      */
-    async getName(){
+    async getName(index){
         try{
-            var {layerName} = await L.getName(this.layerId);
+            var {layerName} = await L.getName(this.layerId,index);
             return layerName;
         }catch(e){
             console.error(e);
@@ -96,6 +96,21 @@ export default class Layer{
     async setSelectable(b){
         try{
             await L.setSelectable(this.layerId,b);
+        }catch(e){
+            console.error(e);
+        }
+    }
+    
+    /**
+     * 获取此图层是否可见。true 表示此图层可见，false 表示图层不可见。当图层不可见时，其他所有的属性的设置将无效。
+     * @memberOf Layer
+     * @param {boolean} b - 指定图层是否可见。
+     * @returns {Promise.<boolean>}
+     */
+    async getVisible(b){
+        try{
+            var isVisible = await L.getVisible(this.layerId);
+            return isVisible;
         }catch(e){
             console.error(e);
         }

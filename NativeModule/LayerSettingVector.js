@@ -52,4 +52,25 @@ export default class LayerSettingVector {
             console.error(e);
         }
     }
+    
+    /**
+     * 获取矢量图层的风格。
+     * @memberOf LayerSettingVector
+     * @returns {Promise.<type>}
+     */
+    async getType(){
+        try{
+            
+            var {type} = await LSV.getType(this._layerSettingVectorId_);
+            return type;
+        }catch (e){
+            console.error(e);
+        }
+    }
+}
+
+LayerSettingVector.TYPE = {
+    VECTOR:0,
+    RASTER:1,
+    GRID:2
 }

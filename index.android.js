@@ -20,6 +20,8 @@ import {
 // import MapView from './test_mode/index.android';
 // import ComponentDemo from './test_mode/Components.index.android.js';
 // import Navigation2 from './test_mode/Navigation2.android';
-import TraditionalNavi from './test_mode/TraditionalNavi.android';
+// import TraditionalNavi from './test_mode/TraditionalNavi.android';
+// import EditMap from './test_mode/EditMap.android';
+import ThreeD from './test_mode/ThreeDimensional.android'
 
-AppRegistry.registerComponent('GeometryInfo', () => TraditionalNavi);
+AppRegistry.registerComponent('GeometryInfo', () => ThreeD);

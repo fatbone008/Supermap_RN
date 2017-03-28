@@ -157,38 +157,21 @@ export default class Workspace{
             console.error(e);
         }
     }
-
+    
     /**
-     * 打开数据源 path , engineType [,driver] 获取网络数据源
+     * 打开数据源 jsonObject 获取网络数据源
      * @memberOf Workspace
-     * @param {string} path 服务器路径或本地数据库路径
-     * @param {number} engineType 引擎类型
-     * @param {string} driver 驱动
-     * @returns {Promise.<void>}
+     * @param {object} jsonObject {engineType:<int>引擎类型 ,server:<sring>文件／服务器路径 ,driver:<string>驱动名称（可选参数）}
+     * @returns {Promise.<datasource>}
      */
-    async openDatasource(path,engineType,driver){
+    
+    async openDatasource(jsonObject){
         try{
-//            if(arguments.length < 3){
-//                var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
-//            }else{
-//                var {datasourceId} = await W.openDatasource(this.workspaceId,path,engineType,driver);
-//            }
-            switch (engineType){
-                case 219 :
-                    var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
-                  break;
-                case 305 :
-                    var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
-                  break;
-                case 23 :
-                    var {datasourceId} = await W.openDatasource(this.workspaceId,path,engineType,driver);
-                  break;
-                case 225 :
-                    var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
-                  break;
-                default :
-                    var {datasourceId} = await W.openLocalDatasource(this.workspaceId,path,engineType);
+            if(jsonObject.webBBox){
+                var rect = jsonObject.webBBox;
+                if(typeof rect != 'string') jsonObject.webBBox = rect.rectangle2DId;
             }
+            var {datasourceId} = await W.openDatasource(this.workspaceId,jsonObject);
             var datasource = new Datasource();
             datasource.datasourceId = datasourceId;
             return datasource;

@@ -84,7 +84,15 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '25.0.0'
+
+    packagingOptions {
+        exclude('META-INF/DEPENDENCIES')
+        exclude('META-INF/NOTICE')
+        exclude('META-INF/LICENSE')
+        exclude('META-INF/LICENSE.txt')
+        exclude('META-INF/NOTICE.txt')
+    }
 
     defaultConfig {
         applicationId "com.supermap"
@@ -131,21 +139,20 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:23.0.1'
     compile 'com.facebook.react:react-native:+'
-    // From node_modules
-    compile files('libs/com.supermap.analyst.jar')
-    compile files('libs/com.supermap.charts.jar')
-    compile files('libs/com.supermap.data.jar')
-    compile files('libs/com.supermap.mapping.jar')
-    compile files('libs/com.supermap.mdatacollector.jar')
-    compile files('libs/com.supermap.messagequeue.jar')
-    compile files('libs/com.supermap.navigation.jar')
-    compile files('libs/com.supermap.plot.jar')
-    compile files('libs/com.supermap.realspace.jar')
-    compile files('libs/com.supermap.services.jar')
-    compile files('libs/com.supermap.track.jar')
+    compile files('libs/com.supermap.analyst_v812.jar')
+    compile files('libs/com.supermap.charts_v812.jar')
+    compile files('libs/com.supermap.data_v812.jar')
+    compile files('libs/com.supermap.mapping_v812.jar')
+    compile files('libs/com.supermap.mdatacollector_v812.jar')
+    compile files('libs/com.supermap.messagequeue_v812.jar')
+    compile files('libs/com.supermap.navigation_v812.jar')
+    compile files('libs/com.supermap.plot_v812.jar')
+    compile files('libs/com.supermap.realspace_v812.jar')
+    compile files('libs/com.supermap.services_v812.jar')
+    compile files('libs/com.supermap.track_v812.jar')
 }
 
 // Run this once to be able to run the application with BUCK

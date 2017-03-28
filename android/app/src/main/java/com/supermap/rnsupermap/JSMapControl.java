@@ -25,6 +25,7 @@ import com.supermap.mapping.Action;
 import com.supermap.mapping.ActionChangedListener;
 import com.supermap.mapping.ConfigurationChangedListener;
 import com.supermap.mapping.EditStatusListener;
+import com.supermap.mapping.FinishEditedEvent;
 import com.supermap.mapping.GeometryAddedListener;
 import com.supermap.mapping.GeometryDeletedListener;
 import com.supermap.mapping.GeometryDeletingListener;
@@ -865,6 +866,17 @@ public class JSMapControl extends ReactContextBaseJavaModule {
 
                     mReactContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)
                             .emit(DELETENODEENABLE,map);
+                }
+
+
+                @Override
+                public void beforeFinishGeometryEdited(FinishEditedEvent finishEditedEvent) {
+
+                }
+
+                @Override
+                public void finishGeometryEdited(FinishEditedEvent finishEditedEvent) {
+
                 }
             };
             mMapControl = mapControlList.get(mapControlId);

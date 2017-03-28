@@ -341,4 +341,18 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
             promise.reject(e);
         }
     }
+
+    @ReactMethod
+    public void getSceneName(String workspaceId,int index, Promise promise){
+        try{
+            Workspace workspace = getObjById(workspaceId);
+            String name = workspace.getScenes().get(index);
+
+            WritableMap map = Arguments.createMap();
+            map.putString("name",name);
+            promise.resolve(map);
+        }catch(Exception e) {
+            promise.reject(e);
+        }
+    }
 }

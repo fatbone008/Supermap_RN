@@ -58,7 +58,7 @@ public class JSLayer extends ReactContextBaseJavaModule {
     }
 
     @ReactMethod
-    public void getName(String layerId,int index,Promise promise){
+    public void getName(String layerId,Promise promise){
         try{
             mLayer = mLayerList.get(layerId);
             String layerName = mLayer.getName();

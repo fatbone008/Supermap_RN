@@ -1,7 +1,8 @@
-import {NativeModules} from 'react-native';
+import {NativeModules,DeviceEventEmitter,NativeEventEmitter,Platform} from 'react-native';
 let TN = NativeModules.JSNavigation;
 import GeoLine from './GeoLine';
 
+const nativeEvt = new NativeEventEmitter(TN);
 /**
  * @class TraditionalNavi
  */
@@ -274,39 +275,64 @@ export default class TraditionalNavi {
         try{
             var success = await TN.addNaviInfoListener(this.navigation2Id);
             if(success){
-                typeof events.startNavi !== 'function'  ||
-                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.start_navi",function (e) {
-                    events.startNavi(e);
-                });
-
-                typeof events.naviInfoUpdate !== 'function'  ||
-                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.navi_info_update",function (e) {
-                    events.naviInfoUpdate(e);
-                });
-
-                typeof events.arrivedDestination !== 'function'  ||
-                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.arrived_destination",function (e) {
-                    events.arrivedDestination(e);
-                });
-
-                typeof events.stopNavi !== 'function'  ||
-                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.stop_navi",function (e) {
-                    events.stopNavi(e);
-                });
-
-                typeof events.adjustFailure !== 'function'  ||
-                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.adjust_failure",function (e) {
-                    events.adjustFailure(e);
-                });
-
-                typeof events.playNaviMessage !== 'function'  ||
-                DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.play_navi_massage",function (e) {
-                    events.playNaviMessage(e);
-                });
+                //差异化
+                if(Platform.OS === 'ios'){
+                    typeof events.startNavi !== 'function'  ||
+                    nativeEvt.addListener("com.supermap.RN.JSNavigation2.start_navi",function (e) {
+                                                   events.startNavi(e);
+                                                   });
+                    
+                    typeof events.naviInfoUpdate !== 'function'  ||
+                    nativeEvt.addListener("com.supermap.RN.JSNavigation2.navi_info_update",function (e) {
+                                                   events.naviInfoUpdate(e);
+                                                   });
+                    
+                    typeof events.arrivedDestination !== 'function'  ||
+                    nativeEvt.addListener("com.supermap.RN.JSNavigation2.arrived_destination",function (e) {
+                                                   events.arrivedDestination(e);
+                                                   });
+                    
+                    typeof events.stopNavi !== 'function'  ||
+                    nativeEvt.addListener("com.supermap.RN.JSNavigation2.stop_navi",function (e) {
+                                                   events.stopNavi(e);
+                                                   });
+                }else{
+                    
+                    typeof events.startNavi !== 'function'  ||
+                    DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.start_navi",function (e) {
+                                                   events.startNavi(e);
+                                                   });
+                    
+                    typeof events.naviInfoUpdate !== 'function'  ||
+                    DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.navi_info_update",function (e) {
+                                                   events.naviInfoUpdate(e);
+                                                   });
+                    
+                    typeof events.arrivedDestination !== 'function'  ||
+                    DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.arrived_destination",function (e) {
+                                                   events.arrivedDestination(e);
+                                                   });
+                    
+                    typeof events.stopNavi !== 'function'  ||
+                    DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.stop_navi",function (e) {
+                                                   events.stopNavi(e);
+                                                   });
+                    
+                    typeof events.adjustFailure !== 'function'  ||
+                    DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.adjust_failure",function (e) {
+                                                   events.adjustFailure(e);
+                                                   });
+                    
+                    typeof events.playNaviMessage !== 'function'  ||
+                    DeviceEventEmitter.addListener("com.supermap.RN.JSNavigation2.play_navi_massage",function (e) {
+                                                   events.playNaviMessage(e);
+                                                   });
+                }
             }
             return success;
         }catch(e){
             console.error(e);
         }
     }
+
 }

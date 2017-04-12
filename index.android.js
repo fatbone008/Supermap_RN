@@ -22,6 +22,8 @@ import {
 // import Navigation2 from './test_mode/Navigation2.android';
 // import TraditionalNavi from './test_mode/TraditionalNavi.android';
 // import EditMap from './test_mode/EditMap.android';
-import ThreeD from './test_mode/ThreeDimensional.android'
+// import ThreeD from './test_mode/ThreeDimensional.android'
+// import Plot from './test_mode/Plot.android';
+import OverlayAnalyst from './test_mode/OverlayAnalyst.android';
 
-AppRegistry.registerComponent('GeometryInfo', () => ThreeD);
+AppRegistry.registerComponent('GeometryInfo', () => OverlayAnalyst);

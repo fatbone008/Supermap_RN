@@ -6,7 +6,10 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
+import com.supermap.data.DatasetType;
+import com.supermap.data.Enum;
 import com.supermap.data.GeoStyle;
+import com.supermap.mapping.LayerSettingType;
 import com.supermap.mapping.LayerSettingVector;
 
 import java.util.Calendar;
@@ -80,6 +83,22 @@ public class JSLayerSettingVector extends ReactContextBaseJavaModule {
             GeoStyle style = JSGeoStyle.getObjFromList(geoStyleId);
             layerSettingVector.setStyle(style);
 
+            promise.resolve(true);
+        }catch (Exception e){
+            promise.reject(e);
+        }
+    }
+
+    @ReactMethod
+    public void getType(String layerSettingVectorId,String geoStyleId,Promise promise){
+        try{
+            LayerSettingVector layerSettingVector = getObjFromList(layerSettingVectorId);
+            GeoStyle style = JSGeoStyle.getObjFromList(geoStyleId);
+            LayerSettingType layerSettingType = layerSettingVector.getType();
+            int type = Enum.getValueByName(LayerSettingType.class,layerSettingType.name());
+
+            WritableMap map = Arguments.createMap();
+            map.putInt("type",type);
             promise.resolve(true);
         }catch (Exception e){
             promise.reject(e);

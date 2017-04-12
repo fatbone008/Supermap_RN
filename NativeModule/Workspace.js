@@ -303,6 +303,16 @@ export default class Workspace{
         }
     }
 
+    async getSceneName(index){
+        try{
+            var {name} = await W.getSceneName(this.workspaceId,index);
+            return name;
+        }catch(e){
+            console.error(e);
+        }
+    }
+
+
     workspaceType = (type) => {
         var value;
         switch (type){

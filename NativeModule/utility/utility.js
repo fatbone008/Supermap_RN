@@ -10,6 +10,7 @@
  */
 
 import Point from '../Point';
+import SystemUtil from '../SystemUtil';
 
 exports.Point2Map = async function (map,x, y) {
     var pointFac = new Point();
@@ -17,4 +18,11 @@ exports.Point2Map = async function (map,x, y) {
     var mapPoint = await map.pixelToMap(point);
 
     return mapPoint;
+}
+
+exports.appendingHomeDirectory = async function (path) {
+    var util = new SystemUtil();
+    var homeDirectory = await util.getHomeDirectory();
+    var newPath = homeDirectory + path;
+    return newPath;
 }

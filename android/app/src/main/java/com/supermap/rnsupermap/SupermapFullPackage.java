@@ -57,6 +57,8 @@ public class SupermapFullPackage implements ReactPackage {
         modules.add(new JSWorkspaceConnectionInfo(reactContext));
         modules.add(new JSNavigation(reactContext));
         modules.add(new JSNavigation2(reactContext));
+        modules.add(new JSOverlayAnalyst(reactContext));
+        modules.add(new JSOverlayAnalystParameter(reactContext));
         modules.add(new JSPoint(reactContext));
         modules.add(new JSPoint2D(reactContext));
         modules.add(new JSQueryParameter(reactContext));
@@ -67,6 +69,7 @@ public class SupermapFullPackage implements ReactPackage {
         modules.add(new JSServiceBase(reactContext));
         modules.add(new JSScene(reactContext));
         modules.add(new JSSceneControl(reactContext));
+        modules.add(new JSSystemUtil(reactContext));
         modules.add(new JSGeoStyle(reactContext));
         modules.add(new JSGeometry(reactContext));
         modules.add(new JSGeoLine(reactContext));

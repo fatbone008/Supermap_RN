@@ -162,6 +162,25 @@ export default class Map{
             console.error(e);
         }
     }
+    
+    /**
+     * 获取当前地图的显示范围的中心点。
+     * @memberOf Map
+     * @param {object} point2D
+     * @returns {Promise.<void>}
+     */
+    async getCenter(){
+        try{
+            var {point2DId,x,y} = await M.getCenter(this.mapId);
+            var point2D = new Point2D();
+            point2D.point2DId = point2DId;
+            point2D.x = x;
+            point2D.y = y;
+            return point2D;
+        }catch(e){
+            console.error(e);
+        }
+    }
 
     /**
      * 设置当前地图的显示范围的中心点。
@@ -415,7 +434,7 @@ export default class Map{
      * @memberOf Map
      * @param dataset - 要添加到图层的数据集。
      * @param addToHead - 指定新创建图层是否放在图层集合的最上面一层。当设置为 false 时，则将此新创建图层放在最底层。
-     * @returns {Promise.<void>}
+     * @returns {Promise.<layer>}
      */
     async addLayer(dataset,addToHead){
         try{
@@ -423,6 +442,74 @@ export default class Map{
             var layer = new Layer();
             layer.layerId = layerId;
             return layer;
+        }catch(e){
+            console.error(e);
+        }
+    }
+    
+    /**
+     * 用于把一个图层移除。
+     * @memberOf Map
+     * @param index<string/number> - 要移除图层的名字或序号。
+     * @returns {Promise.<void>}
+     */
+    async removeLayer(index){
+        try{
+            if(typeof index === 'string'){
+            var {layerId} = await M.removeLayerByName(this.mapId,index);
+            }else if(typeof index === 'number'){
+            var {layerId} = await M.removeLayerByIndex(index);
+            }else{
+                throw new Error ('index must be number or string!');
+            }
+            var layer = new Layer();
+            layer.layerId = layerId;
+            return layer;
+        }catch(e){
+            console.error(e);
+        }
+    }
+    
+    /**
+     * 判断地图是否包含某个名字的图层。
+     * @memberOf Map
+     * @param name - 图层的名字。
+     * @returns {Promise.<number>} 找到指定图层则返回图层索引，否则返回-1
+     */
+    async contains(name){
+        try{
+            var {isContain} = await M.contains(name);
+            return isContain;
+        }catch(e){
+            console.error(e);
+        }
+    }
+    
+    /**
+     * 图层下移一层（图层的索引从 0 开始，从顶层开始依次编号）。
+     * @memberOf Map
+     * @param name - 图层的名字。
+     * @returns {Promise.<bool>}
+     */
+    async moveDown(name){
+        try{
+            var {moved} = await M.moveDown(name);
+            return moved;
+        }catch(e){
+            console.error(e);
+        }
+    }
+    
+    /**
+     * 图层下移一层（图层的索引从 0 开始，从顶层开始依次编号）。
+     * @memberOf Map
+     * @param name - 图层的名字。
+     * @returns {Promise.<bool>}
+     */
+    async moveUp(name){
+        try{
+            var {moved} = await M.moveUp(name);
+            return moved;
         }catch(e){
             console.error(e);
         }

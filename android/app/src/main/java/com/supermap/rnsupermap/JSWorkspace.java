@@ -134,22 +134,50 @@ public class JSWorkspace extends ReactContextBaseJavaModule {
         }
     }
 
+//    @ReactMethod
+//    public void openDatasource(String workspaceId,String server,int engineType,String driver,Promise promise){
+//        try{
+//            Workspace workspace = getObjById(workspaceId);
+//
+//            DatasourceConnectionInfo dsInfo = new DatasourceConnectionInfo();
+//            dsInfo.setServer(server);
+//            dsInfo.setEngineType((EngineType) Enum.parse(EngineType.class,engineType));
+//            dsInfo.setDriver(driver);
+//
+//            Datasource ds = workspace.getDatasources().open(dsInfo);
+//            String datasourceId = JSDatasource.registerId(ds);
+//
+//            WritableMap map = Arguments.createMap();
+//            map.putString("datasourceId",datasourceId);
+//            promise.resolve(map);
+//        }catch(Exception e){
+//            promise.reject(e);
+//        }
+//    }
+
     @ReactMethod
-    public void openDatasource(String workspaceId,String server,int engineType,String driver,Promise promise){
+    public void openDatasource(String workspaceId,ReadableMap jsonObject,Promise promise){
         try{
             Workspace workspace = getObjById(workspaceId);
+            EngineType engineType = (EngineType)Enum.parse(EngineType.class,jsonObject.getInt("engineType"));
+            String server = jsonObject.getString("server");
 
             DatasourceConnectionInfo dsInfo = new DatasourceConnectionInfo();
-            dsInfo.setServer(server);
-            dsInfo.setEngineType((EngineType) Enum.parse(EngineType.class,engineType));
-            dsInfo.setDriver(driver);
+            dsInfo.setServer(sdcard + server);
+            dsInfo.setEngineType(engineType);
+
+            if(jsonObject.hasKey("driver")){
+                String driver = jsonObject.getString("driver");
+                dsInfo.setDriver(driver);
+            }
 
             Datasource ds = workspace.getDatasources().open(dsInfo);
-            String datasourceId = JSDatasource.registerId(ds);
-
-            WritableMap map = Arguments.createMap();
-            map.putString("datasourceId",datasourceId);
-            promise.resolve(map);
+            if(ds != null){
+                String datasourceId = JSDatasource.registerId(ds);
+                WritableMap map = Arguments.createMap();
+                map.putString("datasourceId",datasourceId);
+                promise.resolve(map);
+            }
         }catch(Exception e){
             promise.reject(e);
         }

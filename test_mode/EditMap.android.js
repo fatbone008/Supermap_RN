@@ -55,7 +55,7 @@ export default class Navigation2 extends Component{
                     await this.map.refresh();
 
                     var editLayer = await this.map.getLayer(5);
-                    console.log(await editLayer.getName());
+                    // console.log(await editLayer.getName());
 
                     await editLayer.setEditable(true);
                 }catch(e){

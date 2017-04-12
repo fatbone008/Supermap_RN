@@ -130,6 +130,21 @@ public class JSLayer extends ReactContextBaseJavaModule {
         }
     }
 
+
+    @ReactMethod
+    public void getVisible(String layerId,Promise promise){
+        try{
+            Layer layer = mLayerList.get(layerId);
+            boolean isVisible = layer.isVisible();
+
+            WritableMap map = Arguments.createMap();
+            map.putBoolean("isVisible",isVisible);
+            promise.resolve(map);
+        }catch(Exception e){
+            promise.reject(e);
+        }
+    }
+
     @ReactMethod
     public void setVisible(String layerId,boolean b,Promise promise){
         try{

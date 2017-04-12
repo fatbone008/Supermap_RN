@@ -6,8 +6,6 @@ let {
     requireNativeComponent,
     View,
     StyleSheet,
-    Image,
-    NativeModules,
 }=require('react-native');
 import SceneControl from './../SceneControl';
 
@@ -17,6 +15,7 @@ class SMSceneView extends React.Component{
         if(!this.props.onGetScene){
             console.error("no onGetScene property!");
             return;
+
         }
         console.log("has SceneControl id:"+event.nativeEvent.sceneControlId);
 
